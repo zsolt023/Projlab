@@ -1,5 +1,6 @@
 package main.field;
 
+import main.Game;
 import main.movable.Movable;
 
 /**
@@ -27,7 +28,13 @@ public class Hole extends Field {
 	 * 
 	 */
 	public void setActive() {
-		// TODO implement here
+		if (isActive){
+			isActive = false;}
+		else{
+			if (actualMovable != null)
+				Game.getTable().kill(actualMovable);
+			isActive = true;
+		}
 	}
 
 	/**
@@ -35,7 +42,18 @@ public class Hole extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		// TODO implement here
+		if (movable.visit(this)){
+			if (isActive) {
+				Game.getTable().kill(movable);
+				movable.getActualField().setActualMovable(null);
+				return true;
+			}else{
+				setActualMovable(movable);
+				movable.getActualField().setActualMovable(null);
+				movable.setActualField(this);
+				return true;
+			}
+		}
 		return false;
 	}
 

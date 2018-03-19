@@ -1,5 +1,6 @@
 package main.movable;
 
+import main.Game;
 import main.field.Hole;
 import main.field.Objective;
 import main.field.Pillar;
@@ -21,8 +22,10 @@ public class Box extends Movable {
 	/**
 	 * 
 	 */
-	public void move() {
-		// TODO implement here
+	public boolean move() {
+		if(this.actualField.getNeigbour().accept(this))
+			return true;
+		return false;
 	}
 
 	/**
@@ -30,8 +33,10 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Plain plain) {
-		// TODO implement here
-		return false;
+		if(plain.getActualMovable() != null){
+			plain.getActualMovable().visit(this);
+		}
+		return true;
 	}
 
 	/**
@@ -39,7 +44,7 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Pillar pillar) {
-		// TODO implement here
+
 		return false;
 	}
 
@@ -48,7 +53,7 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Wall wall) {
-		// TODO implement here
+
 		return false;
 	}
 
@@ -57,8 +62,12 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Objective objective) {
-		// TODO implement here
-		return false;
+		if(objective.getActualMovable() != null){
+			objective.getActualMovable().visit(this);
+		}
+		Game.getTable().kill(this);
+		Game.getActualMovingWorker().addPoint();
+		return true;
 	}
 
 	/**
@@ -66,8 +75,11 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Switch s) {
-		// TODO implement here
-		return false;
+		if(s.getActualMovable() != null){
+			s.getActualMovable().visit(this);
+		}
+		s.switchState();
+		return true;
 	}
 
 	/**
@@ -75,8 +87,11 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Hole hole) {
+		if(hole.getActualMovable() != null){
+			hole.getActualMovable().visit(this);
+		}
 		// TODO implement here
-		return false;
+		return true;
 	}
 
 	/**
@@ -84,8 +99,8 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Worker worker) {
-		// TODO implement here
-		return false;
+		this.move();
+		return true;
 	}
 
 	/**
@@ -93,8 +108,8 @@ public class Box extends Movable {
 	 * @return
 	 */
 	public boolean visit(Box box) {
-		// TODO implement here
-		return false;
+		this.move();
+		return true;
 	}
 
 }

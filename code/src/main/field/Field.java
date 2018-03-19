@@ -1,7 +1,9 @@
 package main.field;
 
+import java.util.EnumMap;
 import java.util.Map;
 
+import main.Game;
 import main.Orientation;
 import main.movable.Movable;
 
@@ -14,12 +16,9 @@ public abstract class Field {
 	 * Default constructor
 	 */
 	public Field() {
+		 neighbours = new EnumMap<>(Orientation.class);
 	}
 
-	/**
-	 * 
-	 */
-	private Field neighbour;
 
 	/**
 	 * 
@@ -27,8 +26,8 @@ public abstract class Field {
 	protected Map<Orientation, Field> neighbours;
 
 	/**
-	 * Azt a movable objektumot tárolja, ami éppen mozgásban van, ha van ilyen.
-	 * Egyébként null.
+	 * Azt a movable objektumot tï¿½rolja, ami ï¿½ppen mozgï¿½sban van, ha van ilyen.
+	 * Egyï¿½bkï¿½nt null.
 	 */
 	protected Movable actualMovable;
 
@@ -36,23 +35,24 @@ public abstract class Field {
 	 * @return
 	 */
 	public Movable getActualMovable() {
-		// TODO implement here
-		return null;
+
+		return actualMovable;
 	}
 
 	/**
 	 * @param movable
 	 */
-	public void setActualMovable(Movable movable) {
-		// TODO implement here
+	public void setActualMovable
+	(Movable movable) {
+
+		actualMovable = movable;
 	}
 
 	/**
 	 * @return
 	 */
 	public Field getNeigbour() {
-		// TODO implement here
-		return null;
+		return neighbours.get(Game.orientation);
 	}
 
 	/**

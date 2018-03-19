@@ -29,20 +29,20 @@ public abstract class Movable {
 	 */
 	public Field getActualField() {
 		// TODO implement here
-		return null;
+		return actualField;
 	}
 
 	/**
 	 * @param field
 	 */
 	public void setActualField(Field field) {
-		// TODO implement here
+		actualField = field;
 	}
 
 	/**
 	 * 
 	 */
-	public abstract void move();
+	public abstract boolean move();
 
 	/**
 	 * @param plain
@@ -69,7 +69,7 @@ public abstract class Movable {
 	public abstract boolean visit(Objective objective);
 
 	/**
-	 * @param switch
+	 * @param s
 	 * @return
 	 */
 	public abstract boolean visit(Switch s);

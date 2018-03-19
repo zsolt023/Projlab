@@ -16,6 +16,7 @@ public class Worker extends Movable {
 	 * Default constructor
 	 */
 	public Worker() {
+		score=0;
 	}
 
 	/**
@@ -27,14 +28,16 @@ public class Worker extends Movable {
 	 * 
 	 */
 	public void addPoint() {
-		// TODO implement here
+		score++;
 	}
 
 	/**
 	 * 
 	 */
-	public void move() {
-		// TODO implement here
+	public boolean move() {
+		if(this.actualField.getNeigbour().accept(this))
+			return true;
+		return false;
 	}
 
 	/**
@@ -42,8 +45,10 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Plain plain) {
-		// TODO implement here
-		return false;
+		if(plain.getActualMovable() != null){
+			plain.getActualMovable().visit(this);
+		}
+		return true;
 	}
 
 	/**
@@ -51,8 +56,7 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Pillar pillar) {
-		// TODO implement here
-		return false;
+		return true;
 	}
 
 	/**
@@ -60,8 +64,7 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Wall wall) {
-		// TODO implement here
-		return false;
+		return true;
 	}
 
 	/**
@@ -69,16 +72,20 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Objective objective) {
-		// TODO implement here
-		return false;
+		if(objective.getActualMovable() != null){
+			objective.getActualMovable().visit(this);
+		}
+		return true;
 	}
 
 	/**
-	 * @param switch
+	 * @param s
 	 * @return
 	 */
 	public boolean visit(Switch s) {
-		// TODO implement here
+		if(s.getActualMovable() != null){
+			s.getActualMovable().visit(this);
+		}
 		return false;
 	}
 
@@ -87,7 +94,9 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Hole hole) {
-		// TODO implement here
+		if(hole.getActualMovable() != null){
+			hole.getActualMovable().visit(this);
+		}
 		return false;
 	}
 
@@ -96,7 +105,6 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Worker worker) {
-		// TODO implement here
 		return false;
 	}
 
@@ -105,8 +113,8 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Box box) {
-		// TODO implement here
-		return false;
+		this.move();
+		return true;
 	}
 
 }

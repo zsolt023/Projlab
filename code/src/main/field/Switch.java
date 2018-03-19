@@ -22,7 +22,7 @@ public class Switch extends Field {
 	 * 
 	 */
 	public void switchState() {
-		// TODO implement here
+		hole.setActive();
 	}
 
 	/**
@@ -30,7 +30,13 @@ public class Switch extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		// TODO implement here
+		if (movable.visit(this)) {
+			setActualMovable(movable);
+			movable.getActualField().setActualMovable(null);
+			movable.setActualField(this);
+			return true;
+		}
+
 		return false;
 	}
 

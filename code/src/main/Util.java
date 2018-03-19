@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Util {
     public static void main(String[] args) {
 
+        Game.getInstance().init();
+        
         System.out.println("Melyik szekvenciát szeretnéd elindítani? (1-16)\n");
 
 

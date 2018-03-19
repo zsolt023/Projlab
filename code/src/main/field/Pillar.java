@@ -1,6 +1,5 @@
 package main.field;
 
-import main.Game;
 import main.movable.Movable;
 
 /**
@@ -19,14 +18,8 @@ public class Pillar extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		if (movable.visit(this)){
-			Game.getTable().kill(movable);
-			movable.getActualField().setActualMovable(null);
-			return true;
-		}
+		// TODO implement here
 		return false;
 	}
-
-
 
 }

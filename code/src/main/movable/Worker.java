@@ -1,5 +1,6 @@
 package main.movable;
 
+import main.Game;
 import main.field.Hole;
 import main.field.Objective;
 import main.field.Pillar;
@@ -16,7 +17,6 @@ public class Worker extends Movable {
 	 * Default constructor
 	 */
 	public Worker() {
-		score=0;
 	}
 
 	/**
@@ -28,16 +28,17 @@ public class Worker extends Movable {
 	 * 
 	 */
 	public void addPoint() {
-		score++;
+            this.score++;
 	}
 
 	/**
 	 * 
+         * @return 
 	 */
 	public boolean move() {
-		if(this.actualField.getNeigbour().accept(this))
-			return true;
-		return false;
+            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
+                + " :: Method name: move :: Parameters: :: return: boolean");
+            return this.actualField.getNeigbour().accept(this);
 	}
 
 	/**
@@ -45,10 +46,14 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Plain plain) {
-		if(plain.getActualMovable() != null){
-			plain.getActualMovable().visit(this);
-		}
-		return true;
+            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
+                    + " :: Method name: visit :: Parameters: Plain with id: " + plain.getId() + ":: return: void");
+            Movable movable = plain.getActualMovable();
+            if (movable != null) {
+                return movable.visit(this);
+            } else {
+                return true;
+            }
 	}
 
 	/**
@@ -56,7 +61,8 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Pillar pillar) {
-		return true;
+		// TODO implement here
+		return false;
 	}
 
 	/**
@@ -64,7 +70,10 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Wall wall) {
-		return true;
+            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
+                    + " :: Method name: visit :: Parameters: Wall with id: " + wall.getId() + ":: return: void");
+            Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
+            return !actualMovingWorker.getId().equals(this.getId());
 	}
 
 	/**
@@ -72,20 +81,16 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Objective objective) {
-		if(objective.getActualMovable() != null){
-			objective.getActualMovable().visit(this);
-		}
-		return true;
+		// TODO implement here
+		return false;
 	}
 
 	/**
-	 * @param s
+	 * @param switch
 	 * @return
 	 */
 	public boolean visit(Switch s) {
-		if(s.getActualMovable() != null){
-			s.getActualMovable().visit(this);
-		}
+		// TODO implement here
 		return false;
 	}
 
@@ -94,9 +99,7 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Hole hole) {
-		if(hole.getActualMovable() != null){
-			hole.getActualMovable().visit(this);
-		}
+		// TODO implement here
 		return false;
 	}
 
@@ -105,7 +108,9 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Worker worker) {
-		return false;
+            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
+                    + " :: Method name: visit :: Parameters: Worker with id: " + worker.getId() + ":: return: void");
+            return false;
 	}
 
 	/**
@@ -113,8 +118,9 @@ public class Worker extends Movable {
 	 * @return
 	 */
 	public boolean visit(Box box) {
-		this.move();
-		return true;
+            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
+                    + " :: Method name: visit :: Parameters: Box with id: " + box.getId() + ":: return: void");
+            return move();
 	}
 
 }

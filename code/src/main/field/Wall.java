@@ -19,12 +19,18 @@ public class Wall extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		if (movable.visit(this)){
-			Game.getTable().kill(movable);
-			movable.getActualField().setActualMovable(null);
-			return true;
-		}
-		return false;
+            System.out.println("Called Class name: " + Wall.class.getSimpleName() 
+                    + " :: Method name: accept :: Parameters: Movable with id: " + movable.getId() + ":: return: void");
+            if (movable.visit(this)) {
+                Game.getInstance().getTable().kill(movable);
+                this.setActualMovable(movable);
+                Field previousField = movable.getActualField();
+                previousField.setActualMovable(null);
+                movable.setActualField(this);
+                return true;
+            } else {
+                return false;
+            }
 	}
 
 }

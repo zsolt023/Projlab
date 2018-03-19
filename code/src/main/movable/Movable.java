@@ -13,83 +13,49 @@ import main.field.Wall;
  */
 public abstract class Movable {
 
-	/**
-	 * Default constructor
-	 */
+        private String id;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+    
 	public Movable() {
 	}
 
-	/**
-	 * 
-	 */
 	protected Field actualField;
 
-	/**
-	 * @return
-	 */
 	public Field getActualField() {
-		// TODO implement here
-		return actualField;
+            System.out.println("Called Class name: " + Movable.class.getSimpleName() 
+                    + " :: Method name: getActualField :: Parameters: :: return: Field with id: " + actualField);
+            return this.actualField;
 	}
 
-	/**
-	 * @param field
-	 */
 	public void setActualField(Field field) {
-		actualField = field;
+            System.out.println("Called Class name: " + Movable.class.getSimpleName() 
+                    + " :: Method name: setActualField :: Parameters: Field with id: " + field.getId() + " :: return: void");
+            this.actualField = field;
 	}
 
-	/**
-	 * 
-	 */
 	public abstract boolean move();
 
-	/**
-	 * @param plain
-	 * @return
-	 */
 	public abstract boolean visit(Plain plain);
 
-	/**
-	 * @param pillar
-	 * @return
-	 */
 	public abstract boolean visit(Pillar pillar);
 
-	/**
-	 * @param wall
-	 * @return
-	 */
 	public abstract boolean visit(Wall wall);
 
-	/**
-	 * @param objective
-	 * @return
-	 */
 	public abstract boolean visit(Objective objective);
 
-	/**
-	 * @param s
-	 * @return
-	 */
 	public abstract boolean visit(Switch s);
 
-	/**
-	 * @param hole
-	 * @return
-	 */
 	public abstract boolean visit(Hole hole);
 
-	/**
-	 * @param worker
-	 * @return
-	 */
 	public abstract boolean visit(Worker worker);
 
-	/**
-	 * @param box
-	 * @return
-	 */
 	public abstract boolean visit(Box box);
 
 }

@@ -28,13 +28,17 @@ public class Hole extends Field {
 	 * 
 	 */
 	public void setActive() {
-		if (isActive){
-			isActive = false;}
-		else{
-			if (actualMovable != null)
-				Game.getTable().kill(actualMovable);
-			isActive = true;
-		}
+            System.out.println("Called Class name: " + Hole.class.getSimpleName() 
+                    + " :: Method name: setActive :: Parameters: :: return: void");
+            Movable movable = this.getActualMovable();
+            if (movable != null) {
+                Game.getInstance().getTable().kill(movable);
+            }
+            if (isActive) {
+                isActive = false;
+            } else {
+                isActive = true;
+            }
 	}
 
 	/**
@@ -42,18 +46,7 @@ public class Hole extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		if (movable.visit(this)){
-			if (isActive) {
-				Game.getTable().kill(movable);
-				movable.getActualField().setActualMovable(null);
-				return true;
-			}else{
-				setActualMovable(movable);
-				movable.getActualField().setActualMovable(null);
-				movable.setActualField(this);
-				return true;
-			}
-		}
+		// TODO implement here
 		return false;
 	}
 

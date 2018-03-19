@@ -18,11 +18,24 @@ public class Switch extends Field {
 	 */
 	private Hole hole;
 
+        public Hole getHole() {
+            System.out.println("Called Class name: " + Switch.class.getSimpleName() 
+                    + " :: Method name: getHole :: Parameters: :: return: Hole with id:" + hole.getId());
+            return hole;
+        }
+
+        public void setHole(Hole hole) {
+            this.hole = hole;
+        }
+
 	/**
 	 * 
 	 */
 	public void switchState() {
-		hole.setActive();
+            System.out.println("Called Class name: " + Switch.class.getSimpleName() 
+                    + " :: Method name: switchState :: Parameters: :: return: void");
+            Hole hole = this.getHole();
+            hole.setActive();
 	}
 
 	/**
@@ -30,14 +43,17 @@ public class Switch extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		if (movable.visit(this)) {
-			setActualMovable(movable);
-			movable.getActualField().setActualMovable(null);
-			movable.setActualField(this);
-			return true;
-		}
-
-		return false;
+            System.out.println("Called Class name: " + Switch.class.getSimpleName() 
+                    + " :: Method name: accept :: Parameters: Movable with id: " + movable.getId() + ":: return: void");
+            if (movable.visit(this)) {                
+                this.setActualMovable(movable);
+                Field previousField = movable.getActualField();
+                previousField.setActualMovable(null);
+                movable.setActualField(this);
+                return true;
+            } else {
+                return false;
+            }
 	}
 
 }

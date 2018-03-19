@@ -1,5 +1,6 @@
 package main.field;
 
+import main.Game;
 import main.movable.Movable;
 
 /**
@@ -19,6 +20,7 @@ public class Switch extends Field {
 	private Hole hole;
 
         public Hole getHole() {
+            if (Game.printing)
             System.out.println("Called Class name: " + Switch.class.getSimpleName() 
                     + " :: Method name: getHole :: Parameters: :: return: Hole with id:" + hole.getId());
             return hole;
@@ -32,6 +34,7 @@ public class Switch extends Field {
 	 * 
 	 */
 	public void switchState() {
+        if (Game.printing)
             System.out.println("Called Class name: " + Switch.class.getSimpleName() 
                     + " :: Method name: switchState :: Parameters: :: return: void");
             Hole hole = this.getHole();
@@ -43,8 +46,9 @@ public class Switch extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
+        if (Game.printing)
             System.out.println("Called Class name: " + Switch.class.getSimpleName() 
-                    + " :: Method name: accept :: Parameters: Movable with id: " + movable.getId() + ":: return: void");
+                    + " :: Method name: accept :: Parameters: Movable with id: " + movable.getId() + ":: return: boolean");
             if (movable.visit(this)) {                
                 this.setActualMovable(movable);
                 Field previousField = movable.getActualField();

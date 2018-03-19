@@ -1,5 +1,6 @@
 package main.field;
 
+import main.Game;
 import main.movable.Movable;
 
 /**
@@ -18,15 +19,33 @@ public class Plain extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-            System.out.println("Called Class name: " + Plain.class.getSimpleName() 
-                    + " :: Method name: accept :: Parameters: Movable with id: " + movable.getId() + ":: return: void");
-            if (movable.visit(this)) {                
+		if (Game.printing){
+			Game.printTabs();
+            System.out.println("> " + this.getId() + ".accept(" + movable.getId() + ")");}
+            Game.tabs++;
+            if (movable.visit(this)) {
+				Game.tabs++;
                 this.setActualMovable(movable);
+				Game.tabs--;
+
+				Game.tabs++;
                 Field previousField = movable.getActualField();
+				Game.tabs--;
+
+				Game.tabs++;
                 previousField.setActualMovable(null);
+				Game.tabs--;
+
+				Game.tabs++;
                 movable.setActualField(this);
+				Game.tabs--;
+
+				Game.printTabs();
+				System.out.println("< true");
                 return true;
             } else {
+				Game.printTabs();
+				System.out.println("< false");
                 return false;
             }
 	}

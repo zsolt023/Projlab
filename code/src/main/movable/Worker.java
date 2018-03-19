@@ -9,118 +9,179 @@ import main.field.Switch;
 import main.field.Wall;
 
 /**
- * 
+ *
  */
 public class Worker extends Movable {
 
-	/**
-	 * Default constructor
-	 */
-	public Worker() {
-	}
+    /**
+     * Default constructor
+     */
+    public Worker() {
+    }
 
-	/**
-	 * 
-	 */
-	private int score;
+    /**
+     *
+     */
+    private int score;
 
-	/**
-	 * 
-	 */
-	public void addPoint() {
-            this.score++;
-	}
+    /**
+     *
+     */
+    public void addPoint() {
+        this.score++;
+    }
 
-	/**
-	 * 
-         * @return 
-	 */
-	public boolean move() {
-            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
-                + " :: Method name: move :: Parameters: :: return: boolean");
-            return this.actualField.getNeigbour().accept(this);
-	}
+    /**
+     * @return
+     */
+    public boolean move() {
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".move()");
+        }
+        Game.tabs++;
+        if (this.actualField.getNeigbour().accept(this)) {
+            Game.tabs--;
+            Game.printTabs();
+            System.out.println("< true");
+            return true;
+        }
+        Game.tabs--;
+        Game.printTabs();
+        System.out.println("< false");
+        return false;
+    }
 
-	/**
-	 * @param plain
-	 * @return
-	 */
-	public boolean visit(Plain plain) {
-            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
-                    + " :: Method name: visit :: Parameters: Plain with id: " + plain.getId() + ":: return: void");
-            Movable movable = plain.getActualMovable();
-            if (movable != null) {
-                return movable.visit(this);
-            } else {
+    /**
+     * @param plain
+     * @return
+     */
+    public boolean visit(Plain plain) {
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + plain.getId() + ")");
+        }
+
+        Game.tabs++;
+        Movable movable = plain.getActualMovable();
+        Game.tabs--;
+
+        Game.tabs++;
+        if (movable != null) {
+            if (movable.visit(this)) {
+                Game.tabs--;
+                Game.printTabs();
+                System.out.println("< true");
                 return true;
+            } else {
+                Game.tabs--;
+                Game.printTabs();
+                System.out.println("< false");
+                return false;
             }
-	}
+        } else {
+            Game.printTabs();
+            System.out.println("< true");
+            return true;
+        }
+    }
 
-	/**
-	 * @param pillar
-	 * @return
-	 */
-	public boolean visit(Pillar pillar) {
-		// TODO implement here
-		return false;
-	}
+    /**
+     * @param pillar
+     * @return
+     */
+    public boolean visit(Pillar pillar) {
+        // TODO implement here
+        return false;
+    }
 
-	/**
-	 * @param wall
-	 * @return
-	 */
-	public boolean visit(Wall wall) {
-            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
-                    + " :: Method name: visit :: Parameters: Wall with id: " + wall.getId() + ":: return: void");
-            Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
-            return !actualMovingWorker.getId().equals(this.getId());
-	}
+    /**
+     * @param wall
+     * @return
+     */
+    public boolean visit(Wall wall) {
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + wall.getId() + ")");
+        }
+        Game.tabs++;
+        Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
+        Game.tabs--;
 
-	/**
-	 * @param objective
-	 * @return
-	 */
-	public boolean visit(Objective objective) {
-		// TODO implement here
-		return false;
-	}
+        if (!actualMovingWorker.getId().equals(this.getId())) {
 
-	/**
-	 * @param switch
-	 * @return
-	 */
-	public boolean visit(Switch s) {
-		// TODO implement here
-		return false;
-	}
+            Game.printTabs();
+            System.out.println("< true");
+            return true;
+        }
 
-	/**
-	 * @param hole
-	 * @return
-	 */
-	public boolean visit(Hole hole) {
-		// TODO implement here
-		return false;
-	}
+        Game.printTabs();
+        System.out.println("< false");
+        return false;
+    }
 
-	/**
-	 * @param worker
-	 * @return
-	 */
-	public boolean visit(Worker worker) {
-            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
-                    + " :: Method name: visit :: Parameters: Worker with id: " + worker.getId() + ":: return: void");
+
+    /**
+     * @param objective
+     * @return
+     */
+    public boolean visit(Objective objective) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param s
+     * @return
+     */
+    public boolean visit(Switch s) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param hole
+     * @return
+     */
+    public boolean visit(Hole hole) {
+        // TODO implement here
+        return false;
+    }
+
+    /**
+     * @param worker
+     * @return
+     */
+    public boolean visit(Worker worker) {
+        if (Game.printing){
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + worker.getId() + ")");}
+
+        Game.printTabs();
+        System.out.println("< false");
+        return false;
+    }
+
+    /**
+     * @param box
+     * @return
+     */
+    public boolean visit(Box box) {
+        if (Game.printing){
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + box.getId() + ")");}
+        Game.tabs++;
+        if (move()) {
+            Game.tabs--;
+            Game.printTabs();
+            System.out.println("< true");
+            return true;
+        } else {
+            Game.tabs--;
+            Game.printTabs();
+            System.out.println("< false");
             return false;
-	}
-
-	/**
-	 * @param box
-	 * @return
-	 */
-	public boolean visit(Box box) {
-            System.out.println("Called Class name: " + Worker.class.getSimpleName() 
-                    + " :: Method name: visit :: Parameters: Box with id: " + box.getId() + ":: return: void");
-            return move();
-	}
+        }
+    }
 
 }

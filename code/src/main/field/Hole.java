@@ -28,6 +28,7 @@ public class Hole extends Field {
 	 * 
 	 */
 	public void setActive() {
+		if (Game.printing)
             System.out.println("Called Class name: " + Hole.class.getSimpleName() 
                     + " :: Method name: setActive :: Parameters: :: return: void");
             Movable movable = this.getActualMovable();

@@ -26,8 +26,21 @@ public class Hole extends Field {
 	/**
 	 * 
 	 */
+	public boolean getIsActive(){
+	return isActive;
+	}
+
+	public void setIsActive(boolean b){
+	isActive=b;
+	}
+	
 	public void setActive() {
-		// TODO implement here
+		if(this.getIsActive){
+			this.setIsActive(false);
+		}
+		else{
+			this.setIsActive(true);
+		}
 	}
 
 	/**
@@ -35,8 +48,13 @@ public class Hole extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		// TODO implement here
-		return false;
+		if(m.visit(this)){
+			game.getTable().kill(m);
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 }

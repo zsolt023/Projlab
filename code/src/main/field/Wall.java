@@ -18,8 +18,12 @@ public class Wall extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		// TODO implement here
-		return false;
+		if(m.visit(this)){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 }

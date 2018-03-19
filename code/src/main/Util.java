@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Util {
     public static void main(String[] args) {
 
-        System.out.println("Melyik szekvenciát szeretnéd elindítani? (1-16)");
+        System.out.println("Melyik szekvenciát szeretnéd elindítani? (1-16)\n");
 
 
         Scanner reader = new Scanner(System.in);
@@ -62,7 +62,13 @@ public class Util {
 
     }
     static void _1(){
+        System.out.println("Push box -> worker to wall or pillar\n");
+        System.out.println("Az utolsó előtti worker nyomódott neki a falnak? (I/N)");
+        if(System.console().readLine().equals("I")){
 
+        }else{
+
+        }
     }
 
     static void _2(){

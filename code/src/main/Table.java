@@ -247,7 +247,7 @@ public class Table {
 
         //7. eset
         Worker worker7_1 = new Worker();
-        worker7_1.setId("7_1");
+        worker7_1.setId("wo7_1");
         Box box7_1 = new Box();
         box7_1.setId("bo7_1");
         Plain plain7_1 = new Plain();

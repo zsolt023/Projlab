@@ -80,6 +80,7 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
+            Game.tabs--;
             Game.printTabs();
             System.out.println("< true");
             return true;

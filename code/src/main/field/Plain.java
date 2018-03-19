@@ -40,10 +40,12 @@ public class Plain extends Field {
                 movable.setActualField(this);
 				Game.tabs--;
 
+				Game.tabs--;
 				Game.printTabs();
 				System.out.println("< true");
                 return true;
             } else {
+				Game.tabs--;
 				Game.printTabs();
 				System.out.println("< false");
                 return false;

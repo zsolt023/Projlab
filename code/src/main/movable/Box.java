@@ -79,7 +79,10 @@ public class Box extends Movable {
      * @return
      */
     public boolean visit(Pillar pillar) {
-        // TODO implement here
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + pillar.getId() + ")");
+        }
         return false;
     }
 
@@ -88,7 +91,10 @@ public class Box extends Movable {
      * @return
      */
     public boolean visit(Wall wall) {
-        // TODO implement here
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + wall.getId() + ")");
+        }
         return false;
     }
 

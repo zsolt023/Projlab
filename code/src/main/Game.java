@@ -15,6 +15,8 @@ public class Game {
     public static boolean lastBoxKill = false;
 
     public static boolean lastBoxIsCorner = false;
+    
+    public static boolean lastBoxToObj = false;
 
     private Game() {
         printing = true;

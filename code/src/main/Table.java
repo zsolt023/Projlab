@@ -30,6 +30,9 @@ public class Table {
     
     private Hole hole4_1 = new Hole();
     private Hole hole7_1 = new Hole();
+    private Box box11_1 = new Box();
+    private Box box12_1 = new Box();
+    private Worker worker13_1 = new Worker();
     
     public void loadTable() {
         Game.getInstance().printing = false;
@@ -399,10 +402,16 @@ public class Table {
         plain10_3.setNeighbour(Orientation.DOWN, wall10_1);
         
         //11 eset
+        box11_1.setId("bo11_1");
+        boxes.add(box11_1);
         
         //12 eset
+        box12_1.setId("box12_1");
+        boxes.add(box12_1);
         
         //13. eset 
+        worker13_1.setId("wo13_1");
+        workers.add(worker13_1);
         
         //14 eset
         Worker worker14_1 = new Worker();
@@ -542,7 +551,7 @@ public class Table {
                 System.out.println("This box was last on the table what pushed on the objective? (I/N)");
                 question = reader.nextLine();
                 if (question.startsWith("i") || question.startsWith("I")) {
-                    Game.getInstance().lastBoxKill = true;
+                    Game.getInstance().lastBoxToObj = true;
                 }
                 break;
             case 7:
@@ -574,7 +583,7 @@ public class Table {
                 System.out.println("This box was last on the table what pushed on the objective? (I/N)");
                 question = reader.nextLine();
                 if (question.startsWith("i") || question.startsWith("I")) {
-                    Game.getInstance().lastBoxKill = true;
+                    Game.getInstance().lastBoxToObj = true;
                 }
                 break;
             case 10:
@@ -584,7 +593,7 @@ public class Table {
                 Game.getInstance().lastBoxKill = true;
                 break;
             case 12:
-                Game.getInstance().lastBoxKill = true;
+                Game.getInstance().lastBoxToObj = true;
                 break;
             case 13:
                 Game.getInstance().penultimateWorker = true;
@@ -719,10 +728,13 @@ public class Table {
                     }
                     break;
                 case 11:
+                    kill(box11_1);
                     break;
                 case 12:
+                    kill(box12_1);
                     break;
                 case 13:
+                    kill(worker13_1);
                     break;
                 case 14:
                     for (Worker w : workers) {
@@ -764,15 +776,18 @@ public class Table {
     public boolean gameOver() {
         System.out.println("> table.gameOver()");
         if (Game.getInstance().penultimateWorker) {
-            System.out.println("Game over, because the penultimate worker was killed.");
+            System.out.println("    Game over, because the penultimate worker was killed.");
         }
         if (Game.getInstance().lastBoxKill) {
-            System.out.println("Game over, because the last box was killed or last box pushed on objective.");
+            System.out.println("    Game over, because the last box was killed.");
+        }
+        if (Game.getInstance().lastBoxToObj) {
+            System.out.println("    Game over, because the last box was pushed on objective.");
         }
         if (Game.getInstance().lastBoxIsCorner) {
-            System.out.println("Game over, because the last box was pushed in the corner.");
+            System.out.println("    Game over, because the last box was pushed in the corner.");
         }
-        if (Game.getInstance().penultimateWorker || Game.getInstance().lastBoxKill || Game.getInstance().lastBoxIsCorner) {
+        if (Game.getInstance().penultimateWorker || Game.getInstance().lastBoxKill || Game.getInstance().lastBoxIsCorner || Game.getInstance().lastBoxToObj) {
             System.out.println("< true");
         } else {
             System.out.println("< false");
@@ -780,6 +795,7 @@ public class Table {
         Game.getInstance().penultimateWorker = false; 
         Game.getInstance().lastBoxKill = false; 
         Game.getInstance().lastBoxIsCorner = false;
+        Game.getInstance().lastBoxToObj = false;
         
         Game.getInstance().tabs = 0;
         return false;

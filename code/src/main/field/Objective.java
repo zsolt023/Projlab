@@ -18,7 +18,10 @@ public class Objective extends Field {
 	 * @return
 	 */
 	public boolean accept(Movable movable) {
-		// TODO implement here
+		if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".accept(" + movable.getId() + ")");
+        }
 		return false;
 	}
 

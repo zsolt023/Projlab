@@ -3,105 +3,81 @@ package main.field;
 import main.Game;
 import main.movable.Movable;
 
-import java.util.Scanner;
 
-/**
- *
- */
 public class Hole extends Field {
 
-    /**
-     * Default constructor
-     */
     public Hole() {
     }
 
-    /**
-     *
-     */
-    private boolean isActive;
+    private boolean isActive = true;
 
-    /**
-     *
-     */
-    private Switch s;
+    public boolean isIsActive() {
+        return isActive;
+    }
 
-    /**
-     *
-     */
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public void setActive() {
-        if (Game.printing) {
-            Game.printTabs();
-            System.out.println(">" + this.getId() + ".setActive()");
+        if (Game.getInstance().printing) {
+            Game.getInstance().printTabs();
+            System.out.println("> " + this.getId() + ".setActive()");
         }
-        Game.tabs++;
+        
+        if (Game.getInstance().table.alternatives == 4) {
+            Game.getInstance().printing = false;
+            Game.getInstance().getTable().kill(null);
+            Game.getInstance().printing = true;
+        }
+        
+        Game.getInstance().tabs++;
         Movable movable = this.getActualMovable();
-        Game.tabs--;
+        Game.getInstance().tabs--;
+        
+        
         if (movable != null) {
-            Game.tabs++;
+            Game.getInstance().tabs++;
             Game.getInstance().getTable().kill(movable);
-            Game.tabs--;
+            Game.getInstance().tabs--;
         }
         if (isActive) {
             isActive = false;
         } else {
             isActive = true;
         }
-        Game.printTabs();
+        Game.getInstance().printTabs();
         System.out.println("< void");
     }
 
-    /**
-     * @param movable
-     * @return
-     */
     public boolean accept(Movable movable) {
-        if (Game.printing) {
-            Game.printTabs();
+        if (Game.getInstance().printing) {
+            Game.getInstance().printTabs();
             System.out.println("> " + this.getId() + ".accept(" + movable.getId() + ")");
         }
-        Game.tabs++;
+        Game.getInstance().tabs++;
         if (movable.visit(this)) {
-            System.out.println("Nyitva van a lyuk?");
-            Scanner reader = new Scanner(System.in);
-            String question = reader.nextLine();
-            if (question.startsWith("i") || question.startsWith("I")) {
-                isActive = true;
-            } else {
-                isActive = false;
+            if (Game.getInstance().table.alternatives == 7) {
+                Game.getInstance().printing = false;
+                Game.getInstance().getTable().kill(null);
+                Game.getInstance().printing = true;
             }
-
             if (isActive) {
-                Game.tabs--;
-                Game.tabs++;
                 Game.getInstance().getTable().kill(movable);
-                Game.tabs--;
             } else {
-                Game.tabs--;
-                Game.tabs++;
                 this.setActualMovable(movable);
-                Game.tabs--;
             }
 
-            Game.tabs++;
             Field previousField = movable.getActualField();
-            Game.tabs--;
-
-            Game.tabs++;
             previousField.setActualMovable(null);
-            Game.tabs--;
-
-            Game.tabs++;
             movable.setActualField(this);
-            Game.tabs--;
 
-            Game.tabs--;
-            Game.printTabs();
+            Game.getInstance().printTabs();
             System.out.println("< true");
             return true;
         } else {
-            Game.tabs--;
-            Game.printTabs();
+            Game.getInstance().tabs--;
+            Game.getInstance().printTabs();
             System.out.println("< false");
             return false;
         }

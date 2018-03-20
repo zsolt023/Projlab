@@ -15,41 +15,29 @@ import main.movable.Box;
 import main.movable.Movable;
 import main.movable.Worker;
 
-/**
- *
- */
 public class Table {
 
-    /**
-     * Default constructor
-     */
     public Table() {
     }
 
-    /**
-     *
-     */
     private List<Field> fields = new ArrayList<>();
 
-    /**
-     *
-     */
     private List<Worker> workers = new ArrayList<>();
 
-    /**
-     *
-     */
     private List<Box> boxes = new ArrayList<>();
 
-    /**
-     *
-     */
+    public static int alternatives = 0;
+    
+    private Hole hole4_1 = new Hole();
+    private Hole hole7_1 = new Hole();
+    
     public void loadTable() {
-        Game.printing = false;
-        if (Game.printing)
+        Game.getInstance().printing = false;
+        if (Game.getInstance().printing) {
             System.out.println("Called Class name: " + Table.class.getSimpleName()
                     + " :: Method name: loadTable :: Parameters: :: return: void");
-
+        }
+            
         //elso esethez objektumok es a kezdo inicializalasok:
         Worker worker1_1 = new Worker();
         worker1_1.setId("wo1_1");
@@ -163,9 +151,9 @@ public class Table {
         plain4_2.setId("pl4_2");
         Switch switch4_1 = new Switch();
         switch4_1.setId("sw4_1");
-        Hole hole4_1 = new Hole();
         hole4_1.setId("ho4_1");
-
+        hole4_1.setIsActive(false);
+        
         worker4_1.setActualField(plain4_1);
         plain4_1.setActualMovable(worker4_1);
 
@@ -254,7 +242,6 @@ public class Table {
         plain7_1.setId("pl7_1");
         Plain plain7_2 = new Plain();
         plain7_2.setId("pl7_2");
-        Hole hole7_1 = new Hole();
         hole7_1.setId("ho7_1");
 
         worker7_1.setActualField(plain7_1);
@@ -372,6 +359,51 @@ public class Table {
         plain9_3.setNeighbour(Orientation.RIGHT, plain9_4);
         plain9_4.setNeighbour(Orientation.RIGHT, objective9_1);
 
+        //10 eset (sarok)
+        Worker worker10_1 = new Worker();
+        worker10_1.setId("wo10_1");
+        Box box10_1 = new Box();
+        box10_1.setId("bo10_1");
+        Plain plain10_1 = new Plain();
+        plain10_1.setId("pl10_1");
+        Plain plain10_2 = new Plain();
+        plain10_2.setId("pl10_2");
+        Plain plain10_3 = new Plain();
+        plain10_3.setId("pl10_3");
+        Pillar pillar10_1 = new Pillar();
+        pillar10_1.setId("pi10_1");
+        Wall wall10_1 = new Wall();
+        wall10_1.setId("wa10_1");
+
+        worker10_1.setActualField(plain10_1);
+        plain10_1.setActualMovable(worker10_1);
+
+        box10_1.setActualField(plain10_2);
+        plain10_2.setActualMovable(box10_1);
+
+        plain10_3.setActualMovable(null);
+        pillar10_1.setActualMovable(null);
+        wall10_1.setActualMovable(null);
+
+        workers.add(worker10_1);
+        boxes.add(box10_1);
+        fields.add(plain10_1);
+        fields.add(plain10_2);
+        fields.add(plain10_3);
+        fields.add(pillar10_1);
+        fields.add(wall10_1);
+
+        plain10_1.setNeighbour(Orientation.RIGHT, plain10_2);
+        plain10_2.setNeighbour(Orientation.RIGHT, plain10_3);
+        plain10_3.setNeighbour(Orientation.RIGHT, pillar10_1);
+        plain10_3.setNeighbour(Orientation.DOWN, wall10_1);
+        
+        //11 eset
+        
+        //12 eset
+        
+        //13. eset 
+        
         //14 eset
         Worker worker14_1 = new Worker();
         worker14_1.setId("wo14_1");
@@ -429,75 +461,153 @@ public class Table {
 
         plain16_1.setNeighbour(Orientation.RIGHT, plain16_2);
 
-        //13. eset (sarok)
-        Worker worker13_1 = new Worker();
-        worker13_1.setId("wo13_1");
-        Box box13_1 = new Box();
-        box13_1.setId("bo13_1");
-        Plain plain13_1 = new Plain();
-        plain13_1.setId("pl13_1");
-        Plain plain13_2 = new Plain();
-        plain13_2.setId("pl13_2");
-        Plain plain13_3 = new Plain();
-        plain13_3.setId("pl13_3");
-        Pillar pillar13_1 = new Pillar();
-        pillar13_1.setId("pi13_1");
-        Wall wall13_1 = new Wall();
-        wall13_1.setId("wa13_1");
-
-        worker13_1.setActualField(plain13_1);
-        plain13_1.setActualMovable(worker13_1);
-
-        box13_1.setActualField(plain13_2);
-        plain13_2.setActualMovable(box13_1);
-
-        plain13_3.setActualMovable(null);
-        pillar13_1.setActualMovable(null);
-        wall13_1.setActualMovable(null);
-
-        workers.add(worker13_1);
-        boxes.add(box13_1);
-        fields.add(plain13_1);
-        fields.add(plain13_2);
-        fields.add(plain13_3);
-        fields.add(pillar13_1);
-        fields.add(wall13_1);
-
-        plain13_1.setNeighbour(Orientation.RIGHT, plain13_2);
-        plain13_2.setNeighbour(Orientation.RIGHT, plain13_3);
-        plain13_3.setNeighbour(Orientation.RIGHT, pillar13_1);
-        plain13_3.setNeighbour(Orientation.DOWN, wall13_1);
-
-        Game.printing = true;
+        Game.getInstance().printing = true;
 
         System.out.println("Load table done.");
     }
 
     public void kill(Movable movable) {
-        Game.printTabs();
-        System.out.println("> Table.kill(" + movable.getId() + ")");
-        for (Worker w : workers) {
-            if (movable.getId().equals(w.getId())) {
-                workers.remove(w);
-                break;
+        if (Game.getInstance().printing) {
+            Game.getInstance().printTabs();
+            System.out.println("> table.kill(" + movable.getId() + ")");
+        }
+        if (movable != null) {
+            for (Worker w : workers) {
+                if (movable.getId().equals(w.getId())) {
+                    workers.remove(w);
+                    break;
+                }
+            }
+
+            for (Box b : boxes) {
+                if (movable.getId().equals(b.getId())) {
+                    boxes.remove(b);
+                    break;
+                }
             }
         }
-
-        for (Box b : boxes) {
-            if (movable.getId().equals(b.getId())) {
-                boxes.remove(b);
-                break;
-            }
-        }
-
-        System.out.println("    The penultimate worker pushed to wall? (I/N)");
+        
         Scanner reader = new Scanner(System.in);
-        String question = reader.nextLine();
-        if (question.startsWith("i") || question.startsWith("I")) {
-
+        String question;
+        switch (alternatives) {
+            case 1:
+                System.out.println("The penultimate worker killed by wall? (I/N)");
+                question = reader.nextLine();
+                if (question.startsWith("i") || question.startsWith("I")) {
+                    Game.getInstance().penultimateWorker = true;
+                }
+                break;
+            case 3:
+                Game.getInstance().printing = true;
+                System.out.println("The box is moved in the corner? (I/N)");
+                question = reader.nextLine();
+                if (question.startsWith("i") || question.startsWith("I")) {
+                    System.out.println("This box was last on the table? (I/N)");
+                    question = reader.nextLine();
+                    if (question.startsWith("i") || question.startsWith("I")) {
+                        Game.getInstance().lastBoxIsCorner = true;
+                    }
+                }
+                Game.getInstance().printing = false;
+                break;
+            case 4:
+                if (!Game.getInstance().printing) {
+                    System.out.println("On the switched hole, is movable? (I/N)");
+                    question = reader.nextLine();
+                    if (question.startsWith("i") || question.startsWith("I")) {
+                        Box box4_2 = new Box();
+                        box4_2.setId("bo4_2");
+                        boxes.add(box4_2);
+                        hole4_1.setActualMovable(box4_2);
+                        box4_2.setActualField(hole4_1);
+                        System.out.println("This box was last on the hole, or penultimate worker was on the hole? (I/N)");
+                        question = reader.nextLine();
+                        if (question.startsWith("i") || question.startsWith("I")) {
+                            Game.getInstance().lastBoxKill = true;
+                        } else {
+                            System.out.println("The box is moved in the corner? (I/N)");
+                            question = reader.nextLine();
+                            if (question.startsWith("i") || question.startsWith("I")) {
+                                System.out.println("This box was last on the table? (I/N)");
+                                question = reader.nextLine();
+                                if (question.startsWith("i") || question.startsWith("I")) {
+                                    Game.getInstance().lastBoxIsCorner = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            case 5:
+                System.out.println("This box was last on the table what pushed on the objective? (I/N)");
+                question = reader.nextLine();
+                if (question.startsWith("i") || question.startsWith("I")) {
+                    Game.getInstance().lastBoxKill = true;
+                }
+                break;
+            case 7:
+                if (!Game.getInstance().printing) {
+                    System.out.println("Hole is aktive now (want to kill box)? (I/N)");
+                    question = reader.nextLine();
+                    if (question.startsWith("i") || question.startsWith("I")) {
+                        hole7_1.setIsActive(true);
+                        System.out.println("This box was last on the table? (I/N)");
+                        question = reader.nextLine();
+                        if (question.startsWith("i") || question.startsWith("I")) {
+                            Game.getInstance().lastBoxKill = true;
+                        }
+                    } else {
+                        hole7_1.setIsActive(false);
+                        System.out.println("The box is moved in the corner? (I/N)");
+                        question = reader.nextLine();
+                        if (question.startsWith("i") || question.startsWith("I")) {
+                            System.out.println("This box was last on the table? (I/N)");
+                            question = reader.nextLine();
+                            if (question.startsWith("i") || question.startsWith("I")) {
+                                Game.getInstance().lastBoxIsCorner = true;
+                            }
+                        }
+                    }
+                }
+                break;
+            case 9:
+                System.out.println("This box was last on the table what pushed on the objective? (I/N)");
+                question = reader.nextLine();
+                if (question.startsWith("i") || question.startsWith("I")) {
+                    Game.getInstance().lastBoxKill = true;
+                }
+                break;
+            case 10:
+                Game.getInstance().lastBoxIsCorner = true;
+                break;
+            case 11:
+                Game.getInstance().lastBoxKill = true;
+                break;
+            case 12:
+                Game.getInstance().lastBoxKill = true;
+                break;
+            case 13:
+                Game.getInstance().penultimateWorker = true;
+                break;
+            case 14:
+                System.out.println("Hole is aktive now (want to kill worker)? (I/N)");
+                question = reader.nextLine();
+                if (question.startsWith("i") || question.startsWith("I")) {
+                    System.out.println("This worker was penultimate on the table? (I/N)");
+                    question = reader.nextLine();
+                    if (question.startsWith("i") || question.startsWith("I")) {
+                        Game.getInstance().penultimateWorker = true;
+                    }
+                }
+                break;
+            default:
+                System.out.println("Your choose is bad, try again!");
+                break;
         }
-        Game.printTabs();
-        System.out.println("< void");
+        if (Game.getInstance().printing) {
+            Game.getInstance().printTabs();
+            System.out.println("< void");
+        }
     }
 
     public void game() {
@@ -517,7 +627,7 @@ public class Table {
             System.out.println("10. Last box stucks");
             System.out.println("11. Last box has being killed");
             System.out.println("12. Last box pushed to objective");
-            System.out.println("13. Last but one worker dies");
+            System.out.println("13. Penultimate worker dies");
             System.out.println("14. Step to hole");
             System.out.println("15. Step to wall or pillar");
             System.out.println("16. Step to plain, switch or objective");
@@ -526,7 +636,7 @@ public class Table {
 
             Worker actualMovingWorker = null;
             Scanner reader = new Scanner(System.in);
-            int alternatives = reader.nextInt();
+            alternatives = reader.nextInt();
             switch (alternatives) {
                 case 1:
                     for (Worker w : workers) {
@@ -601,18 +711,18 @@ public class Table {
                     }
                     break;
                 case 10:
+                    for (Worker w : workers) {
+                        if (w.getId().equals("wo10_1")) {
+                            actualMovingWorker = w;
+                            break;
+                        }
+                    }
                     break;
                 case 11:
                     break;
                 case 12:
                     break;
                 case 13:
-                    for (Worker w : workers) {
-                        if (w.getId().equals("wo13_1")) {
-                            actualMovingWorker = w;
-                            break;
-                        }
-                    }
                     break;
                 case 14:
                     for (Worker w : workers) {
@@ -651,12 +761,27 @@ public class Table {
         }
     }
 
-    /**
-     * @return
-     */
     public boolean gameOver() {
-        System.out.println("Called Class name: " + Table.class.getSimpleName()
-                + " :: Method name: gameOver :: Parameters: :: return: boolean");
+        System.out.println("> table.gameOver()");
+        if (Game.getInstance().penultimateWorker) {
+            System.out.println("Game over, because the penultimate worker was killed.");
+        }
+        if (Game.getInstance().lastBoxKill) {
+            System.out.println("Game over, because the last box was killed or last box pushed on objective.");
+        }
+        if (Game.getInstance().lastBoxIsCorner) {
+            System.out.println("Game over, because the last box was pushed in the corner.");
+        }
+        if (Game.getInstance().penultimateWorker || Game.getInstance().lastBoxKill || Game.getInstance().lastBoxIsCorner) {
+            System.out.println("< true");
+        } else {
+            System.out.println("< false");
+        }
+        Game.getInstance().penultimateWorker = false; 
+        Game.getInstance().lastBoxKill = false; 
+        Game.getInstance().lastBoxIsCorner = false;
+        
+        Game.getInstance().tabs = 0;
         return false;
     }
 

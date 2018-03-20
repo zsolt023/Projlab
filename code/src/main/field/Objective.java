@@ -1,40 +1,35 @@
 package main.field;
 
+import main.Game;
 import main.movable.Movable;
 
-/**
- * 
- */
+
 public class Objective extends Field {
 
-	/**
-	 * Default constructor
-	 */
-	public Objective() {
-	}
+    public Objective() {
+    }
 
-	/**
-	 * @param movable
-	 * @return
-	 */
-	public boolean accept(Movable movable) {
-		if (Game.printing) {
-            Game.printTabs();
+    public boolean accept(Movable movable) {
+        if (Game.getInstance().printing) {
+            Game.getInstance().printTabs();
             System.out.println("> " + this.getId() + ".accept(" + movable.getId() + ")");
         }
-		if(movable.visit(this)){
-			Game.tabs--;
-			Game.tabs++;
-			Game.getInstance().getTable().kill(moveable);
-			Game.getInstance().getActualMovingWorker().addPoint();
-			this.setActualMoveable(null);
-			Game.tabs--;
-		}
-		else {
-            		Game.tabs--;
-            		Game.printTabs();
-            		System.out.println("< false");
-            		return false;
-		}
+        Game.getInstance().tabs++;
+        
+        if (movable.visit(this)) {
+            Game.getInstance().getTable().kill(movable);
+            Game.getInstance().getActualMovingWorker().addPoint();
+            
+            Game.getInstance().tabs--;
+            Game.getInstance().printTabs();
+            System.out.println("< true");
+            return true;
+        } else {
+            Game.getInstance().tabs--;
+            Game.getInstance().printTabs();
+            System.out.println("< false");
+            return false;
+        }
+    }
 
 }

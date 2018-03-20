@@ -9,9 +9,7 @@ import main.field.Plain;
 import main.field.Switch;
 import main.field.Wall;
 
-/**
- *
- */
+
 public abstract class Movable {
 
     private String id;
@@ -30,22 +28,23 @@ public abstract class Movable {
     protected Field actualField;
 
     public Field getActualField() {
-        if (Game.printing) {
-            Game.printTabs();
+        if (Game.getInstance().printing) {
+            Game.getInstance().printTabs();
             System.out.println("> " + this.getId() + ".getActualField()");
+            Game.getInstance().printTabs();
+            System.out.println("< " + actualField.getId());
         }
-        Game.printTabs();
-        System.out.println("< " + actualField);
         return this.actualField;
     }
 
     public void setActualField(Field field) {
-        if (Game.printing){
-            Game.printTabs();
-            System.out.println("> " + this.getId() + "setActualField(" + field.getId() + ")");}
-
-            Game.printTabs();
-        System.out.println("< void");
+        if (Game.getInstance().printing){
+            Game.getInstance().printTabs();
+            System.out.println("> " + this.getId() + ".setActualField(" + field.getId() + ")");
+            Game.getInstance().printTabs();
+            Game.getInstance().tabs--;
+            System.out.println("< void");
+        }
         this.actualField = field;
     }
 

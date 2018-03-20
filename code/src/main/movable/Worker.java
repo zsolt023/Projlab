@@ -92,7 +92,23 @@ public class Worker extends Movable {
      * @return
      */
     public boolean visit(Pillar pillar) {
-        // TODO implement here
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + pillar.getId() + ")");
+        }
+        Game.tabs++;
+        Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
+        Game.tabs--;
+
+        if (!actualMovingWorker.getId().equals(this.getId())) {
+
+            Game.printTabs();
+            System.out.println("< true");
+            return true;
+        }
+
+        Game.printTabs();
+        System.out.println("< false");
         return false;
     }
 
@@ -197,8 +213,33 @@ public class Worker extends Movable {
      * @return
      */
     public boolean visit(Hole hole) {
-        // TODO implement here
-        return false;
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + hole.getId() + ")");
+        }
+        Game.tabs++;
+        Movable movable = hole.getActualMovable();
+        Game.tabs--;
+
+        Game.tabs++;
+        if (movable != null) {
+            if (movable.visit(this)) {
+                Game.tabs--;
+                Game.printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.tabs--;
+                Game.printTabs();
+                System.out.println("< false");
+                return false;
+            }
+        } else {
+            Game.tabs--;
+            Game.printTabs();
+            System.out.println("< true");
+            return true;
+        }
     }
 
     /**

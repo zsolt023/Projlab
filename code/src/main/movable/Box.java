@@ -9,7 +9,6 @@ import main.field.Switch;
 import main.field.Wall;
 
 /**
- *
  */
 public class Box extends Movable {
 

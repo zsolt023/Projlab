@@ -28,6 +28,10 @@ public class Worker extends Movable {
      *
      */
     public void addPoint() {
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + Game.getInstance().getActualMovingWorker().getId() + ".addPoint()");
+        }
         this.score++;
     }
 

@@ -22,7 +22,19 @@ public class Objective extends Field {
             Game.printTabs();
             System.out.println("> " + this.getId() + ".accept(" + movable.getId() + ")");
         }
-		return false;
-	}
+		if(movable.visit(this)){
+			Game.tabs--;
+			Game.tabs++;
+			Game.getInstance().getTable().kill(moveable);
+			Game.getInstance().getActualMovingWorker().addPoint();
+			this.setActualMoveable(null);
+			Game.tabs--;
+		}
+		else {
+            		Game.tabs--;
+            		Game.printTabs();
+            		System.out.println("< false");
+            		return false;
+		}
 
 }

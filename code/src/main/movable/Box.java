@@ -97,8 +97,34 @@ public class Box extends Movable {
      * @return
      */
     public boolean visit(Objective objective) {
-        // TODO implement here
-        return false;
+        if (Game.printing) {
+            Game.printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + objective.getId() + ")");
+        }
+        Game.tabs++;
+        Movable movable = objective.getActualMovable();
+        Game.tabs--;
+
+        Game.tabs++;
+        if (movable != null) {
+            if (movable.visit(this)) {
+                Game.tabs--;
+                Game.printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.tabs--;
+                Game.printTabs();
+                System.out.println("< false");
+                return false;
+            }
+        } else {
+            Game.tabs--;
+            Game.printTabs();
+            System.out.println("< true");
+            return true;
+        }
+    }
     }
 
     /**

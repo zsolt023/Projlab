@@ -222,10 +222,11 @@ public class Box extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
+            if (actualMovingWorker.getForce() > Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 Game.getInstance().getTable().kill(this);
-                Game.getInstance().getActualMovingWorker().addPoint();
+                actualMovingWorker.addPoint();
                 Game.getInstance().tabs--;
                 Game.getInstance().printTabs();
                 System.out.println("< true");

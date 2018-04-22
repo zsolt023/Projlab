@@ -199,14 +199,14 @@ public class Worker extends Movable {
         }
         Game.getInstance().tabs++;
         Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
-        Game.getInstance().tabs--;
 
         if (!actualMovingWorker.getId().equals(this.getId())) {
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (actualMovingWorker.getForce() > Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 Game.getInstance().getTable().kill(this);
+                Game.getInstance().tabs--;
                 Game.getInstance().printTabs();
-                System.out.println("< true");
+                System.out.println("< true");                
                 Game.getInstance().tabs--;
                 return true;
             }
@@ -347,19 +347,10 @@ public class Worker extends Movable {
             Game.getInstance().printTabs();
             System.out.println("> " + this.getId() + ".visit(" + worker.getId() + ")");
         }
-        Game.getInstance().tabs++;
         
-        if (move()) {
-            Game.getInstance().tabs--;
-            Game.getInstance().printTabs();
-            System.out.println("< true");
-            return true;
-        } else {
-            Game.getInstance().tabs--;
-            Game.getInstance().printTabs();
-            System.out.println("< false");
-            return false;
-        }
+        Game.getInstance().printTabs();
+        System.out.println("< false");
+        return false;
     }
 
     @Override

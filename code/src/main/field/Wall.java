@@ -18,7 +18,6 @@ public class Wall extends Field {
         Game.getInstance().tabs++;
         if (movable.visit(this)) {
             Game.getInstance().tabs++;
-            Game.getInstance().getTable().kill(movable);
             Field previousField = movable.getActualField();
             previousField.setActualMovable(null);
             movable.setActualField(this);

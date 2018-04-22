@@ -3,8 +3,9 @@ package main.movable;
 import main.Game;
 import main.field.Field;
 import main.field.Hole;
+import main.field.HoneyPlain;
 import main.field.Objective;
-import main.field.Pillar;
+import main.field.OilPlain;
 import main.field.Plain;
 import main.field.Switch;
 import main.field.Wall;
@@ -51,8 +52,10 @@ public abstract class Movable {
     public abstract boolean move();
 
     public abstract boolean visit(Plain plain);
-
-    public abstract boolean visit(Pillar pillar);
+    
+    public abstract boolean visit(HoneyPlain honeyPlain);
+    
+    public abstract boolean visit(OilPlain oilPlain);
 
     public abstract boolean visit(Wall wall);
 

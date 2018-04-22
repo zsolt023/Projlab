@@ -17,8 +17,9 @@ public class Objective extends Field {
         Game.getInstance().tabs++;
         
         if (movable.visit(this)) {
-            Game.getInstance().getTable().kill(movable);
-            Game.getInstance().getActualMovingWorker().addPoint();
+            Field previousField = movable.getActualField();
+            previousField.setActualMovable(null);
+            movable.setActualField(this);
             
             Game.getInstance().tabs--;
             Game.getInstance().printTabs();

@@ -35,6 +35,8 @@ public class Game {
     private Worker actualMovingWorker = null;
 
     public static Table table;
+    
+    private static int actualChainFriction = 0;
 
     public void init() {
         printing = false;
@@ -81,6 +83,14 @@ public class Game {
 
     public void setActualMovingWorker(Worker actualMovingWorker) {
         this.actualMovingWorker = actualMovingWorker;
+    }
+
+    public int getActualChainFriction() {
+        return actualChainFriction;
+    }
+
+    public void setActualChainFriction(int actualChainFriction) {
+        Game.actualChainFriction = actualChainFriction;
     }
 
     public static void printTabs() {

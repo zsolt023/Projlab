@@ -7,7 +7,6 @@ import java.util.Scanner;
 import main.field.Field;
 import main.field.Hole;
 import main.field.Objective;
-import main.field.Pillar;
 import main.field.Plain;
 import main.field.Switch;
 import main.field.Wall;
@@ -373,8 +372,8 @@ public class Table {
         plain10_2.setId("pl10_2");
         Plain plain10_3 = new Plain();
         plain10_3.setId("pl10_3");
-        Pillar pillar10_1 = new Pillar();
-        pillar10_1.setId("pi10_1");
+        Wall wall10_2 = new Wall();
+        wall10_2.setId("pi10_1");
         Wall wall10_1 = new Wall();
         wall10_1.setId("wa10_1");
 
@@ -385,7 +384,7 @@ public class Table {
         plain10_2.setActualMovable(box10_1);
 
         plain10_3.setActualMovable(null);
-        pillar10_1.setActualMovable(null);
+        wall10_2.setActualMovable(null);
         wall10_1.setActualMovable(null);
 
         workers.add(worker10_1);
@@ -393,12 +392,12 @@ public class Table {
         fields.add(plain10_1);
         fields.add(plain10_2);
         fields.add(plain10_3);
-        fields.add(pillar10_1);
+        fields.add(wall10_2);
         fields.add(wall10_1);
 
         plain10_1.setNeighbour(Orientation.RIGHT, plain10_2);
         plain10_2.setNeighbour(Orientation.RIGHT, plain10_3);
-        plain10_3.setNeighbour(Orientation.RIGHT, pillar10_1);
+        plain10_3.setNeighbour(Orientation.RIGHT, wall10_2);
         plain10_3.setNeighbour(Orientation.DOWN, wall10_1);
         
         //11 eset

@@ -2,8 +2,9 @@ package main.movable;
 
 import main.Game;
 import main.field.Hole;
+import main.field.HoneyPlain;
 import main.field.Objective;
-import main.field.Pillar;
+import main.field.OilPlain;
 import main.field.Plain;
 import main.field.Switch;
 import main.field.Wall;
@@ -11,11 +12,30 @@ import main.field.Wall;
 
 public class Worker extends Movable {
 
+    private int score = 0;
+
+    private int force = 20;
+    
     public Worker() {
+        
     }
 
-    private int score;
+    public int getScore() {
+        return score;
+    }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getForce() {
+        return force;
+    }
+
+    public void setForce(int force) {
+        this.force = force;
+    }
+    
     public void addPoint() {
         if (Game.printing) {
             Game.printTabs();
@@ -26,6 +46,7 @@ public class Worker extends Movable {
         this.score++;
     }
 
+    @Override
     public boolean move() {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -44,12 +65,12 @@ public class Worker extends Movable {
         return false;
     }
 
+    @Override
     public boolean visit(Plain plain) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
             System.out.println("> " + this.getId() + ".visit(" + plain.getId() + ")");
         }
-
         Game.getInstance().tabs++;
         Movable movable = plain.getActualMovable();
         
@@ -66,34 +87,111 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
-            Game.getInstance().tabs--;
-            Game.getInstance().printTabs();
-            System.out.println("< true");
-            return true;
+            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
         }
     }
 
-    public boolean visit(Pillar pillar) {
+    @Override
+    public boolean visit(HoneyPlain honeyPlain) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
-            System.out.println("> " + this.getId() + ".visit(" + pillar.getId() + ")");
+            System.out.println("> " + this.getId() + ".visit(" + honeyPlain.getId() + ")");
         }
-
         Game.getInstance().tabs++;
-        Movable movable = Game.getInstance().getActualMovingWorker();
-        Game.getInstance().tabs--;
+        Movable movable = honeyPlain.getActualMovable();
         
-        if (!movable.getId().equals(this.getId())) {
-            Game.getInstance().printTabs();
-            System.out.println("< true");
-            Game.getInstance().tabs--;
-            return true;
+        if (movable != null) {
+            if (movable.visit(this)) {
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
+        } else {
+            if (Game.getInstance().table.alternatives == 3) {
+                Game.getInstance().printing = false;
+                Game.getInstance().getTable().kill(this);
+                Game.getInstance().printing = true;
+            }
+            
+            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
         }
-        Game.getInstance().printTabs();
-        System.out.println("< false");
-        return false;
+    }
+    
+    @Override
+    public boolean visit(OilPlain oilPlain) {
+        if (Game.getInstance().printing) {
+            Game.getInstance().printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + oilPlain.getId() + ")");
+        }
+        Game.getInstance().tabs++;
+        Movable movable = oilPlain.getActualMovable();
+        
+        if (movable != null) {
+            if (movable.visit(this)) {
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
+        } else {
+            if (Game.getInstance().table.alternatives == 3) {
+                Game.getInstance().printing = false;
+                Game.getInstance().getTable().kill(this);
+                Game.getInstance().printing = true;
+            }
+            
+            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
+        }
     }
 
+    @Override
     public boolean visit(Wall wall) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -104,17 +202,22 @@ public class Worker extends Movable {
         Game.getInstance().tabs--;
 
         if (!actualMovingWorker.getId().equals(this.getId())) {
-            Game.getInstance().printTabs();
-            System.out.println("< true");
-            Game.getInstance().tabs--;
-            return true;
+            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().getTable().kill(this);
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                Game.getInstance().tabs--;
+                return true;
+            }
         }
-
+        Game.getInstance().setActualChainFriction(0);
         Game.getInstance().printTabs();
         System.out.println("< false");
         return false;
     }
 
+    @Override
     public boolean visit(Objective objective) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -125,6 +228,9 @@ public class Worker extends Movable {
         
         if (movable != null) {
             if (movable.visit(this)) {
+                //TODO valamelyik kell a 2bol
+                objective.setActualMovable(this);
+                this.setActualField(objective);
                 Game.getInstance().tabs--;
                 Game.getInstance().printTabs();
                 System.out.println("< true");
@@ -136,13 +242,26 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
-            Game.getInstance().tabs--;
-            Game.getInstance().printTabs();
-            System.out.println("< true");
-            return true;
+            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+                Game.getInstance().setActualChainFriction(0);
+                //TODO valamelyik kell a 2bol
+                objective.setActualMovable(this);
+                this.setActualField(objective);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
         }
     }
 
+    @Override
     public boolean visit(Switch s) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -150,27 +269,41 @@ public class Worker extends Movable {
         }
         Game.getInstance().tabs++;
         Movable movable = s.getActualMovable();
-        
+        Game.getInstance().tabs--;
+
         if (movable != null) {
             if (movable.visit(this)) {
-                Game.getInstance().tabs--;
+                if (!(movable instanceof Box)) {
+                    s.switchState();
+                }
                 Game.getInstance().printTabs();
                 System.out.println("< true");
                 return true;
             } else {
-                Game.getInstance().tabs--;
                 Game.getInstance().printTabs();
                 System.out.println("< false");
                 return false;
             }
         } else {
-            Game.getInstance().tabs--;
-            Game.getInstance().printTabs();
-            System.out.println("< true");
-            return true;
+            Game.getInstance().tabs++;
+            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+                s.switchState();
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
         }
     }
 
+    @Override
     public boolean visit(Hole hole) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -192,30 +325,51 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
+            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< true");
+                return true;
+            } else {
+                Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().tabs--;
+                Game.getInstance().printTabs();
+                System.out.println("< false");
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public boolean visit(Worker worker) {
+        if (Game.getInstance().printing){
+            Game.getInstance().printTabs();
+            System.out.println("> " + this.getId() + ".visit(" + worker.getId() + ")");
+        }
+        Game.getInstance().tabs++;
+        
+        if (move()) {
             Game.getInstance().tabs--;
             Game.getInstance().printTabs();
             System.out.println("< true");
             return true;
-        }
-    }
-
-    public boolean visit(Worker worker) {
-        if (Game.getInstance().printing) {
+        } else {
+            Game.getInstance().tabs--;
             Game.getInstance().printTabs();
-            System.out.println("> " + this.getId() + ".visit(" + worker.getId() + ")");
+            System.out.println("< false");
+            return false;
         }
-
-        Game.getInstance().printTabs();
-        System.out.println("< false");
-        return false;
     }
 
+    @Override
     public boolean visit(Box box) {
         if (Game.getInstance().printing){
             Game.getInstance().printTabs();
             System.out.println("> " + this.getId() + ".visit(" + box.getId() + ")");
         }
         Game.getInstance().tabs++;
+        
         if (move()) {
             Game.getInstance().tabs--;
             Game.getInstance().printTabs();

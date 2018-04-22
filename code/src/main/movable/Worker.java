@@ -17,7 +17,7 @@ public class Worker extends Movable {
     private int force = 20;
     
     public Worker() {
-        
+        //Default constructor
     }
 
     public int getScore() {
@@ -289,9 +289,7 @@ public class Worker extends Movable {
         
         if (movable != null) {
             if (movable.visit(this)) {
-                //TODO valamelyik kell a 2bol
                 objective.setActualMovable(this);
-                this.setActualField(objective);
                 Game.getInstance().tabs--;
                 Game.getInstance().printTabs();
                 System.out.println("< true");
@@ -305,9 +303,7 @@ public class Worker extends Movable {
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
-                //TODO valamelyik kell a 2bol
                 objective.setActualMovable(this);
-                this.setActualField(objective);
                 Game.getInstance().tabs--;
                 Game.getInstance().printTabs();
                 System.out.println("< true");

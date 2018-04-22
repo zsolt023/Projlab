@@ -16,16 +16,24 @@ import main.movable.Worker;
 
 public class Table {
 
-    public Table() {
-    }
+    public static int alternatives = 0;
 
+    /**
+     * A táblán szereplő összes mezőt tároljuk ebben a listában.
+     */    
     private List<Field> fields = new ArrayList<>();
 
+    /**
+     * A táblán lévő összes munkást tároljuk ebben a listában, és kivesszük belőle azon elemet, 
+     * ami megsemmisült a játék végének ellenőrzése céljábol.
+     */
     private List<Worker> workers = new ArrayList<>();
 
+    /**
+     * A táblán lévő összes dobozt tároljok ebben a listában, és kivesszük belőle azon elemet,
+     * ami megsemmisült, vagy cél-helyre került, vagy beragadt a játék végének ellenőrzése céljából.
+     */
     private List<Box> boxes = new ArrayList<>();
-
-    public static int alternatives = 0;
     
     private Hole hole4_1 = new Hole();
     private Hole hole7_1 = new Hole();
@@ -33,6 +41,41 @@ public class Table {
     private Box box12_1 = new Box();
     private Worker worker13_1 = new Worker();
     
+    public Table() {
+        //Default constructor
+    }
+    
+    /**
+     * Visszaadja a mezők listáját.
+     * @return List<Field>
+     */
+    public List<Field> getFields() {
+        return fields;
+    }
+
+    /**
+     * Visszaadja a munkások listáját.
+     * @return List<Worker>
+     */
+    public List<Worker> getWorkers() {
+        return workers;
+    }
+
+    /**
+     * Visszaadja a dobozok listáját.
+     * @return List<Box>
+     */
+    public List<Box> getBoxes() {
+        return boxes;
+    }
+    
+    /**
+     * Ez a metódus hozza létre a pályafájlból az összes mezőt, az összes ládát, 
+     * és legenerál random helyekre random számú (legalább 2 darab) munkást. 
+     * Ezeket az objektumokat konzisztens módon eltárolja a table megfelelő változóiban. 
+     * Beállítja a mezők szomszédait, “ráteszi” a mezőkre a munkásokat, és a dobozokat.
+     * Összeköti a kapcsolókat egy lyuk objektummal.
+     */
     public void loadTable() {
         Game.getInstance().printing = false;
         if (Game.getInstance().printing) {
@@ -474,6 +517,11 @@ public class Table {
         System.out.println("Load table done.");
     }
 
+    /**
+     * Leveszi a pályáról a paraméterben kapott movable objektumot legyen az doboz, vagy munkás. 
+     * Tehát kiveszi a boxes listából, vagy kiveszi a workers listából a paraméterben kapott elemet.
+     * @param movable 
+     */
     public void kill(Movable movable) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -618,6 +666,13 @@ public class Table {
         }
     }
 
+    /**
+     * Egy ciklusban vizsgálja, hogy nincs-e vége a játéknak, a gameOver függvény visszatérési értékét használva. 
+     * Első körben a cikluson belül figyeli történt-e billentyű lenyomás, ha igen, 
+     * akkor beállítja az Game osztály actuálisan lépő munkását, arra a munkásra, aki kezdeményezte a lépést, 
+     * majd beállítja a billentyű lenyomásának megfelelő irányt a szintén Game osztály orientation változójába. 
+     * Majd legvégül ezen munkás move() függvénye kerül meghívásra, ami a rekurziót hivatott elindítani.
+     */
     public void game() {
         while (!gameOver()) {
             System.out.println("Called Class name: " + Table.class.getSimpleName()
@@ -772,6 +827,12 @@ public class Table {
         }
     }
 
+    /**
+     * Ez a függvény csak akkor tér vissza igazzal, ha csak egy munkás maradt életben. 
+     * Vagy a raktárban az utolsó doboz, cél-helyre került, vagy beszorult, vagy lyukba esett. 
+     * Egyébként pedig mindig hamissal tér vissza.
+     * @return boolean
+     */
     public boolean gameOver() {
         System.out.println("> table.gameOver()");
         if (Game.getInstance().penultimateWorker) {
@@ -798,18 +859,6 @@ public class Table {
         
         Game.getInstance().tabs = 0;
         return false;
-    }
-
-    public List<Field> getFields() {
-        return fields;
-    }
-
-    public List<Worker> getWorkers() {
-        return workers;
-    }
-
-    public List<Box> getBoxes() {
-        return boxes;
     }
 
 }

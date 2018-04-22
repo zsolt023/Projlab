@@ -15,7 +15,7 @@ public class Box extends Movable {
     private int friction = 2;
             
     public Box() {
-    
+        //Default constructor
     }
 
     public int getFriction() {

@@ -6,11 +6,19 @@ import main.movable.Movable;
 
 public class Hole extends Field {
 
-    public Hole() {
-    }
-
+    /**
+     * Ezen attribútum tárolja a lyuk aktiválásának állapotát.
+     */
     private boolean isActive = true;
 
+    public Hole() {
+        //Default constructor
+    }
+    
+    /**
+     * Visszaadja a lyuk aktuális állapotát, aktív-e vagy sem.
+     * @return boolean
+     */
     public boolean isIsActive() {
         return isActive;
     }
@@ -19,6 +27,12 @@ public class Hole extends Field {
         this.isActive = isActive;
     }
 
+    /**
+     * Lekéri első körben a lyukon szereplő movable-t, Ha ez a movable nem null, ebből kiderül, 
+     * hogy a lyuk előző állapota daaktív volt. Mivel váltás lesz ezért ezen movable-t egyből kill-elni lehet.
+     * Majd negálja az isActive változót. Ha movable nem volt rajta eddig, akkor csak negálni kell az isActive változó értékét tehát, 
+     * ha eddig igaz volt, akkor hamis lesz és ha hamis volt igazzá változik.
+     */
     public void setActive() {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -50,6 +64,19 @@ public class Hole extends Field {
         System.out.println("< void");
     }
 
+    /**
+     * Ez a mező befogadó függvénye. Első körben tovább hív a láncolás következő visit hívással és ezen visszatérési érték alapján, 
+     * ha igazzal tért vissza az említett visit, akkor megvizsgáljuk a lyuk aktív állapotban van-e, 
+     * ha igen akkor a rá lépni kívánt movable-t kill-eljük. ellenkező esetben ha nem volt aktív, 
+     * akkor beállítjuk a lyukra a paraméterben kapott movable-t ezen mezőre. És a movable aktuális field-jét lekérjük, 
+     * ami az a mező ahonnan érkezik a movable, és ezen mező aktuális movable-t nullázzuk. 
+     * és a movable mezőjét beállítjuk ezen lyukra, és végül vissza térünk igaz értékkel jelezve a lépés sikerességéről. 
+     * Ha a fentebb említett visit metódus hamis értékkel tért vissza, ebben az esetben egyből visszatérünk hamis értékkel
+     * minden változtatás nélkül.
+     * @param movable
+     * @return boolean
+     */
+    @Override
     public boolean accept(Movable movable) {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -81,7 +108,6 @@ public class Hole extends Field {
             System.out.println("< false");
             return false;
         }
-
     }
 
 }

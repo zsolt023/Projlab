@@ -24,7 +24,7 @@ public abstract class Movable {
     }
 
     public Movable() {
-        
+        //Default constructor
     }
 
     protected Field actualField;

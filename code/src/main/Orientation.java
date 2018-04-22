@@ -2,5 +2,21 @@ package main;
 
 
 public enum Orientation {
-	UP, DOWN, LEFT, RIGHT
+    
+    /**
+     * A felfelé irány enumja
+     */
+    UP, 
+    /**
+     * A lefelé irány enumja
+     */
+    DOWN,
+    /**
+     * A balra irány enumja
+     */
+    LEFT, 
+    /**
+     * A jobbra irány enumja
+     */
+    RIGHT
 }

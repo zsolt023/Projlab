@@ -24,10 +24,15 @@ public abstract class Movable {
     }
 
     public Movable() {
+        
     }
 
     protected Field actualField;
 
+    /**
+     * Visszaadja azon fieldet, amin épp áll.
+     * @return Field
+     */
     public Field getActualField() {
         if (Game.getInstance().printing) {
             Game.getInstance().printTabs();
@@ -37,7 +42,11 @@ public abstract class Movable {
         }
         return this.actualField;
     }
-
+    
+    /**
+     * Beállítja a paraméterében kapot field objectumra magát.
+     * @param field 
+     */
     public void setActualField(Field field) {
         if (Game.getInstance().printing){
             Game.getInstance().printTabs();

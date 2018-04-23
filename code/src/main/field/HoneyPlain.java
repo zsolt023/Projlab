@@ -6,7 +6,6 @@
 package main.field;
 
 /**
- *
  * @author schnorb
  */
 public class HoneyPlain extends Plain {
@@ -14,5 +13,5 @@ public class HoneyPlain extends Plain {
     public HoneyPlain() {
         this.frictionMultiplier = DEFAULT_FRICTION + 1;
     }
-    
+
 }

@@ -343,10 +343,7 @@ public class Table {
      * @param movable
      */
     public void kill(Movable movable) {
-        if (Game.getInstance().printing) {
-            Game.getInstance().printTabs();
-            System.out.println("> table.kill(" + movable.getId() + ")");
-        }
+
         if (movable != null) {
             for (Worker w : workers) {
                 if (movable.getId().equals(w.getId())) {
@@ -479,10 +476,6 @@ public class Table {
             default:
                 System.out.println("Your choose is bad, try again!");
                 break;
-        }
-        if (Game.getInstance().printing) {
-            Game.getInstance().printTabs();
-            System.out.println("< void");
         }
     }
 

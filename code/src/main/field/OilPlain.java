@@ -6,7 +6,6 @@
 package main.field;
 
 /**
- *
  * @author schnorb
  */
 public class OilPlain extends Plain {

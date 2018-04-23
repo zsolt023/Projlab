@@ -11,7 +11,7 @@ import main.movable.Movable;
 public abstract class Field {
 
     private String id;
-    
+
     /**
      * EnumMap ami az összes szomszédot tárolja az irányoknak megfelelően.
      */
@@ -38,51 +38,36 @@ public abstract class Field {
     /**
      * Visszaadja azon movable objektumot, ami éppen rajta áll, ha van ilyen, ha nincs akkor nullal tér vissza,
      * azaz ezen mezőn épp nem áll semmi.
+     *
      * @return Movable
      */
     public Movable getActualMovable() {
-        if (Game.getInstance().printing) {
-            Game.getInstance().printTabs();
-            System.out.println("> " + this.getId()+ ".getActualMovable()");
-            Game.getInstance().printTabs();
-            System.out.println("< " + ((actualMovable != null) ? actualMovable.getId() : null));
-        }
         return this.actualMovable;
     }
 
     /**
      * Beállítja ezen mezőre a paraméterben kapott movable objektumot.
-     * @param movable 
+     *
+     * @param movable
      */
     public void setActualMovable(Movable movable) {
-        if (Game.getInstance().printing) {
-            Game.getInstance().printTabs();
-            System.out.println("> " + this.getId()+ ".setActualMovable("
-                    + ((movable != null) ? movable.getId() : null) + ")");
-            Game.getInstance().printTabs();
-            System.out.println("< void");
-        }
         this.actualMovable = movable;
     }
 
     /**
      * Visszaadja az aktuális lépés irányában lévő szomszédos mezőt.
+     *
      * @return Field
      */
     public Field getNeigbour() {
-        if (Game.getInstance().printing) {
-            Game.getInstance().printTabs();
-            System.out.println("> " + this.getId()+ ".getNeighbour()");
-            Game.getInstance().printTabs();
-            System.out.println("< " + neighbours.get(Game.getInstance().getOrientation()).getId());
-        }
         return neighbours.get(Game.getInstance().getOrientation());
     }
 
     /**
      * Beállítja ennek az objektumank a paraméterben kapott irány és mezőnek megfelelő szomszédokat.
+     *
      * @param orientation
-     * @param neighbour 
+     * @param neighbour
      */
     public void setNeighbour(Orientation orientation, Field neighbour) {
         neighbours.put(orientation, neighbour);

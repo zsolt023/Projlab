@@ -34,12 +34,6 @@ public abstract class Movable {
      * @return Field
      */
     public Field getActualField() {
-        if (Game.getInstance().printing) {
-            Game.getInstance().printTabs();
-            System.out.println("> " + this.getId() + ".getActualField()");
-            Game.getInstance().printTabs();
-            System.out.println("< " + actualField.getId());
-        }
         return this.actualField;
     }
     
@@ -48,13 +42,6 @@ public abstract class Movable {
      * @param field 
      */
     public void setActualField(Field field) {
-        if (Game.getInstance().printing){
-            Game.getInstance().printTabs();
-            System.out.println("> " + this.getId() + ".setActualField(" + field.getId() + ")");
-            Game.getInstance().printTabs();
-            Game.getInstance().tabs--;
-            System.out.println("< void");
-        }
         this.actualField = field;
     }
 

@@ -162,174 +162,181 @@ public class Game {
      * Majd ha az sikeresen lefutott, elindítja a game loop-ot.
      */
     public void init() {
+        boolean end = false;
 
-        table = new Table();
+        while(!end) {
 
-        System.out.println("");
-        System.out.println("1.  Push box -> worker to wall");
-        System.out.println("2.  Trying to push worker");
-        System.out.println("3.  Push box to plain");
-        System.out.println("4.  Push box to switch");
-        System.out.println("5.  Push box to objective");
-        System.out.println("6.  Push box to wall");
-        System.out.println("7.  Push box to hole");
-        System.out.println("8.  Push box -> worker -> worker");
-        System.out.println("9.  Push box -> worker -> box to objective");
-        System.out.println("10. Last box stucks");
-        System.out.println("11. Last box has being killed");
-        System.out.println("12. Last box pushed to objective");
-        System.out.println("13. Penultimate worker dies");
-        System.out.println("14. Step to hole");
-        System.out.println("15. Step to wall");
-        System.out.println("16. Step to plain, switch or objective");
-        System.out.println("17. Push Box -> Box chain through 2 HoneyField");
-        System.out.println("18. Push Box -> Box chain through 1 HoneyField 1 Plain");
-        System.out.println("19. Push Box -> Box chain through 1 HoneyField 1 OilyField");
-        System.out.println("20. Push Box -> Box chain through 1 Plain 1 OilyField");
-        System.out.println("21. Push Box -> Worker -> Box -> Box chain");
-        System.out.println("22. Run every test");
-        System.out.println("23. Create your own test");
+            table = new Table();
 
-        System.out.println("The game was stared, please select one alternative:");
+            System.out.println("");
+            System.out.println("1.  Push box -> worker to wall");
+            System.out.println("2.  Trying to push worker");
+            System.out.println("3.  Push box to plain");
+            System.out.println("4.  Push box to switch");
+            System.out.println("5.  Push box to objective");
+            System.out.println("6.  Push box to wall");
+            System.out.println("7.  Push box to hole");
+            System.out.println("8.  Push box -> worker -> worker");
+            System.out.println("9.  Push box -> worker -> box to objective");
+            System.out.println("10. Last box stucks");
+            System.out.println("11. Last box has being killed");
+            System.out.println("12. Last box pushed to objective");
+            System.out.println("13. Penultimate worker dies");
+            System.out.println("14. Step to hole");
+            System.out.println("15. Step to wall");
+            System.out.println("16. Step to plain, switch or objective");
+            System.out.println("17. Push Box -> Box chain through 2 HoneyField");
+            System.out.println("18. Push Box -> Box chain through 1 HoneyField 1 Plain");
+            System.out.println("19. Push Box -> Box chain through 1 HoneyField 1 OilyField");
+            System.out.println("20. Push Box -> Box chain through 1 Plain 1 OilyField");
+            System.out.println("21. Push Box -> Worker -> Box -> Box chain");
+            System.out.println("22. Run every test");
+            System.out.println("23. Create your own test");
 
-        Worker actualMovingWorker = null;
-        Scanner reader = new Scanner(System.in);
-        int alternatives = reader.nextInt();
-        switch (alternatives) {
-            case 1:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 2:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 3:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 4:
-                table.loadTable("map4.txt");
-                table.game();
-                break;
-            case 5:
-                table.loadTable("map5.txt");
-                table.game();
-                break;
-            case 6:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 7:
-                table.loadTable("map7.txt");
-                table.game();
-                break;
-            case 8:
-                table.loadTable("map8.txt");
-                table.game();
-                break;
-            case 9:
-                table.loadTable("map9.txt");
-                table.game();
-                break;
-            case 10:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 11:
-                table.loadTable("map7.txt");
-                table.game();
-                break;
-            case 12:
-                table.loadTable("map5.txt");
-                table.game();
-                break;
-            case 13:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 14:
-                table.loadTable("map7.txt");
-                table.game();
-                break;
-            case 15:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 16:
-                table.loadTable("map1.txt");
-                table.game();
-                break;
-            case 17:
-                table.loadTable("map17.txt");
-                table.game();
-                break;
-            case 18:
-                table.loadTable("map17.txt");
-                table.game();
-                break;
-            case 19:
-                table.loadTable("map17.txt");
-                table.game();
-                break;
-            case 20:
-                table.loadTable("map17.txt");
-                table.game();
-                break;
-            case 21:
-                table.loadTable("map21.txt");
-                table.game();
-                break;
-            case 22:
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map4.txt");
-                table.game();
-                table.loadTable("map5.txt");
-                table.game();
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map7.txt");
-                table.game();
-                table.loadTable("map8.txt");
-                table.game();
-                table.loadTable("map9.txt");
-                table.game();
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map7.txt");
-                table.game();
-                table.loadTable("map5.txt");
-                table.game();
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map7.txt");
-                table.game();
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map1.txt");
-                table.game();
-                table.loadTable("map17.txt");
-                table.game();
-                table.loadTable("map17.txt");
-                table.game();
-                table.loadTable("map17.txt");
-                table.game();
-                table.loadTable("map17.txt");
-                table.game();
-                table.loadTable("map21.txt");
+            System.out.println("The game was stared, please select one alternative:");
 
-                break;
-            case 23:
-                //Custom
-                break;
-            default:
-                System.out.println("Your choose is bad, try again!");
-                break;
+            Worker actualMovingWorker = null;
+            Scanner reader = new Scanner(System.in);
+            int alternatives = reader.nextInt();
+            switch (alternatives) {
+                case 1:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 2:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 3:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 4:
+                    table.loadTable("map4.txt");
+                    table.game();
+                    break;
+                case 5:
+                    table.loadTable("map5.txt");
+                    table.game();
+                    break;
+                case 6:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 7:
+                    table.loadTable("map7.txt");
+                    table.game();
+                    break;
+                case 8:
+                    table.loadTable("map8.txt");
+                    table.game();
+                    break;
+                case 9:
+                    table.loadTable("map9.txt");
+                    table.game();
+                    break;
+                case 10:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 11:
+                    table.loadTable("map7.txt");
+                    table.game();
+                    break;
+                case 12:
+                    table.loadTable("map5.txt");
+                    table.game();
+                    break;
+                case 13:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 14:
+                    table.loadTable("map7.txt");
+                    table.game();
+                    break;
+                case 15:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 16:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    break;
+                case 17:
+                    table.loadTable("map17.txt");
+                    table.game();
+                    break;
+                case 18:
+                    table.loadTable("map17.txt");
+                    table.game();
+                    break;
+                case 19:
+                    table.loadTable("map17.txt");
+                    table.game();
+                    break;
+                case 20:
+                    table.loadTable("map17.txt");
+                    table.game();
+                    break;
+                case 21:
+                    table.loadTable("map21.txt");
+                    table.game();
+                    break;
+                case 22:
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map4.txt");
+                    table.game();
+                    table.loadTable("map5.txt");
+                    table.game();
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map7.txt");
+                    table.game();
+                    table.loadTable("map8.txt");
+                    table.game();
+                    table.loadTable("map9.txt");
+                    table.game();
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map7.txt");
+                    table.game();
+                    table.loadTable("map5.txt");
+                    table.game();
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map7.txt");
+                    table.game();
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map1.txt");
+                    table.game();
+                    table.loadTable("map17.txt");
+                    table.game();
+                    table.loadTable("map17.txt");
+                    table.game();
+                    table.loadTable("map17.txt");
+                    table.game();
+                    table.loadTable("map17.txt");
+                    table.game();
+                    table.loadTable("map21.txt");
+
+                    break;
+                case 23:
+                    //Custom
+                    break;
+                case 24:
+                    System.out.println("Shutting down");
+                    end = true;
+                default:
+                    System.out.println("Your choose is bad, try again!");
+                    break;
+            }
         }
 
 

@@ -322,19 +322,7 @@ public class Table {
         }
 
     }
-
-
-    public void loadTable() {
-        Game.getInstance().printing = false;
-        if (Game.getInstance().printing) {
-            System.out.println("Called Class name: " + Table.class.getSimpleName()
-                    + " :: Method name: loadTable :: Parameters: :: return: void");
-        }
-
-        Game.getInstance().printing = true;
-
-        System.out.println("Load table done.");
-    }
+    
 
     /**
      * Leveszi a pályáról a paraméterben kapott movable objektumot legyen az doboz, vagy munkás.

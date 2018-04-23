@@ -358,8 +358,7 @@ public class Table {
      */
     public void game() {
         while (!gameOver()) {
-            System.out.println("Called Class name: " + Table.class.getSimpleName()
-                    + " :: Method name: game :: Parameters: :: return: void");
+
             System.out.println("");
             System.out.println("1.  Push box -> worker to wall");
             System.out.println("2.  Trying to push worker");

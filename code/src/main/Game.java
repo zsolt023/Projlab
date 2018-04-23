@@ -152,12 +152,7 @@ public class Game {
      * Majd ha az sikeresen lefutott, elindítja a game loop-ot.
      */
     public void init() {
-        printing = false;
-        if (printing)
-            System.out.println("Called Class name: " + Game.class.getSimpleName()
-                + " :: Method name: init() :: Parameters: :: return: void");
-        printing = true;
-        System.out.println("Create new Table...");
+                System.out.println("Create new Table...");
         table = new Table();
         System.out.println("Load table elements, with call loadTable()");
         table.loadTable("map9.txt");

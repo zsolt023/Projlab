@@ -657,16 +657,10 @@ public class Table {
             System.out.println("    Game over, because the last box was pushed in the corner.");
         }
         if (Game.getInstance().penultimateWorker || Game.getInstance().lastBoxKill || Game.getInstance().lastBoxIsCorner || Game.getInstance().lastBoxToObj) {
-            System.out.println("< true");
+            return true;
         } else {
-            System.out.println("< false");
-        }
-        Game.getInstance().penultimateWorker = false;
-        Game.getInstance().lastBoxKill = false;
-        Game.getInstance().lastBoxIsCorner = false;
-        Game.getInstance().lastBoxToObj = false;
 
-        Game.getInstance().tabs = 0;
+        }
         return false;
     }
 

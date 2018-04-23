@@ -322,7 +322,7 @@ public class Table {
         }
 
     }
-    
+
 
     /**
      * Leveszi a pályáról a paraméterben kapott movable objektumot legyen az doboz, vagy munkás.
@@ -347,124 +347,6 @@ public class Table {
                 }
             }
         }
-
-        Scanner reader = new Scanner(System.in);
-        String question;
-        switch (alternatives) {
-            case 1:
-                System.out.println("The penultimate worker killed by wall? (I/N)");
-                question = reader.nextLine();
-                if (question.startsWith("i") || question.startsWith("I")) {
-                    Game.getInstance().penultimateWorker = true;
-                }
-                break;
-            case 3:
-                Game.getInstance().printing = true;
-                System.out.println("The box is moved in the corner? (I/N)");
-                question = reader.nextLine();
-                if (question.startsWith("i") || question.startsWith("I")) {
-                    System.out.println("This box was last on the table? (I/N)");
-                    question = reader.nextLine();
-                    if (question.startsWith("i") || question.startsWith("I")) {
-                        Game.getInstance().lastBoxIsCorner = true;
-                    }
-                }
-                Game.getInstance().printing = false;
-                break;
-            case 4:
-                if (!Game.getInstance().printing) {
-                    System.out.println("On the switched hole, is movable? (I/N)");
-                    question = reader.nextLine();
-                    if (question.startsWith("i") || question.startsWith("I")) {
-                        Box box4_2 = new Box();
-                        box4_2.setId("bo4_2");
-                        boxes.add(box4_2);
-                        hole4_1.setActualMovable(box4_2);
-                        box4_2.setActualField(hole4_1);
-                        System.out.println("This box was last on the hole, or penultimate worker was on the hole? (I/N)");
-                        question = reader.nextLine();
-                        if (question.startsWith("i") || question.startsWith("I")) {
-                            Game.getInstance().lastBoxKill = true;
-                        } else {
-                            System.out.println("The box is moved in the corner? (I/N)");
-                            question = reader.nextLine();
-                            if (question.startsWith("i") || question.startsWith("I")) {
-                                System.out.println("This box was last on the table? (I/N)");
-                                question = reader.nextLine();
-                                if (question.startsWith("i") || question.startsWith("I")) {
-                                    Game.getInstance().lastBoxIsCorner = true;
-                                }
-                            }
-                        }
-                    }
-                }
-                break;
-            case 5:
-                System.out.println("This box was last on the table what pushed on the objective? (I/N)");
-                question = reader.nextLine();
-                if (question.startsWith("i") || question.startsWith("I")) {
-                    Game.getInstance().lastBoxToObj = true;
-                }
-                break;
-            case 7:
-                if (!Game.getInstance().printing) {
-                    System.out.println("Hole is aktive now (want to kill box)? (I/N)");
-                    question = reader.nextLine();
-                    if (question.startsWith("i") || question.startsWith("I")) {
-                        hole7_1.setIsActive(true);
-                        System.out.println("This box was last on the table? (I/N)");
-                        question = reader.nextLine();
-                        if (question.startsWith("i") || question.startsWith("I")) {
-                            Game.getInstance().lastBoxKill = true;
-                        }
-                    } else {
-                        hole7_1.setIsActive(false);
-                        System.out.println("The box is moved in the corner? (I/N)");
-                        question = reader.nextLine();
-                        if (question.startsWith("i") || question.startsWith("I")) {
-                            System.out.println("This box was last on the table? (I/N)");
-                            question = reader.nextLine();
-                            if (question.startsWith("i") || question.startsWith("I")) {
-                                Game.getInstance().lastBoxIsCorner = true;
-                            }
-                        }
-                    }
-                }
-                break;
-            case 9:
-                System.out.println("This box was last on the table what pushed on the objective? (I/N)");
-                question = reader.nextLine();
-                if (question.startsWith("i") || question.startsWith("I")) {
-                    Game.getInstance().lastBoxToObj = true;
-                }
-                break;
-            case 10:
-                Game.getInstance().lastBoxIsCorner = true;
-                break;
-            case 11:
-                Game.getInstance().lastBoxKill = true;
-                break;
-            case 12:
-                Game.getInstance().lastBoxToObj = true;
-                break;
-            case 13:
-                Game.getInstance().penultimateWorker = true;
-                break;
-            case 14:
-                System.out.println("Hole is aktive now (want to kill worker)? (I/N)");
-                question = reader.nextLine();
-                if (question.startsWith("i") || question.startsWith("I")) {
-                    System.out.println("This worker was penultimate on the table? (I/N)");
-                    question = reader.nextLine();
-                    if (question.startsWith("i") || question.startsWith("I")) {
-                        Game.getInstance().penultimateWorker = true;
-                    }
-                }
-                break;
-            default:
-                System.out.println("Your choose is bad, try again!");
-                break;
-        }
     }
 
     /**
@@ -476,8 +358,7 @@ public class Table {
      */
     public void game() {
         while (!gameOver()) {
-            System.out.println("Called Class name: " + Table.class.getSimpleName()
-                    + " :: Method name: game :: Parameters: :: return: void");
+
             System.out.println("");
             System.out.println("1.  Push box -> worker to wall");
             System.out.println("2.  Trying to push worker");

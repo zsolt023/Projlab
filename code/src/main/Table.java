@@ -74,6 +74,14 @@ public class Table {
         return boxes;
     }
 
+    /**
+     * Ez a metódus hozza létre a pályafájlból az összes mezőt, az összes ládát,
+     * és legenerál random helyekre random számú (legalább 2 darab) munkást.
+     * Ezeket az objektumokat konzisztens módon eltárolja a table megfelelő változóiban.
+     * Beállítja a mezők szomszédait, “ráteszi” a mezőkre a munkásokat, és a dobozokat.
+     * Összeköti a kapcsolókat egy lyuk objektummal.
+     */
+
     public void loadTable(String filename) {
         BufferedReader br = null;
         int lineNumber;
@@ -315,13 +323,7 @@ public class Table {
 
     }
 
-    /**
-     * Ez a metódus hozza létre a pályafájlból az összes mezőt, az összes ládát,
-     * és legenerál random helyekre random számú (legalább 2 darab) munkást.
-     * Ezeket az objektumokat konzisztens módon eltárolja a table megfelelő változóiban.
-     * Beállítja a mezők szomszédait, “ráteszi” a mezőkre a munkásokat, és a dobozokat.
-     * Összeköti a kapcsolókat egy lyuk objektummal.
-     */
+
     public void loadTable() {
         Game.getInstance().printing = false;
         if (Game.getInstance().printing) {

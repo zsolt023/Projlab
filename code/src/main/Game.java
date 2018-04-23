@@ -160,7 +160,7 @@ public class Game {
         System.out.println("Create new Table...");
         table = new Table();
         System.out.println("Load table elements, with call loadTable()");
-        table.loadTable();
+        table.loadTable("map9.txt");
         System.out.println("Start game, with call game()");
         table.game();
     }    

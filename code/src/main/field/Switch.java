@@ -41,6 +41,7 @@ public class Switch extends Field {
 
         Hole hole = this.getHole();
         hole.setActive();
+        System.out.println("setSwitch("+this.getId()+","+hole.isIsActive()+") DONE");
     }
 
     /**

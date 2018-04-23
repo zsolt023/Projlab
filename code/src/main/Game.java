@@ -128,13 +128,6 @@ public class Game {
      * @return Table
      */
     public Table getTable() {
-        if (printing) {
-            printTabs();
-            System.out.println("> Game.getTable()");
-
-            printTabs();
-            System.out.println("< table");
-        }
         return this.table;
     }
 

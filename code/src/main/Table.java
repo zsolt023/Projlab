@@ -320,7 +320,7 @@ public class Table {
             }
 
         }
-
+        System.out.println("load("+filename+") DONE");
     }
 
 
@@ -336,6 +336,7 @@ public class Table {
             for (Worker w : workers) {
                 if (movable.getId().equals(w.getId())) {
                     workers.remove(w);
+                    System.out.println("killWorker("+w.getId()+") DONE");
                     break;
                 }
             }
@@ -343,6 +344,7 @@ public class Table {
             for (Box b : boxes) {
                 if (movable.getId().equals(b.getId())) {
                     boxes.remove(b);
+                    System.out.println("killBox("+b.getId()+") DONE");
                     break;
                 }
             }
@@ -370,18 +372,17 @@ public class Table {
      * @return boolean
      */
     public boolean gameOver() {
-        System.out.println("> table.gameOver()");
         if (Game.getInstance().penultimateWorker) {
-            System.out.println("    Game over, because the penultimate worker was killed.");
+            System.out.println("Game over, because the penultimate worker was killed.");
         }
         if (Game.getInstance().lastBoxKill) {
-            System.out.println("    Game over, because the last box was killed.");
+            System.out.println("Game over, because the last box was killed.");
         }
         if (Game.getInstance().lastBoxToObj) {
-            System.out.println("    Game over, because the last box was pushed on objective.");
+            System.out.println("Game over, because the last box was pushed on objective.");
         }
         if (Game.getInstance().lastBoxIsCorner) {
-            System.out.println("    Game over, because the last box was pushed in the corner.");
+            System.out.println("Game over, because the last box was pushed in the corner.");
         }
         if (Game.getInstance().penultimateWorker || Game.getInstance().lastBoxKill || Game.getInstance().lastBoxIsCorner || Game.getInstance().lastBoxToObj) {
             return true;

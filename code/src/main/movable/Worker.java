@@ -34,6 +34,7 @@ public class Worker extends Movable {
 
     public void setForce(int force) {
         this.force = force;
+        System.out.println("setForce("+this.getId()+") DONE");
     }
 
     /**
@@ -41,6 +42,7 @@ public class Worker extends Movable {
      */
     public void addPoint() {
 
+        System.out.println("addPoint("+this.getId()+") DONE");
         this.score++;
     }
 
@@ -55,8 +57,10 @@ public class Worker extends Movable {
     public boolean move() {
 
         if (this.actualField.getNeigbour().accept(this)) {
+            System.out.println("step("+this.getId()+") SUCCESS");
             return true;
         }
+        System.out.println("step("+this.getId()+") FAIL");
         return false;
     }
 

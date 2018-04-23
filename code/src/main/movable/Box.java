@@ -23,7 +23,9 @@ public class Box extends Movable {
     }
 
     public void setFriction(int friction) {
+
         this.friction = friction;
+        System.out.println("setFriction("+this.getId()+") DONE");
     }
 
     /**

@@ -2,6 +2,7 @@ package main;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
 import main.field.*;
+import main.movable.Box;
 import main.movable.Worker;
 
 import java.util.List;
@@ -144,7 +145,7 @@ public class Game {
     public void init() {
         boolean end = false;
 
-        while(!end) {
+        while (!end) {
 
             table = new Table();
 
@@ -212,21 +213,22 @@ public class Game {
                     table.loadTable("code/res/maps/map4.txt");
 
 
-
                     break;
                 case 5:
                     table.loadTable("code/res/maps/map5.txt"); //load(5)
                     table.getBoxes().remove(2);
                     table.getBoxes().remove(1);
-                    System.out.println("listBoxes " +table.getBoxes().get(0).getId()+";"); //listBoxes
+                    System.out.println("listBoxes " + table.getBoxes().get(0).getId() + ";"); //listBoxes
 
                     setOrientation(Orientation.LEFT);
                     setActualMovingWorker(table.getWorkers().get(1));
                     this.actualMovingWorker.move();
 
-                    if(table.getBoxes().size()==0){System.out.println("listBoxes NONE");}
+                    if (table.getBoxes().size() == 0) {
+                        System.out.println("listBoxes NONE");
+                    }
 
-                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+                    System.out.println("listPoints " + table.getWorkers().get(0).getId() + ":" + table.getWorkers().get(0).getScore() + ";" + table.getWorkers().get(1).getId() + ":" + table.getWorkers().get(1).getScore());
 
                     break;
                 case 6:
@@ -243,13 +245,15 @@ public class Game {
                     table.getBoxes().remove(2);
                     table.getBoxes().remove(1);
 
-                    System.out.println("listBoxes " +table.getBoxes().get(0).getId()+";"); //listBoxes
+                    System.out.println("listBoxes " + table.getBoxes().get(0).getId() + ";"); //listBoxes
 
                     setOrientation(Orientation.LEFT);
                     setActualMovingWorker(table.getWorkers().get(1));
                     this.actualMovingWorker.move();
 
-                    if(table.getBoxes().size()==0){System.out.println("listBoxes NONE");}
+                    if (table.getBoxes().size() == 0) {
+                        System.out.println("listBoxes NONE");
+                    }
 
                     break;
                 case 8:
@@ -267,7 +271,7 @@ public class Game {
                     setActualMovingWorker(table.getWorkers().get(0));
                     this.actualMovingWorker.move();
 
-                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+                    System.out.println("listPoints " + table.getWorkers().get(0).getId() + ":" + table.getWorkers().get(0).getScore() + ";" + table.getWorkers().get(1).getId() + ":" + table.getWorkers().get(1).getScore());
 
                     break;
                 case 10:
@@ -286,9 +290,11 @@ public class Game {
                     table.getBoxes().remove(0);
                     System.out.println("stuck(b1) DONE");
 
-                    if(table.getBoxes().size()==0) {System.out.println("listBoxes NONE");}
+                    if (table.getBoxes().size() == 0) {
+                        System.out.println("listBoxes NONE");
+                    }
 
-                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+                    System.out.println("listPoints " + table.getWorkers().get(0).getId() + ":" + table.getWorkers().get(0).getScore() + ";" + table.getWorkers().get(1).getId() + ":" + table.getWorkers().get(1).getScore());
 
                     break;
                 case 11:
@@ -296,15 +302,17 @@ public class Game {
                     table.getBoxes().remove(2);
                     table.getBoxes().remove(1);
 
-                    System.out.println("listBoxes "+table.getBoxes().get(0).getId()+";");
+                    System.out.println("listBoxes " + table.getBoxes().get(0).getId() + ";");
 
                     setOrientation(Orientation.LEFT);
                     setActualMovingWorker(table.getWorkers().get(1));
                     this.actualMovingWorker.move();
 
-                    if(table.getBoxes().size()==0) {System.out.println("listBoxes NONE");}
+                    if (table.getBoxes().size() == 0) {
+                        System.out.println("listBoxes NONE");
+                    }
 
-                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+                    System.out.println("listPoints " + table.getWorkers().get(0).getId() + ":" + table.getWorkers().get(0).getScore() + ";" + table.getWorkers().get(1).getId() + ":" + table.getWorkers().get(1).getScore());
 
                     break;
                 case 12:
@@ -312,15 +320,17 @@ public class Game {
                     table.getBoxes().remove(2);
                     table.getBoxes().remove(1);
 
-                    System.out.println("listBoxes "+table.getBoxes().get(0).getId()+";");
+                    System.out.println("listBoxes " + table.getBoxes().get(0).getId() + ";");
 
                     setOrientation(Orientation.LEFT);
                     setActualMovingWorker(table.getWorkers().get(1));
                     this.actualMovingWorker.move();
 
-                    if(table.getBoxes().size()==0) {System.out.println("listBoxes NONE");}
+                    if (table.getBoxes().size() == 0) {
+                        System.out.println("listBoxes NONE");
+                    }
 
-                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+                    System.out.println("listPoints " + table.getWorkers().get(0).getId() + ":" + table.getWorkers().get(0).getScore() + ";" + table.getWorkers().get(1).getId() + ":" + table.getWorkers().get(1).getScore());
 
                     break;
                 case 13:
@@ -338,11 +348,11 @@ public class Game {
                     this.actualMovingWorker.move();
 
                     System.out.print("listWorkers ");
-                    for(int i=0; i<table.getWorkers().size();i++){
-                        System.out.print(table.getWorkers().get(i).getId()+";"+"\n");
+                    for (int i = 0; i < table.getWorkers().size(); i++) {
+                        System.out.print(table.getWorkers().get(i).getId() + ";" + "\n");
                     }
 
-                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+"w2:"+x);
+                    System.out.println("listPoints " + table.getWorkers().get(0).getId() + ":" + table.getWorkers().get(0).getScore() + ";" + "w2:" + x);
 
                     break;
                 case 14:
@@ -381,22 +391,22 @@ public class Game {
 
                     Field temp17 = table.getFields().get(1);
                     HoneyPlain hp1 = new HoneyPlain();
-                    hp1.setNeighbour(Orientation.LEFT,temp17.getNeighbour(Orientation.LEFT));
+                    hp1.setNeighbour(Orientation.LEFT, temp17.getNeighbour(Orientation.LEFT));
                     hp1.setNeighbour(Orientation.RIGHT, temp17.getNeighbour(Orientation.RIGHT));
                     hp1.setActualMovable(temp17.getActualMovable());
                     table.getBoxes().get(0).setActualField(hp1);
                     table.getFields().remove(1);
-                    table.getFields().add(1,hp1);
+                    table.getFields().add(1, hp1);
                     System.out.println("setPlainFieldType(p2, hon) DONE");
 
                     temp17 = table.getFields().get(2);
                     HoneyPlain hp2 = new HoneyPlain();
-                    hp2.setNeighbour(Orientation.LEFT,temp17.getNeighbour(Orientation.LEFT));
+                    hp2.setNeighbour(Orientation.LEFT, temp17.getNeighbour(Orientation.LEFT));
                     hp2.setNeighbour(Orientation.RIGHT, temp17.getNeighbour(Orientation.RIGHT));
                     hp2.setActualMovable(temp17.getActualMovable());
                     table.getBoxes().get(1).setActualField(hp2);
                     table.getFields().remove(2);
-                    table.getFields().add(2,hp2);
+                    table.getFields().add(2, hp2);
                     System.out.println("setPlainFieldType(p2, hon) DONE");
 
                     table.getBoxes().get(0).setFriction(4);
@@ -413,12 +423,12 @@ public class Game {
 
                     Field temp18 = table.getFields().get(1);
                     HoneyPlain hop2 = new HoneyPlain();
-                    hop2.setNeighbour(Orientation.LEFT,temp18.getNeighbour(Orientation.LEFT));
-                    hop2.setNeighbour(Orientation.RIGHT,temp18.getNeighbour(Orientation.RIGHT));
+                    hop2.setNeighbour(Orientation.LEFT, temp18.getNeighbour(Orientation.LEFT));
+                    hop2.setNeighbour(Orientation.RIGHT, temp18.getNeighbour(Orientation.RIGHT));
                     hop2.setActualMovable(temp18.getActualMovable());
                     table.getBoxes().get(0).setActualField(hop2);
                     table.getFields().remove(1);
-                    table.getFields().add(1,hop2);
+                    table.getFields().add(1, hop2);
                     System.out.println("setPlainFieldType(p2, hon) DONE");
 
                     table.getBoxes().get(0).setFriction(4);
@@ -436,22 +446,22 @@ public class Game {
 
                     Field tmp = table.getFields().get(1);
                     HoneyPlain hop1 = new HoneyPlain();
-                    hop1.setNeighbour(Orientation.LEFT,tmp.getNeighbour(Orientation.LEFT));
-                    hop1.setNeighbour(Orientation.RIGHT,tmp.getNeighbour(Orientation.RIGHT));
+                    hop1.setNeighbour(Orientation.LEFT, tmp.getNeighbour(Orientation.LEFT));
+                    hop1.setNeighbour(Orientation.RIGHT, tmp.getNeighbour(Orientation.RIGHT));
                     hop1.setActualMovable(tmp.getActualMovable());
                     table.getBoxes().get(0).setActualField(hop1);
                     table.getFields().remove(1);
-                    table.getFields().add(1,hop1);
+                    table.getFields().add(1, hop1);
                     System.out.println("setPlainFieldType(p2, hon) DONE");
 
                     Field temp = table.getFields().get(2);
                     OilPlain op = new OilPlain();
-                    op.setNeighbour(Orientation.LEFT,temp.getNeighbour(Orientation.LEFT));
-                    op.setNeighbour(Orientation.RIGHT,temp.getNeighbour(Orientation.RIGHT));
+                    op.setNeighbour(Orientation.LEFT, temp.getNeighbour(Orientation.LEFT));
+                    op.setNeighbour(Orientation.RIGHT, temp.getNeighbour(Orientation.RIGHT));
                     op.setActualMovable(temp.getActualMovable());
                     table.getBoxes().get(1).setActualField(op);
                     table.getFields().remove(2);
-                    table.getFields().add(2,op);
+                    table.getFields().add(2, op);
                     System.out.println("setPlainFieldType(p3, oil) DONE");
 
                     table.getBoxes().get(0).setFriction(4);
@@ -468,12 +478,12 @@ public class Game {
 
                     Field temp1 = table.getFields().get(2);
                     OilPlain hp = new OilPlain();
-                    hp.setNeighbour(Orientation.LEFT,temp1.getNeighbour(Orientation.LEFT));
-                    hp.setNeighbour(Orientation.RIGHT,temp1.getNeighbour(Orientation.RIGHT));
+                    hp.setNeighbour(Orientation.LEFT, temp1.getNeighbour(Orientation.LEFT));
+                    hp.setNeighbour(Orientation.RIGHT, temp1.getNeighbour(Orientation.RIGHT));
                     hp.setActualMovable(temp1.getActualMovable());
                     table.getBoxes().get(1).setActualField(hp);
                     table.getFields().remove(2);
-                    table.getFields().add(2,hp);
+                    table.getFields().add(2, hp);
                     System.out.println("setPlainFieldType(p3, oil) DONE");
 
                     table.getBoxes().get(0).setFriction(4);
@@ -540,91 +550,134 @@ public class Game {
                     break;
                 case 23:
                     //Custom
-                     reader = new Scanner(System.in);
-                    String  cmd = "";
+                    reader = new Scanner(System.in);
+                    String cmd = "";
 
-                    while (!cmd.equals("exit")){
+                    while (!cmd.equals("exit")) {
                         cmd = reader.next();
                         System.out.println(cmd);
 
-                        if (cmd.startsWith("load")){
-
-                            //System.out.println(cmd.substring(5,cmd.length()));
-                            table.loadTable(cmd.substring(5,cmd.length()-1));
+                        if (cmd.startsWith("load")) {
+                            table.loadTable(cmd.substring(5, cmd.length() - 1));
 
                         }
 
-                        if (cmd.startsWith("step")){
-                            System.out.println(cmd.substring(5,7));
-                            System.out.println(cmd.substring(8,cmd.length()-1));
+                        if (cmd.startsWith("step")) {
+                            String wId = cmd.substring(5, 7);
+                            String ori = cmd.substring(8, cmd.length() - 1);
+                            for (Worker w : table.getWorkers()) {
+                                if (w.getId().equals(wId)) {
+                                    setActualMovingWorker(w);
+
+                                    switch (ori) {
+                                        case "left":
+                                            setOrientation(Orientation.LEFT);
+                                            break;
+                                        case "right":
+                                            setOrientation(Orientation.RIGHT);
+                                            break;
+                                        case "up":
+                                            setOrientation(Orientation.UP);
+                                            break;
+                                        case "down":
+                                            setOrientation(Orientation.DOWN);
+                                            break;
+                                        default:
+                                            System.out.println("Wrong orientation. Try up, down, left, right with lowercase.");
+                                    }
+                                    w.move();
+                                    break;
+                                }
+                            }
 
                         }
 
-                        if (cmd.startsWith("placeWorker")){
-                            System.out.println(cmd.substring(12,14));
-                            System.out.println(cmd.substring(15,cmd.length()-1));
-                        }
+                        if (cmd.startsWith("placeWorker")) {
+                            String wId = cmd.substring(12, 14);
+                            String fId = cmd.substring(15, cmd.length() - 1);
 
-                        if (cmd.startsWith("placeBox")){
-                            System.out.println(cmd.substring(9,11));
-                            System.out.println(cmd.substring(12,cmd.length()-1));
-                        }
+                            for (Field f:table.getFields()) {
+                                if (f.getId().equals(fId)){
+                                    Worker w = new Worker();
+                                    w.setId(wId);
+                                    w.setActualField(f);
+                                    f.setActualMovable(w);
+                                    table.getWorkers().add(w);
+                                    break;
+                                }
+                            }
 
-                        if (cmd.startsWith("killWorker")){
-                            System.out.println(cmd.substring(11,13));
-                        }
-
-                        if (cmd.startsWith("killBox")){
-                            System.out.println(cmd.substring(8,10));
-                        }
-
-                        if (cmd.startsWith("stuck")){
-                            System.out.println(cmd.substring(6,8));
-                        }
-
-                        if (cmd.startsWith("addPoint")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-
-                        if (cmd.startsWith("listBoxes")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-                        if (cmd.startsWith("listWorkers")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-                        if (cmd.startsWith("listPoints")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-                        if (cmd.startsWith("listFields")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-
-
-
-
-                        if (cmd.startsWith("setFriction")){
-                            System.out.println(cmd.substring(12,13));
-                            System.out.println(cmd.substring(14,cmd.length()-1));
 
                         }
 
-                        if (cmd.startsWith("setForce")){
-                            System.out.println(cmd.substring(9,11));
-                            System.out.println(cmd.substring(12,cmd.length()-1));
+                        if (cmd.startsWith("placeBox")) {
+                            String bId = cmd.substring(9, 11);
+                            String fId = cmd.substring(12, cmd.length() - 1);
+
+                            for (Field f:table.getFields()) {
+                                if (f.getId().equals(fId)){
+                                    Box b = new Box();
+                                    b.setId(bId);
+                                    b.setActualField(f);
+                                    f.setActualMovable(b);
+                                    table.getBoxes().add(b);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (cmd.startsWith("killWorker")) {
+                            System.out.println(cmd.substring(11, 13));
+                        }
+
+                        if (cmd.startsWith("killBox")) {
+                            System.out.println(cmd.substring(8, 10));
+                        }
+
+                        if (cmd.startsWith("stuck")) {
+                            System.out.println(cmd.substring(6, 8));
+                        }
+
+                        if (cmd.startsWith("addPoint")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+
+                        if (cmd.startsWith("listBoxes")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+                        if (cmd.startsWith("listWorkers")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+                        if (cmd.startsWith("listPoints")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+                        if (cmd.startsWith("listFields")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+
+
+                        if (cmd.startsWith("setFriction")) {
+                            System.out.println(cmd.substring(12, 13));
+                            System.out.println(cmd.substring(14, cmd.length() - 1));
 
                         }
 
-                        if (cmd.startsWith("setSwitch")){
-                            System.out.println(cmd.substring(10,cmd.length()-1));
+                        if (cmd.startsWith("setForce")) {
+                            System.out.println(cmd.substring(9, 11));
+                            System.out.println(cmd.substring(12, cmd.length() - 1));
 
                         }
 
-                        if (cmd.startsWith("setPlainFieldType")){
-                            System.out.println(cmd.substring(18,20));
-                            System.out.println(cmd.substring(21,cmd.length()));
+                        if (cmd.startsWith("setSwitch")) {
+                            System.out.println(cmd.substring(10, cmd.length() - 1));
 
                         }
 
+                        if (cmd.startsWith("setPlainFieldType")) {
+                            System.out.println(cmd.substring(18, 20));
+                            System.out.println(cmd.substring(21, cmd.length()));
+
+                        }
 
 
                     }

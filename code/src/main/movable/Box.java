@@ -37,7 +37,7 @@ public class Box extends Movable {
      */
     @Override
     public boolean move() {
-        System.out.println("asd");
+        //System.out.println("asd");
 
         if (this.actualField.getNeigbour().accept(this)) {
 

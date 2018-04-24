@@ -211,6 +211,20 @@ public class Game {
                     break;
                 case 4:
                     table.loadTable("code/res/maps/map4.txt");
+                    Switch s1 = new Switch();
+                    Hole h1 = new Hole();
+                    s1.setId("s1");
+                    h1.setId("h1");
+
+                    s1.setNeighbour(Orientation.UP, table.getFields().get(17).getNeighbour(Orientation.UP));
+                    s1.setNeighbour(Orientation.DOWN, table.getFields().get(17).getNeighbour(Orientation.DOWN));
+                    s1.setNeighbour(Orientation.LEFT, table.getFields().get(17).getNeighbour(Orientation.LEFT));
+                    s1.setNeighbour(Orientation.RIGHT, table.getFields().get(17).getNeighbour(Orientation.RIGHT));
+                    s1.setHole(h1);
+                    table.getFields().get(12).setNeighbour(Orientation.DOWN,s1);
+                    table.getFields().get(16).setNeighbour(Orientation.RIGHT,s1);
+                    table.getFields().get(18).setNeighbour(Orientation.LEFT,s1);
+                    table.getFields().get(22).setNeighbour(Orientation.UP,s1);
 
 
                     break;
@@ -414,6 +428,8 @@ public class Game {
                     setActualMovingWorker(table.getWorkers().get(0));
                     setOrientation(Orientation.RIGHT);
 
+                    Game.getInstance().setActualChainFriction(10);
+
                     table.getWorkers().get(0).move();
 
                     break;
@@ -436,7 +452,8 @@ public class Game {
                     setActualMovingWorker(table.getWorkers().get(0));
                     setOrientation(Orientation.RIGHT);
 
-                    System.out.println(Game.getInstance().getActualChainFriction());
+                    Game.getInstance().setActualChainFriction(8);
+
                     table.getWorkers().get(0).move();
 
                     break;

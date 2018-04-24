@@ -154,6 +154,7 @@ public class Table {
                         if (wall.getActualMovable() != null)
                             wall.getActualMovable().setActualField(wall);
                         fields.add(wall);
+                        break;
 
 
                     case "plain":
@@ -191,6 +192,7 @@ public class Table {
                         if (plain.getActualMovable() != null)
                             plain.getActualMovable().setActualField(plain);
                         fields.add(plain);
+                        break;
                     case "hole":
                         Hole hole = new Hole();
                         hole.setId(line[3]);
@@ -226,6 +228,7 @@ public class Table {
                         if (hole.getActualMovable() != null)
                             hole.getActualMovable().setActualField(hole);
                         fields.add(hole);
+                        break;
                     case "switch":
                         Switch sw = new Switch();
                         sw.setId(line[3]);
@@ -261,6 +264,7 @@ public class Table {
                         if (sw.getActualMovable() != null)
                             sw.getActualMovable().setActualField(sw);
                         fields.add(sw);
+                        break;
                     case "objective":
                         Objective obj = new Objective();
                         obj.setId(line[3]);
@@ -296,6 +300,7 @@ public class Table {
                         if (obj.getActualMovable() != null)
                             obj.getActualMovable().setActualField(obj);
                         fields.add(obj);
+                        break;
                 }
 
 
@@ -387,7 +392,6 @@ public class Table {
         if (Game.getInstance().penultimateWorker || Game.getInstance().lastBoxKill || Game.getInstance().lastBoxIsCorner || Game.getInstance().lastBoxToObj) {
             return true;
         } else {
-
         }
         return false;
     }

@@ -177,131 +177,131 @@ public class Game {
             int alternatives = reader.nextInt();
             switch (alternatives) {
                 case 1:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 2:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 3:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 4:
-                    table.loadTable("map4.txt");
+                    table.loadTable("code/res/maps/map4.txt");
                     table.game();
                     break;
                 case 5:
-                    table.loadTable("map5.txt");
+                    table.loadTable("code/res/maps/map5.txt");
                     table.game();
                     break;
                 case 6:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 7:
-                    table.loadTable("map7.txt");
+                    table.loadTable("code/res/maps/map7.txt");
                     table.game();
                     break;
                 case 8:
-                    table.loadTable("map8.txt");
+                    table.loadTable("code/res/maps/map8.txt");
                     table.game();
                     break;
                 case 9:
-                    table.loadTable("map9.txt");
+                    table.loadTable("code/res/maps/map9.txt");
                     table.game();
                     break;
                 case 10:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 11:
-                    table.loadTable("map7.txt");
+                    table.loadTable("code/res/maps/map7.txt");
                     table.game();
                     break;
                 case 12:
-                    table.loadTable("map5.txt");
+                    table.loadTable("code/res/maps/map5.txt");
                     table.game();
                     break;
                 case 13:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 14:
-                    table.loadTable("map7.txt");
+                    table.loadTable("code/res/maps/map7.txt");
                     table.game();
                     break;
                 case 15:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 16:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
                     break;
                 case 17:
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/map17.txt");
                     table.game();
                     break;
                 case 18:
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/map17.txt");
                     table.game();
                     break;
                 case 19:
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/map17.txt");
                     table.game();
                     break;
                 case 20:
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/map17.txt");
                     table.game();
                     break;
                 case 21:
-                    table.loadTable("map21.txt");
+                    table.loadTable("code/res/maps/map21.txt");
                     table.game();
                     break;
                 case 22:
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map4.txt");
+                    table.loadTable("code/res/maps/map4.txt");
                     table.game();
-                    table.loadTable("map5.txt");
+                    table.loadTable("code/res/maps/map5.txt");
                     table.game();
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map7.txt");
+                    table.loadTable("code/res/maps/map7.txt");
                     table.game();
-                    table.loadTable("map8.txt");
+                    table.loadTable("code/res/maps/map8.txt");
                     table.game();
-                    table.loadTable("map9.txt");
+                    table.loadTable("code/res/maps/map9.txt");
                     table.game();
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map7.txt");
+                    table.loadTable("code/res/maps/map7.txt");
                     table.game();
-                    table.loadTable("map5.txt");
+                    table.loadTable("code/res/maps/map5.txt");
                     table.game();
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map7.txt");
+                    table.loadTable("code/res/maps/map7.txt");
                     table.game();
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map1.txt");
+                    table.loadTable("code/res/maps/map1.txt");
                     table.game();
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/ap17.txt");
                     table.game();
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/map17.txt");
                     table.game();
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/map17.txt");
                     table.game();
-                    table.loadTable("map17.txt");
+                    table.loadTable("code/res/maps/map17.txt");
                     table.game();
-                    table.loadTable("map21.txt");
+                    table.loadTable("code/res/maps/map21.txt");
 
                     break;
                 case 23:

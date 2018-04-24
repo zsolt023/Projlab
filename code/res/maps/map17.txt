@@ -1,0 +1,4 @@
+1;plain;w1;p1;null;p2;null;null
+2;plain;b1;p2;null;p3;null;p1
+3;plain;b2;p3;null;p4;null;p2
+4;plain;null;p4;null;null;null;p3

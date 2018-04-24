@@ -663,55 +663,113 @@ public class Game {
                         }
 
                         if (cmd.startsWith("killWorker")) {
-                            System.out.println(cmd.substring(11, 13));
+
+                            for (Worker w:table.getWorkers()) {
+                                if (w.getId().equals(cmd.substring(11, 13)))
+                                    table.kill(w);
+                            }
                         }
 
                         if (cmd.startsWith("killBox")) {
-                            System.out.println(cmd.substring(8, 10));
+
+                            for (Box b:table.getBoxes()) {
+                                if (b.getId().equals(cmd.substring(8, 10)))
+                                    table.kill(b);
+                            }
                         }
 
                         if (cmd.startsWith("stuck")) {
-                            System.out.println(cmd.substring(6, 8));
+                            for (Box b:table.getBoxes()) {
+                                if (b.getId().equals(cmd.substring(6, 8)))
+                                    table.kill(b);
+                            }
                         }
 
                         if (cmd.startsWith("addPoint")) {
-                            System.out.println(cmd.substring(9, 11));
+
+                            for (Worker w:table.getWorkers()) {
+                                if (w.getId().equals(cmd.substring(9, 11)))
+                                    w.addPoint();
+                            }
                         }
 
                         if (cmd.startsWith("listBoxes")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listBoxes();
                         }
                         if (cmd.startsWith("listWorkers")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listWorkers();
                         }
                         if (cmd.startsWith("listPoints")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listPoints();
                         }
                         if (cmd.startsWith("listFields")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listFields();
                         }
 
 
                         if (cmd.startsWith("setFriction")) {
-                            System.out.println(cmd.substring(12, 13));
-                            System.out.println(cmd.substring(14, cmd.length() - 1));
+                            for (Box b:table.getBoxes()) {
+                                if (b.getId().equals(cmd.substring(12, 13)))
+                                    b.setFriction(Integer.getInteger(cmd.substring(14, cmd.length() - 1)));
+                            }
 
                         }
 
                         if (cmd.startsWith("setForce")) {
-                            System.out.println(cmd.substring(9, 11));
-                            System.out.println(cmd.substring(12, cmd.length() - 1));
+                            for (Worker b:table.getWorkers()) {
+                                if (b.getId().equals(cmd.substring(9, 11)))
+                                    b.setForce(Integer.getInteger(cmd.substring(12, cmd.length() - 1)));
+                            }
 
                         }
 
                         if (cmd.startsWith("setSwitch")) {
-                            System.out.println(cmd.substring(10, cmd.length() - 1));
+                            for (Field f:table.getFields()) {
+                                if (f.getId().equals(cmd.substring(10, cmd.length() - 1)))
+                                    f.switchState();
+                            }
 
                         }
 
                         if (cmd.startsWith("setPlainFieldType")) {
                             System.out.println(cmd.substring(18, 20));
-                            System.out.println(cmd.substring(21, cmd.length()));
+                            System.out.println();
+
+                            switch (cmd.substring(21, cmd.length())) {
+                                case "hon":
+                                    Field tempHon = null;
+                                    for (Field f:table.getFields()) {
+                                        if (f.getId().equals(cmd.substring(18, 20)))
+                                            tempHon = f;
+                                    }
+                                    HoneyPlain newH = new HoneyPlain();
+                                    newH.setNeighbour(Orientation.LEFT,tempHon.getNeighbour(Orientation.LEFT));
+                                    newH.setNeighbour(Orientation.RIGHT,tempHon.getNeighbour(Orientation.RIGHT));
+                                    newH.setActualMovable(tempHon.getActualMovable());
+                                    if (tempHon.getActualMovable() != null)
+                                        tempHon.getActualMovable().setActualField(newH);
+                                    table.getFields().remove(tempHon);
+                                    table.getFields().add(newH);
+                                    System.out.println("setPlainFieldType(" + cmd.substring(18, 20) + ", hon) DONE");
+                                    break;
+                                case "oil":
+
+                                    Field tempOil = null;
+                                    for (Field f:table.getFields()) {
+                                        if (f.getId().equals(cmd.substring(18, 20)))
+                                            tempOil = f;
+                                    }
+                                    OilPlain newO = new OilPlain();
+                                    newO.setNeighbour(Orientation.LEFT,tempOil.getNeighbour(Orientation.LEFT));
+                                    newO.setNeighbour(Orientation.RIGHT,tempOil.getNeighbour(Orientation.RIGHT));
+                                    newO.setActualMovable(tempOil.getActualMovable());
+                                    if (tempOil.getActualMovable() != null)
+                                        tempOil.getActualMovable().setActualField(newO);
+                                    table.getFields().remove(tempOil);
+                                    table.getFields().add(newO);
+                                    System.out.println("setPlainFieldType(" + cmd.substring(18, 20) + ", oil) DONE");
+                                    break;
+                            }
 
                         }
 

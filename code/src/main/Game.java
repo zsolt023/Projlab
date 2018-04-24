@@ -177,6 +177,7 @@ public class Game {
             Worker actualMovingWorker = null;
             Scanner reader = new Scanner(System.in);
             int alternatives = reader.nextInt();
+            //int alternatives = 23;
             switch (alternatives) {
                 case 1:
                     table.loadTable("code/res/maps/map1.txt");
@@ -509,6 +510,96 @@ public class Game {
                     break;
                 case 23:
                     //Custom
+                     reader = new Scanner(System.in);
+                    String  cmd = "";
+
+                    while (!cmd.equals("exit")){
+                        cmd = reader.next();
+                        System.out.println(cmd);
+
+                        if (cmd.startsWith("load")){
+
+                            //System.out.println(cmd.substring(5,cmd.length()));
+                            table.loadTable(cmd.substring(5,cmd.length()-1));
+
+                        }
+
+                        if (cmd.startsWith("step")){
+                            System.out.println(cmd.substring(5,7));
+                            System.out.println(cmd.substring(8,cmd.length()-1));
+
+                        }
+
+                        if (cmd.startsWith("placeWorker")){
+                            System.out.println(cmd.substring(12,14));
+                            System.out.println(cmd.substring(15,cmd.length()-1));
+                        }
+
+                        if (cmd.startsWith("placeBox")){
+                            System.out.println(cmd.substring(9,11));
+                            System.out.println(cmd.substring(12,cmd.length()-1));
+                        }
+
+                        if (cmd.startsWith("killWorker")){
+                            System.out.println(cmd.substring(11,13));
+                        }
+
+                        if (cmd.startsWith("killBox")){
+                            System.out.println(cmd.substring(8,10));
+                        }
+
+                        if (cmd.startsWith("stuck")){
+                            System.out.println(cmd.substring(6,8));
+                        }
+
+                        if (cmd.startsWith("addPoint")){
+                            System.out.println(cmd.substring(9,11));
+                        }
+
+                        if (cmd.startsWith("listBoxes")){
+                            System.out.println(cmd.substring(9,11));
+                        }
+                        if (cmd.startsWith("listWorkers")){
+                            System.out.println(cmd.substring(9,11));
+                        }
+                        if (cmd.startsWith("listPoints")){
+                            System.out.println(cmd.substring(9,11));
+                        }
+                        if (cmd.startsWith("listFields")){
+                            System.out.println(cmd.substring(9,11));
+                        }
+
+
+
+
+                        if (cmd.startsWith("setFriction")){
+                            System.out.println(cmd.substring(12,13));
+                            System.out.println(cmd.substring(14,cmd.length()-1));
+
+                        }
+
+                        if (cmd.startsWith("setForce")){
+                            System.out.println(cmd.substring(9,11));
+                            System.out.println(cmd.substring(12,cmd.length()-1));
+
+                        }
+
+                        if (cmd.startsWith("setSwitch")){
+                            System.out.println(cmd.substring(10,cmd.length()-1));
+
+                        }
+
+                        if (cmd.startsWith("setPlainFieldType")){
+                            System.out.println(cmd.substring(18,20));
+                            System.out.println(cmd.substring(21,cmd.length()));
+
+                        }
+
+
+
+                    }
+
+
                     break;
                 case 24:
                     System.out.println("Shutting down");

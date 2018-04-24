@@ -67,9 +67,9 @@ public abstract class Field {
         return neighbours.get(Game.getInstance().getOrientation());
     }
 
-    public void setHole(Hole hole){
+    public void setHole(Hole hole){}
 
-    }
+    public void switchState(){}
     /**
      * Beállítja ennek az objektumank a paraméterben kapott irány és mezőnek megfelelő szomszédokat.
      *

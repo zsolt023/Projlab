@@ -60,6 +60,14 @@ public class Table {
         return workers;
     }
 
+    public void listWorkers(){
+        System.out.print("listWorkers ");
+        for (Worker w:workers) {
+            System.out.print(w.getId()+ ";");
+        }
+        System.out.println();
+    }
+
     /**
      * Visszaadja a dobozok listáját.
      *
@@ -201,6 +209,8 @@ public class Table {
                                 if (b.getId().equals(line[2]))
                                     sw.setActualMovable(b);
                             }
+
+                            sw.setHole((Hole) fields.get(7));
                         }
 
 

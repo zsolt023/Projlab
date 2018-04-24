@@ -54,6 +54,10 @@ public abstract class Field {
         this.actualMovable = movable;
     }
 
+    public Field getNeighbour(Orientation orientation){
+        return neighbours.get(orientation);
+    }
+
     /**
      * Visszaadja az aktuális lépés irányában lévő szomszédos mezőt.
      *
@@ -63,6 +67,9 @@ public abstract class Field {
         return neighbours.get(Game.getInstance().getOrientation());
     }
 
+    public void setHole(Hole hole){
+
+    }
     /**
      * Beállítja ennek az objektumank a paraméterben kapott irány és mezőnek megfelelő szomszédokat.
      *

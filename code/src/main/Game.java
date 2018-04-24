@@ -2,6 +2,7 @@ package main;
 
 import com.sun.org.apache.xpath.internal.operations.Or;
 import main.field.*;
+import main.movable.Box;
 import main.movable.Worker;
 
 import java.util.List;
@@ -585,91 +586,134 @@ public class Game {
                     break;
                 case 23:
                     //Custom
-                     reader = new Scanner(System.in);
-                    String  cmd = "";
+                    reader = new Scanner(System.in);
+                    String cmd = "";
 
-                    while (!cmd.equals("exit")){
+                    while (!cmd.equals("exit")) {
                         cmd = reader.next();
                         System.out.println(cmd);
 
-                        if (cmd.startsWith("load")){
-
-                            //System.out.println(cmd.substring(5,cmd.length()));
-                            table.loadTable(cmd.substring(5,cmd.length()-1));
+                        if (cmd.startsWith("load")) {
+                            table.loadTable(cmd.substring(5, cmd.length() - 1));
 
                         }
 
-                        if (cmd.startsWith("step")){
-                            System.out.println(cmd.substring(5,7));
-                            System.out.println(cmd.substring(8,cmd.length()-1));
+                        if (cmd.startsWith("step")) {
+                            String wId = cmd.substring(5, 7);
+                            String ori = cmd.substring(8, cmd.length() - 1);
+                            for (Worker w : table.getWorkers()) {
+                                if (w.getId().equals(wId)) {
+                                    setActualMovingWorker(w);
+
+                                    switch (ori) {
+                                        case "left":
+                                            setOrientation(Orientation.LEFT);
+                                            break;
+                                        case "right":
+                                            setOrientation(Orientation.RIGHT);
+                                            break;
+                                        case "up":
+                                            setOrientation(Orientation.UP);
+                                            break;
+                                        case "down":
+                                            setOrientation(Orientation.DOWN);
+                                            break;
+                                        default:
+                                            System.out.println("Wrong orientation. Try up, down, left, right with lowercase.");
+                                    }
+                                    w.move();
+                                    break;
+                                }
+                            }
 
                         }
 
-                        if (cmd.startsWith("placeWorker")){
-                            System.out.println(cmd.substring(12,14));
-                            System.out.println(cmd.substring(15,cmd.length()-1));
-                        }
+                        if (cmd.startsWith("placeWorker")) {
+                            String wId = cmd.substring(12, 14);
+                            String fId = cmd.substring(15, cmd.length() - 1);
 
-                        if (cmd.startsWith("placeBox")){
-                            System.out.println(cmd.substring(9,11));
-                            System.out.println(cmd.substring(12,cmd.length()-1));
-                        }
+                            for (Field f:table.getFields()) {
+                                if (f.getId().equals(fId)){
+                                    Worker w = new Worker();
+                                    w.setId(wId);
+                                    w.setActualField(f);
+                                    f.setActualMovable(w);
+                                    table.getWorkers().add(w);
+                                    break;
+                                }
+                            }
 
-                        if (cmd.startsWith("killWorker")){
-                            System.out.println(cmd.substring(11,13));
-                        }
-
-                        if (cmd.startsWith("killBox")){
-                            System.out.println(cmd.substring(8,10));
-                        }
-
-                        if (cmd.startsWith("stuck")){
-                            System.out.println(cmd.substring(6,8));
-                        }
-
-                        if (cmd.startsWith("addPoint")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-
-                        if (cmd.startsWith("listBoxes")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-                        if (cmd.startsWith("listWorkers")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-                        if (cmd.startsWith("listPoints")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-                        if (cmd.startsWith("listFields")){
-                            System.out.println(cmd.substring(9,11));
-                        }
-
-
-
-
-                        if (cmd.startsWith("setFriction")){
-                            System.out.println(cmd.substring(12,13));
-                            System.out.println(cmd.substring(14,cmd.length()-1));
 
                         }
 
-                        if (cmd.startsWith("setForce")){
-                            System.out.println(cmd.substring(9,11));
-                            System.out.println(cmd.substring(12,cmd.length()-1));
+                        if (cmd.startsWith("placeBox")) {
+                            String bId = cmd.substring(9, 11);
+                            String fId = cmd.substring(12, cmd.length() - 1);
+
+                            for (Field f:table.getFields()) {
+                                if (f.getId().equals(fId)){
+                                    Box b = new Box();
+                                    b.setId(bId);
+                                    b.setActualField(f);
+                                    f.setActualMovable(b);
+                                    table.getBoxes().add(b);
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (cmd.startsWith("killWorker")) {
+                            System.out.println(cmd.substring(11, 13));
+                        }
+
+                        if (cmd.startsWith("killBox")) {
+                            System.out.println(cmd.substring(8, 10));
+                        }
+
+                        if (cmd.startsWith("stuck")) {
+                            System.out.println(cmd.substring(6, 8));
+                        }
+
+                        if (cmd.startsWith("addPoint")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+
+                        if (cmd.startsWith("listBoxes")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+                        if (cmd.startsWith("listWorkers")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+                        if (cmd.startsWith("listPoints")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+                        if (cmd.startsWith("listFields")) {
+                            System.out.println(cmd.substring(9, 11));
+                        }
+
+
+                        if (cmd.startsWith("setFriction")) {
+                            System.out.println(cmd.substring(12, 13));
+                            System.out.println(cmd.substring(14, cmd.length() - 1));
 
                         }
 
-                        if (cmd.startsWith("setSwitch")){
-                            System.out.println(cmd.substring(10,cmd.length()-1));
+                        if (cmd.startsWith("setForce")) {
+                            System.out.println(cmd.substring(9, 11));
+                            System.out.println(cmd.substring(12, cmd.length() - 1));
 
                         }
 
-                        if (cmd.startsWith("setPlainFieldType")){
-                            System.out.println(cmd.substring(18,20));
-                            System.out.println(cmd.substring(21,cmd.length()));
+                        if (cmd.startsWith("setSwitch")) {
+                            System.out.println(cmd.substring(10, cmd.length() - 1));
 
                         }
 
+                        if (cmd.startsWith("setPlainFieldType")) {
+                            System.out.println(cmd.substring(18, 20));
+                            System.out.println(cmd.substring(21, cmd.length()));
+
+                        }
 
 
                     }

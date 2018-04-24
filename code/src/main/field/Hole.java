@@ -54,8 +54,7 @@ public class Hole extends Field {
         } else {
             isActive = true;
         }
-        Game.getInstance().printTabs();
-        System.out.println("< void");
+
     }
 
     /**

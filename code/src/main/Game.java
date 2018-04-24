@@ -2,6 +2,7 @@ package main;
 
 import main.movable.Worker;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
@@ -178,7 +179,11 @@ public class Game {
             switch (alternatives) {
                 case 1:
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    //DOWN parancs
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    actualMovingWorker.move();
+
                     break;
                 case 2:
                     table.loadTable("code/res/maps/map1.txt");

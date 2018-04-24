@@ -1,9 +1,7 @@
 package main;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import main.field.Field;
 import main.field.Hole;
@@ -119,6 +117,9 @@ public class Table {
         Box b3 = new Box();
         b3.setId("b3");
 
+        boxes.clear();
+
+
         boxes.add(b1);
         boxes.add(b2);
         boxes.add(b3);
@@ -129,11 +130,13 @@ public class Table {
         w2.setId("w2");
         Worker w3 = new Worker();
         w3.setId("w3");
+        workers.clear();
 
         workers.add(w1);
         workers.add(w2);
         workers.add(w3);
 
+        fields.clear();
 
         try {
             br = new BufferedReader(new FileReader(filename));

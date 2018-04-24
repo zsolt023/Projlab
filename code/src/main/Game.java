@@ -541,47 +541,355 @@ public class Game {
                     table.getWorkers().get(0).move();
                     break;
                 case 22:
+
+
+
+
+
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.RIGHT);
+                    this.actualMovingWorker.move();
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setOrientation(Orientation.UP);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.LEFT);
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.LEFT);
+                    this.actualMovingWorker.move();
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
                     table.loadTable("code/res/maps/map4.txt");
-                    table.game();
-                    table.loadTable("code/res/maps/map5.txt");
-                    table.game();
+                    Switch ss1 = new Switch();
+                    Hole hh1 = new Hole();
+                    ss1.setId("s1");
+                    hh1.setId("h1");
+
+                    ss1.setNeighbour(Orientation.UP, table.getFields().get(17).getNeighbour(Orientation.UP));
+                    ss1.setNeighbour(Orientation.DOWN, table.getFields().get(17).getNeighbour(Orientation.DOWN));
+                    ss1.setNeighbour(Orientation.LEFT, table.getFields().get(17).getNeighbour(Orientation.LEFT));
+                    ss1.setNeighbour(Orientation.RIGHT, table.getFields().get(17).getNeighbour(Orientation.RIGHT));
+                    ss1.setHole(hh1);
+                    table.getFields().get(12).setNeighbour(Orientation.DOWN,ss1);
+                    table.getFields().get(16).setNeighbour(Orientation.RIGHT,ss1);
+                    table.getFields().get(18).setNeighbour(Orientation.LEFT,ss1);
+                    table.getFields().get(22).setNeighbour(Orientation.UP,ss1);
+
+                    hh1.setNeighbour(Orientation.UP, table.getFields().get(7).getNeighbour(Orientation.UP));
+                    hh1.setNeighbour(Orientation.DOWN, table.getFields().get(7).getNeighbour(Orientation.DOWN));
+                    hh1.setNeighbour(Orientation.LEFT, table.getFields().get(7).getNeighbour(Orientation.LEFT));
+                    hh1.setNeighbour(Orientation.RIGHT, table.getFields().get(7).getNeighbour(Orientation.RIGHT));
+                    hh1.setIsActive(false);
+                    table.getFields().get(2).setNeighbour(Orientation.DOWN,hh1);
+                    table.getFields().get(6).setNeighbour(Orientation.RIGHT,hh1);
+                    table.getFields().get(8).setNeighbour(Orientation.LEFT,hh1);
+                    table.getFields().get(12).setNeighbour(Orientation.UP,hh1);
+
+                    table.getFields().remove(17);
+                    table.getFields().remove(7);
+
+                    table.getFields().add(17,ss1);
+                    table.getFields().add(7,hh1);
+
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+                    hh1.setActualMovable(this.actualMovingWorker);
+                    this.actualMovingWorker.setActualField(hh1);
+
+                    System.out.println("listWorkers "+table.getWorkers().get(0).getId()+";"+table.getWorkers().get(1).getId());
+
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    setOrientation(Orientation.UP);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    System.out.println("listWorkers "+table.getWorkers().get(0).getId());
+
+
+                    table.loadTable("code/res/maps/map5.txt"); //load(5)
+                    table.getBoxes().remove(2);
+                    table.getBoxes().remove(1);
+                    System.out.println("listBoxes " +table.getBoxes().get(0).getId()+";"); //listBoxes
+
+                    if(table.getBoxes().size()==0){System.out.println("listBoxes NONE");}
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
                     table.loadTable("code/res/maps/map7.txt");
-                    table.game();
+                    table.getBoxes().remove(2);
+                    table.getBoxes().remove(1);
+
+                    System.out.println("listBoxes " +table.getBoxes().get(0).getId()+";"); //listBoxes
+
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
+                    if(table.getBoxes().size()==0){System.out.println("listBoxes NONE");}
+
+
                     table.loadTable("code/res/maps/map8.txt");
-                    table.game();
+
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+
                     table.loadTable("code/res/maps/map9.txt");
-                    table.game();
+
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    table.getBoxes().remove(2);
+                    table.getBoxes().remove(1);
+
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    table.getBoxes().remove(0);
+                    System.out.println("stuck(b1) DONE");
+
+                    if(table.getBoxes().size()==0) {System.out.println("listBoxes NONE");}
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+
+
                     table.loadTable("code/res/maps/map7.txt");
-                    table.game();
+                    table.getBoxes().remove(2);
+                    table.getBoxes().remove(1);
+
+                    System.out.println("listBoxes "+table.getBoxes().get(0).getId()+";");
+
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
+                    if(table.getBoxes().size()==0) {System.out.println("listBoxes NONE");}
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+
+
                     table.loadTable("code/res/maps/map5.txt");
-                    table.game();
+                    table.getBoxes().remove(2);
+                    table.getBoxes().remove(1);
+
+                    System.out.println("listBoxes "+table.getBoxes().get(0).getId()+";");
+
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
+                    if(table.getBoxes().size()==0) {System.out.println("listBoxes NONE");}
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    table.getWorkers().remove(2);
+
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    int xx = table.getWorkers().get(1).getScore();
+
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    System.out.print("listWorkers ");
+                    for(int i=0; i<table.getWorkers().size();i++){
+                        System.out.print(table.getWorkers().get(i).getId()+";"+"\n");
+                    }
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+"w2:"+xx);
+
+
                     table.loadTable("code/res/maps/map7.txt");
-                    table.game();
+                    table.getWorkers().remove(2);
+                    table.listWorkers();
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.DOWN);
+                    table.getWorkers().get(0).move();
+                    table.listWorkers();
+
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.UP);
+                    table.getWorkers().get(0).move();
+                    setOrientation(Orientation.LEFT);
+                    table.getWorkers().get(0).move();
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    setOrientation(Orientation.RIGHT);
+                    table.getWorkers().get(1).move();
+
+
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
-                    table.loadTable("code/res/maps/ap17.txt");
-                    table.game();
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.DOWN);
+                    table.getWorkers().get(0).move();
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    setOrientation(Orientation.UP);
+                    table.getWorkers().get(1).move();
+
+
                     table.loadTable("code/res/maps/map17.txt");
-                    table.game();
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field ttemp17 = table.getFields().get(1);
+                    HoneyPlain hhp1 = new HoneyPlain();
+                    hhp1.setNeighbour(Orientation.LEFT,ttemp17.getNeighbour(Orientation.LEFT));
+                    hhp1.setNeighbour(Orientation.RIGHT, ttemp17.getNeighbour(Orientation.RIGHT));
+                    hhp1.setActualMovable(ttemp17.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hhp1);
+                    table.getFields().remove(1);
+                    table.getFields().add(1,hhp1);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    ttemp17 = table.getFields().get(2);
+                    HoneyPlain hhp2 = new HoneyPlain();
+                    hhp2.setNeighbour(Orientation.LEFT,ttemp17.getNeighbour(Orientation.LEFT));
+                    hhp2.setNeighbour(Orientation.RIGHT, ttemp17.getNeighbour(Orientation.RIGHT));
+                    hhp2.setActualMovable(ttemp17.getActualMovable());
+                    table.getBoxes().get(1).setActualField(hhp2);
+                    table.getFields().remove(2);
+                    table.getFields().add(2,hhp2);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    Game.getInstance().setActualChainFriction(10);
+
+                    table.getWorkers().get(0).move();
+
+
                     table.loadTable("code/res/maps/map17.txt");
-                    table.game();
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field ttemp18 = table.getFields().get(1);
+                    HoneyPlain hhop2 = new HoneyPlain();
+                    hhop2.setNeighbour(Orientation.LEFT,ttemp18.getNeighbour(Orientation.LEFT));
+                    hhop2.setNeighbour(Orientation.RIGHT,ttemp18.getNeighbour(Orientation.RIGHT));
+                    hhop2.setActualMovable(ttemp18.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hhop2);
+                    table.getFields().remove(1);
+                    table.getFields().add(1,hhop2);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    Game.getInstance().setActualChainFriction(8);
+
+                    table.getWorkers().get(0).move();
+
+
                     table.loadTable("code/res/maps/map17.txt");
-                    table.game();
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field ttmp = table.getFields().get(1);
+                    HoneyPlain hhop1 = new HoneyPlain();
+                    hhop1.setNeighbour(Orientation.LEFT,ttmp.getNeighbour(Orientation.LEFT));
+                    hhop1.setNeighbour(Orientation.RIGHT,ttmp.getNeighbour(Orientation.RIGHT));
+                    hhop1.setActualMovable(ttmp.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hhop1);
+                    table.getFields().remove(1);
+                    table.getFields().add(1,hhop1);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    Field ttemp = table.getFields().get(2);
+                    OilPlain oop = new OilPlain();
+                    oop.setNeighbour(Orientation.LEFT,ttemp.getNeighbour(Orientation.LEFT));
+                    oop.setNeighbour(Orientation.RIGHT,ttemp.getNeighbour(Orientation.RIGHT));
+                    oop.setActualMovable(ttemp.getActualMovable());
+                    table.getBoxes().get(1).setActualField(oop);
+                    table.getFields().remove(2);
+                    table.getFields().add(2,oop);
+                    System.out.println("setPlainFieldType(p3, oil) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    table.getWorkers().get(0).move();
+
+
+                    table.loadTable("code/res/maps/map17.txt");
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field ttemp1 = table.getFields().get(2);
+                    OilPlain hhp = new OilPlain();
+                    hhp.setNeighbour(Orientation.LEFT,ttemp1.getNeighbour(Orientation.LEFT));
+                    hhp.setNeighbour(Orientation.RIGHT,ttemp1.getNeighbour(Orientation.RIGHT));
+                    hhp.setActualMovable(ttemp1.getActualMovable());
+                    table.getBoxes().get(1).setActualField(hhp);
+                    table.getFields().remove(2);
+                    table.getFields().add(2,hhp);
+                    System.out.println("setPlainFieldType(p3, oil) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    table.getWorkers().get(0).move();
+
+
                     table.loadTable("code/res/maps/map21.txt");
+                    table.getWorkers().get(0).setForce(8);
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    table.getBoxes().get(2).setFriction(4);
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    table.getWorkers().get(0).move();
+
+
+
+
+
 
                     break;
                 case 23:

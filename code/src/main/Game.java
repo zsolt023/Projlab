@@ -179,10 +179,11 @@ public class Game {
             switch (alternatives) {
                 case 1:
                     table.loadTable("code/res/maps/map1.txt");
-                    //DOWN parancs
                     setOrientation(Orientation.DOWN);
                     setActualMovingWorker(table.getWorkers().get(0));
-                    actualMovingWorker.move();
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.RIGHT);
+                    this.actualMovingWorker.move();
 
                     break;
                 case 2:
@@ -195,7 +196,7 @@ public class Game {
                     break;
                 case 4:
                     table.loadTable("code/res/maps/map4.txt");
-                    table.game();
+
                     break;
                 case 5:
                     table.loadTable("code/res/maps/map5.txt");

@@ -56,13 +56,17 @@ public class Worker extends Movable {
     @Override
     public boolean move() {
 
+        this.setMoving(true);
+
         if (this.actualField.getNeigbour().accept(this)) {
             System.out.println("step("+this.getId()+") SUCCESS");
             Game.getInstance().setActualChainFriction(0);
+            this.setMoving(false);
             return true;
         }
         System.out.println("step("+this.getId()+") FAIL");
         Game.getInstance().setActualChainFriction(0);
+        this.setMoving(false);
         return false;
     }
 

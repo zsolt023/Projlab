@@ -37,13 +37,15 @@ public class Box extends Movable {
      */
     @Override
     public boolean move() {
-        //System.out.println("asd");
+        this.setMoving(true);
 
         if (this.actualField.getNeigbour().accept(this)) {
 
+            this.setMoving(false);
             return true;
         } else {
 
+            this.setMoving(false);
             return false;
         }
     }

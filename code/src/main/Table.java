@@ -210,7 +210,7 @@ public class Table {
                                     sw.setActualMovable(b);
                             }
 
-                            sw.setHole((Hole) fields.get(7));
+                            //sw.setHole((Hole) fields.get(7));
                         }
 
 

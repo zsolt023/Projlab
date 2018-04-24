@@ -15,6 +15,14 @@ public abstract class Movable {
 
     private String id;
 
+    private boolean moving=false;
+
+    public void setMoving(boolean value){
+        moving=value;
+    }
+
+    public boolean getMoving(){return moving;}
+
     public String getId() {
         return id;
     }

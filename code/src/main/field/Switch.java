@@ -31,6 +31,7 @@ public class Switch extends Field {
      */
     public void setHole(Hole hole) {
         this.hole = hole;
+        System.out.println("connectSwitch(" + this.getId() + ", " +hole.getId() + ") DONE");
     }
 
     /**

@@ -36,11 +36,6 @@ public class Table {
      */
     private List<Box> boxes = new ArrayList<>();
 
-    private Hole hole4_1 = new Hole();
-    private Hole hole7_1 = new Hole();
-    private Box box11_1 = new Box();
-    private Box box12_1 = new Box();
-    private Worker worker13_1 = new Worker();
 
     public Table() {
         //Default constructor

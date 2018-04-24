@@ -58,9 +58,11 @@ public class Worker extends Movable {
 
         if (this.actualField.getNeigbour().accept(this)) {
             System.out.println("step("+this.getId()+") SUCCESS");
+            Game.getInstance().setActualChainFriction(0);
             return true;
         }
         System.out.println("step("+this.getId()+") FAIL");
+        Game.getInstance().setActualChainFriction(0);
         return false;
     }
 
@@ -87,10 +89,10 @@ public class Worker extends Movable {
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -125,10 +127,10 @@ public class Worker extends Movable {
             }
 
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -161,10 +163,10 @@ public class Worker extends Movable {
             }
 
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -189,12 +191,12 @@ public class Worker extends Movable {
 
         if (!actualMovingWorker.getId().equals(this.getId())) {
             if (actualMovingWorker.getForce() >= Game.getInstance().getActualChainFriction()) {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 Game.getInstance().getTable().kill(this);
                 return true;
             }
         }
-        Game.getInstance().setActualChainFriction(0);
+        //Game.getInstance().setActualChainFriction(0);
         return false;
     }
 
@@ -227,11 +229,11 @@ public class Worker extends Movable {
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 objective.setActualMovable(this);
                 return true;
             } else {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -271,10 +273,10 @@ public class Worker extends Movable {
 
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 s.switchState();
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -305,10 +307,10 @@ public class Worker extends Movable {
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                Game.getInstance().setActualChainFriction(0);
+                //Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }

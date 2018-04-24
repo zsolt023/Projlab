@@ -1,5 +1,6 @@
 package main;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import main.field.*;
 import main.movable.Worker;
 
@@ -374,20 +375,26 @@ public class Game {
                     break;
                 case 17:
                     table.loadTable("code/res/maps/map17.txt");
-                    table.game();
-                    break;
-                case 18:
-                    table.loadTable("code/res/maps/map17.txt");
                     table.getWorkers().get(0).setForce(8);
 
-                    Field temp2 = table.getFields().get(1);
-                    HoneyPlain hp2 = new HoneyPlain();
-                    hp2.setNeighbour(Orientation.LEFT,temp2.getNeighbour(Orientation.LEFT));
-                    hp2.setNeighbour(Orientation.RIGHT,temp2.getNeighbour(Orientation.RIGHT));
-                    hp2.setActualMovable(temp2.getActualMovable());
-                    table.getBoxes().get(0).setActualField(hp2);
+                    Field temp17 = table.getFields().get(1);
+                    HoneyPlain hp1 = new HoneyPlain();
+                    hp1.setNeighbour(Orientation.LEFT,temp17.getNeighbour(Orientation.LEFT));
+                    hp1.setNeighbour(Orientation.RIGHT, temp17.getNeighbour(Orientation.RIGHT));
+                    hp1.setActualMovable(temp17.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hp1);
                     table.getFields().remove(1);
-                    table.getFields().add(1,hp2);
+                    table.getFields().add(1,hp1);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    temp17 = table.getFields().get(2);
+                    HoneyPlain hp2 = new HoneyPlain();
+                    hp2.setNeighbour(Orientation.LEFT,temp17.getNeighbour(Orientation.LEFT));
+                    hp2.setNeighbour(Orientation.RIGHT, temp17.getNeighbour(Orientation.RIGHT));
+                    hp2.setActualMovable(temp17.getActualMovable());
+                    table.getBoxes().get(1).setActualField(hp2);
+                    table.getFields().remove(2);
+                    table.getFields().add(2,hp2);
                     System.out.println("setPlainFieldType(p2, hon) DONE");
 
                     table.getBoxes().get(0).setFriction(4);
@@ -398,18 +405,41 @@ public class Game {
                     table.getWorkers().get(0).move();
 
                     break;
+                case 18:
+                    table.loadTable("code/res/maps/map17.txt");
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field temp18 = table.getFields().get(1);
+                    HoneyPlain hop2 = new HoneyPlain();
+                    hop2.setNeighbour(Orientation.LEFT,temp18.getNeighbour(Orientation.LEFT));
+                    hop2.setNeighbour(Orientation.RIGHT,temp18.getNeighbour(Orientation.RIGHT));
+                    hop2.setActualMovable(temp18.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hop2);
+                    table.getFields().remove(1);
+                    table.getFields().add(1,hop2);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    System.out.println(Game.getInstance().getActualChainFriction());
+                    table.getWorkers().get(0).move();
+
+                    break;
                 case 19:
                     table.loadTable("code/res/maps/map17.txt");
                     table.getWorkers().get(0).setForce(8);
 
                     Field tmp = table.getFields().get(1);
-                    HoneyPlain hp1 = new HoneyPlain();
-                    hp1.setNeighbour(Orientation.LEFT,tmp.getNeighbour(Orientation.LEFT));
-                    hp1.setNeighbour(Orientation.RIGHT,tmp.getNeighbour(Orientation.RIGHT));
-                    hp1.setActualMovable(tmp.getActualMovable());
-                    table.getBoxes().get(0).setActualField(hp1);
+                    HoneyPlain hop1 = new HoneyPlain();
+                    hop1.setNeighbour(Orientation.LEFT,tmp.getNeighbour(Orientation.LEFT));
+                    hop1.setNeighbour(Orientation.RIGHT,tmp.getNeighbour(Orientation.RIGHT));
+                    hop1.setActualMovable(tmp.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hop1);
                     table.getFields().remove(1);
-                    table.getFields().add(1,hp1);
+                    table.getFields().add(1,hop1);
                     System.out.println("setPlainFieldType(p2, hon) DONE");
 
                     Field temp = table.getFields().get(2);

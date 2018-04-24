@@ -266,6 +266,10 @@ public class Game {
                     table.getBoxes().remove(1);
                     System.out.println("listBoxes " + table.getBoxes().get(0).getId() + ";"); //listBoxes
 
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
                     if (table.getBoxes().size() == 0) {
                         System.out.println("listBoxes NONE");
                     }

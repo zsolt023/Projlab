@@ -209,8 +209,56 @@ public class Game {
                     break;
                 case 4:
                     table.loadTable("code/res/maps/map4.txt");
+                    Switch s1 = new Switch();
+                    Hole h1 = new Hole();
+                    s1.setId("s1");
+                    h1.setId("h1");
+
+                    s1.setNeighbour(Orientation.UP, table.getFields().get(17).getNeighbour(Orientation.UP));
+                    s1.setNeighbour(Orientation.DOWN, table.getFields().get(17).getNeighbour(Orientation.DOWN));
+                    s1.setNeighbour(Orientation.LEFT, table.getFields().get(17).getNeighbour(Orientation.LEFT));
+                    s1.setNeighbour(Orientation.RIGHT, table.getFields().get(17).getNeighbour(Orientation.RIGHT));
+                    s1.setHole(h1);
+                    table.getFields().get(12).setNeighbour(Orientation.DOWN,s1);
+                    table.getFields().get(16).setNeighbour(Orientation.RIGHT,s1);
+                    table.getFields().get(18).setNeighbour(Orientation.LEFT,s1);
+                    table.getFields().get(22).setNeighbour(Orientation.UP,s1);
+
+                    h1.setNeighbour(Orientation.UP, table.getFields().get(7).getNeighbour(Orientation.UP));
+                    h1.setNeighbour(Orientation.DOWN, table.getFields().get(7).getNeighbour(Orientation.DOWN));
+                    h1.setNeighbour(Orientation.LEFT, table.getFields().get(7).getNeighbour(Orientation.LEFT));
+                    h1.setNeighbour(Orientation.RIGHT, table.getFields().get(7).getNeighbour(Orientation.RIGHT));
+                    h1.setIsActive(false);
+                    table.getFields().get(2).setNeighbour(Orientation.DOWN,h1);
+                    table.getFields().get(6).setNeighbour(Orientation.RIGHT,h1);
+                    table.getFields().get(8).setNeighbour(Orientation.LEFT,h1);
+                    table.getFields().get(12).setNeighbour(Orientation.UP,h1);
+
+                    table.getFields().remove(17);
+                    table.getFields().remove(7);
+
+                    table.getFields().add(17,s1);
+                    table.getFields().add(7,h1);
+
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+                    h1.setActualMovable(this.actualMovingWorker);
+                    this.actualMovingWorker.setActualField(h1);
+
+                    System.out.println("listWorkers "+table.getWorkers().get(0).getId()+";"+table.getWorkers().get(1).getId());
 
 
+
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    setOrientation(Orientation.UP);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    System.out.println("listWorkers "+table.getWorkers().get(0).getId());
 
                     break;
                 case 5:
@@ -403,6 +451,8 @@ public class Game {
                     setActualMovingWorker(table.getWorkers().get(0));
                     setOrientation(Orientation.RIGHT);
 
+                    Game.getInstance().setActualChainFriction(10);
+
                     table.getWorkers().get(0).move();
 
                     break;
@@ -425,7 +475,8 @@ public class Game {
                     setActualMovingWorker(table.getWorkers().get(0));
                     setOrientation(Orientation.RIGHT);
 
-                    System.out.println(Game.getInstance().getActualChainFriction());
+                    Game.getInstance().setActualChainFriction(8);
+
                     table.getWorkers().get(0).move();
 
                     break;

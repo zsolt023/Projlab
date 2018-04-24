@@ -346,6 +346,7 @@ public class Game {
                     break;
                 case 14:
                     table.loadTable("code/res/maps/map7.txt");
+                    table.getWorkers().remove(2);
                     table.listWorkers();
                     setActualMovingWorker(table.getWorkers().get(0));
                     setOrientation(Orientation.DOWN);

@@ -1013,23 +1013,31 @@ public class Game {
 
                         if (cmd.startsWith("killWorker")) {
 
+                            Worker killableW = null;
                             for (Worker w : table.getWorkers()) {
                                 if (w.getId().equals(cmd.substring(11, 13)))
-                                    table.kill(w);
+                                    killableW = w;
                             }
+                            if (killableW != null)
+                                table.kill(killableW);
                         }
 
                         if (cmd.startsWith("killBox")) {
 
+
+                            Box killableB = null;
                             for (Box b : table.getBoxes()) {
                                 if (b.getId().equals(cmd.substring(8, 10)))
-                                    table.kill(b);
+                                    killableB = b;
                             }
+                            if (killableB !=null)
+                                table.kill(killableB);
                         }
 
                         if (cmd.startsWith("stuck")) {
                             for (Box b : table.getBoxes()) {
                                 if (b.getId().equals(cmd.substring(6, 8)))
+                                    System.out.println("stuck DONE");
                                     table.kill(b);
                             }
                         }
@@ -1131,13 +1139,10 @@ public class Game {
                     System.out.println("Shutting down");
                     end = true;
                 default:
-                    System.out.println("Your choose is bad, try again!");
+                    System.out.println("Your choice is bad, try again!");
                     break;
             }
         }
-
-
-        //table.loadTable("map9.txt");
 
 
     }

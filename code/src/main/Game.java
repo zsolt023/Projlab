@@ -663,32 +663,47 @@ public class Game {
                         }
 
                         if (cmd.startsWith("killWorker")) {
-                            System.out.println(cmd.substring(11, 13));
+
+                            for (Worker w:table.getWorkers()) {
+                                if (w.getId().equals(cmd.substring(11, 13)))
+                                    table.kill(w);
+                            }
                         }
 
                         if (cmd.startsWith("killBox")) {
-                            System.out.println(cmd.substring(8, 10));
+
+                            for (Box b:table.getBoxes()) {
+                                if (b.getId().equals(cmd.substring(8, 10)))
+                                    table.kill(b);
+                            }
                         }
 
                         if (cmd.startsWith("stuck")) {
-                            System.out.println(cmd.substring(6, 8));
+                            for (Box b:table.getBoxes()) {
+                                if (b.getId().equals(cmd.substring(6, 8)))
+                                    table.kill(b);
+                            }
                         }
 
                         if (cmd.startsWith("addPoint")) {
-                            System.out.println(cmd.substring(9, 11));
+
+                            for (Worker w:table.getWorkers()) {
+                                if (w.getId().equals(cmd.substring(9, 11)))
+                                    w.addPoint();
+                            }
                         }
 
                         if (cmd.startsWith("listBoxes")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listBoxes();
                         }
                         if (cmd.startsWith("listWorkers")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listWorkers();
                         }
                         if (cmd.startsWith("listPoints")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listPoints();
                         }
                         if (cmd.startsWith("listFields")) {
-                            System.out.println(cmd.substring(9, 11));
+                            table.listFields();
                         }
 
 

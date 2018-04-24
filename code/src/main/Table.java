@@ -68,6 +68,29 @@ public class Table {
         System.out.println();
     }
 
+    public void listBoxes(){
+        System.out.print("listBoxes ");
+        for (Box b:boxes) {
+            System.out.print(b.getId()+ ";");
+        }
+        System.out.println();
+    }
+
+    public void listFields(){
+        System.out.print("listFields ");
+        for (Field f:fields) {
+            System.out.print(f.getId()+ ";");
+        }
+        System.out.println();
+    }
+    public void listPoints(){
+        System.out.print("listWorkers ");
+        for (Worker w:workers) {
+            System.out.print(w.getId()+ ":" + w.getScore()+ "; ");
+        }
+        System.out.println();
+    }
+
     /**
      * Visszaadja a dobozok listáját.
      *

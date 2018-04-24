@@ -176,7 +176,6 @@ public class Game {
 
             System.out.println("The game was stared, please select one alternative:");
 
-            Worker actualMovingWorker = null;
             Scanner reader = new Scanner(System.in);
             int alternatives = reader.nextInt();
             //int alternatives = 23;

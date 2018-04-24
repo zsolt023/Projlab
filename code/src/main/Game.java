@@ -8,19 +8,9 @@ public class Game {
 
     /**
      * A singleton tervezési mintához szukséges Game változő ezen változőn keresztül érjük el a Game bármely paraméterét,
-     * vagy bármely metődusát.
+     * vagy bármely metódusát.
      */
     private static Game instance;
-
-    /**
-     * Segédváltozó, a szükséges tabok kiíratásának száma.
-     */
-    public static int tabs;
-
-    /**
-     * Segédváltoző, ami a kiíratást engedélyezi vagy épp tiltja.
-     */
-    public static boolean printing;
 
     /**
      * Segédváltozó, boolean érték, ami az utolsó előtti munkást halálakor lesz igaz érték.
@@ -43,8 +33,7 @@ public class Game {
     public static boolean lastBoxToObj = false;
 
     private Game() {
-        printing = true;
-        tabs = 0;
+
     }
 
     /**
@@ -104,12 +93,7 @@ public class Game {
      * @return Worker
      */
     public Worker getActualMovingWorker() {
-        if (printing) {
-            printTabs();
-            System.out.println("> Game.getActualMovingWorker()");
-        }
-        printTabs();
-        System.out.println("< " + this.actualMovingWorker.getId());
+
         return this.actualMovingWorker;
     }
 
@@ -336,14 +320,5 @@ public class Game {
         //table.loadTable("map9.txt");
 
 
-    }
-
-    /**
-     * Segéd függvény, ami a szkeletonnál használt kiírásoknah a tabulátorozását oldotta meg.
-     */
-    public static void printTabs() {
-        for (int i = 0; i < tabs; i++) {
-            System.out.print("\t");
-        }
     }
 }

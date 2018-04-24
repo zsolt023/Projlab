@@ -222,7 +222,7 @@ public class Game {
                     if(table.getBoxes().size()==0){System.out.println("listBoxes NONE");}
 
                     System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
-                    
+
                     break;
                 case 6:
                     table.loadTable("code/res/maps/map1.txt");
@@ -235,19 +235,56 @@ public class Game {
                     break;
                 case 7:
                     table.loadTable("code/res/maps/map7.txt");
-                    table.game();
+                    table.getBoxes().remove(2);
+                    table.getBoxes().remove(1);
+
+                    System.out.println("listBoxes " +table.getBoxes().get(0).getId()+";"); //listBoxes
+
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
+                    if(table.getBoxes().size()==0){System.out.println("listBoxes NONE");}
+
                     break;
                 case 8:
                     table.loadTable("code/res/maps/map8.txt");
-                    table.game();
+
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
                     break;
                 case 9:
                     table.loadTable("code/res/maps/map9.txt");
-                    table.game();
+
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+
                     break;
                 case 10:
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    table.getBoxes().remove(2);
+                    table.getBoxes().remove(1);
+
+                    setOrientation(Orientation.LEFT);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+
+                    setOrientation(Orientation.DOWN);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    this.actualMovingWorker.move();
+
+                    table.getBoxes().remove(0);
+                    System.out.println("stuck(b1) DONE");
+
+                    if(table.getBoxes().size()==0) {System.out.println("listBoxes NONE");}
+
+                    System.out.println("listPoints "+table.getWorkers().get(0).getId()+":"+table.getWorkers().get(0).getScore()+";"+table.getWorkers().get(1).getId()+":"+table.getWorkers().get(1).getScore() );
+
                     break;
                 case 11:
                     table.loadTable("code/res/maps/map7.txt");

@@ -249,8 +249,6 @@ public class Game {
 
                     System.out.println("listWorkers "+table.getWorkers().get(0).getId()+";"+table.getWorkers().get(1).getId());
 
-
-
                     setOrientation(Orientation.DOWN);
                     setActualMovingWorker(table.getWorkers().get(0));
                     this.actualMovingWorker.move();
@@ -267,10 +265,6 @@ public class Game {
                     table.getBoxes().remove(2);
                     table.getBoxes().remove(1);
                     System.out.println("listBoxes " +table.getBoxes().get(0).getId()+";"); //listBoxes
-
-                    setOrientation(Orientation.LEFT);
-                    setActualMovingWorker(table.getWorkers().get(1));
-                    this.actualMovingWorker.move();
 
                     if(table.getBoxes().size()==0){System.out.println("listBoxes NONE");}
 

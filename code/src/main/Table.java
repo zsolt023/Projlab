@@ -114,9 +114,19 @@ public class Table {
 
             String s;
 
+            ArrayList<String> neighbours[] = new ArrayList[4];
+
+            for (int i = 0; i < 4; i++) {
+                neighbours[i] = new ArrayList<String>();
+            }
+
             while ((s = br.readLine()) != null) {
                 //0:mező sorszám 1:mező típusa 2:mezőn lévő moveable azonosítója 3:mező azonosítója 4:felső szomszéd 5:jobb szomszéd6: alsó szomszéd 7:bal szomszéd
                 String line[] = s.split(";");
+
+                for (int i = 0; i < 4; i++) {
+                    neighbours[i].add(line[i + 4]);
+                }
 
                 switch (line[1]) {
                     case "wall":
@@ -135,22 +145,6 @@ public class Table {
                             }
                         }
 
-                        if (!line[4].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[4]))
-                                    wall.setNeighbour(Orientation.UP, f);
-                        if (!line[5].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[5]))
-                                    wall.setNeighbour(Orientation.RIGHT, f);
-                        if (!line[6].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[6]))
-                                    wall.setNeighbour(Orientation.DOWN, f);
-                        if (!line[7].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[7]))
-                                    wall.setNeighbour(Orientation.LEFT, f);
                         if (wall.getActualMovable() != null)
                             wall.getActualMovable().setActualField(wall);
                         fields.add(wall);
@@ -173,22 +167,6 @@ public class Table {
                             }
                         }
 
-                        if (!line[4].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[4]))
-                                    plain.setNeighbour(Orientation.UP, f);
-                        if (!line[5].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[5]))
-                                    plain.setNeighbour(Orientation.RIGHT, f);
-                        if (!line[6].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[6]))
-                                    plain.setNeighbour(Orientation.DOWN, f);
-                        if (!line[7].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[7]))
-                                    plain.setNeighbour(Orientation.LEFT, f);
                         if (plain.getActualMovable() != null)
                             plain.getActualMovable().setActualField(plain);
                         fields.add(plain);
@@ -209,22 +187,7 @@ public class Table {
                             }
                         }
 
-                        if (!line[4].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[4]))
-                                    hole.setNeighbour(Orientation.UP, f);
-                        if (!line[5].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[5]))
-                                    hole.setNeighbour(Orientation.RIGHT, f);
-                        if (!line[6].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[6]))
-                                    hole.setNeighbour(Orientation.DOWN, f);
-                        if (!line[7].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[7]))
-                                    hole.setNeighbour(Orientation.LEFT, f);
+
                         if (hole.getActualMovable() != null)
                             hole.getActualMovable().setActualField(hole);
                         fields.add(hole);
@@ -245,22 +208,7 @@ public class Table {
                             }
                         }
 
-                        if (!line[4].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[4]))
-                                    sw.setNeighbour(Orientation.UP, f);
-                        if (!line[5].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[5]))
-                                    sw.setNeighbour(Orientation.RIGHT, f);
-                        if (!line[6].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[6]))
-                                    sw.setNeighbour(Orientation.DOWN, f);
-                        if (!line[7].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[7]))
-                                    sw.setNeighbour(Orientation.LEFT, f);
+
                         if (sw.getActualMovable() != null)
                             sw.getActualMovable().setActualField(sw);
                         fields.add(sw);
@@ -281,22 +229,7 @@ public class Table {
                             }
                         }
 
-                        if (!line[4].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[4]))
-                                    obj.setNeighbour(Orientation.UP, f);
-                        if (!line[5].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[5]))
-                                    obj.setNeighbour(Orientation.RIGHT, f);
-                        if (!line[6].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[6]))
-                                    obj.setNeighbour(Orientation.DOWN, f);
-                        if (!line[7].equals("null"))
-                            for (Field f : fields)
-                                if (f.getId().equals(line[7]))
-                                    obj.setNeighbour(Orientation.LEFT, f);
+
                         if (obj.getActualMovable() != null)
                             obj.getActualMovable().setActualField(obj);
                         fields.add(obj);
@@ -304,6 +237,38 @@ public class Table {
                 }
 
 
+            }
+
+            for (int i = 0; i < neighbours[0].size(); i++) {
+
+                if (!neighbours[0].get(i).equals("null"))
+                    for (Field f : fields)
+                        if (f.getId().equals(neighbours[0].get(i)))
+                            f.setNeighbour(Orientation.DOWN, fields.get(i));
+            }
+
+            for (int i = 0; i < neighbours[1].size(); i++) {
+
+                if (!neighbours[1].get(i).equals("null"))
+                    for (Field f : fields)
+                        if (f.getId().equals(neighbours[1].get(i)))
+                            f.setNeighbour(Orientation.LEFT, fields.get(i));
+            }
+
+            for (int i = 0; i < neighbours[2].size(); i++) {
+
+                if (!neighbours[2].get(i).equals("null"))
+                    for (Field f : fields)
+                        if (f.getId().equals(neighbours[2].get(i)))
+                            f.setNeighbour(Orientation.UP, fields.get(i));
+            }
+
+            for (int i = 0; i < neighbours[3].size(); i++) {
+
+                if (!neighbours[3].get(i).equals("null"))
+                    for (Field f : fields)
+                        if (f.getId().equals(neighbours[3].get(i)))
+                            f.setNeighbour(Orientation.RIGHT, fields.get(i));
             }
 
         } catch (IOException e) {
@@ -325,7 +290,7 @@ public class Table {
             }
 
         }
-        System.out.println("load("+filename+") DONE");
+        System.out.println("load(" + filename + ") DONE");
     }
 
 
@@ -341,7 +306,7 @@ public class Table {
             for (Worker w : workers) {
                 if (movable.getId().equals(w.getId())) {
                     workers.remove(w);
-                    System.out.println("killWorker("+w.getId()+") DONE");
+                    System.out.println("killWorker(" + w.getId() + ") DONE");
                     break;
                 }
             }
@@ -349,7 +314,7 @@ public class Table {
             for (Box b : boxes) {
                 if (movable.getId().equals(b.getId())) {
                     boxes.remove(b);
-                    System.out.println("killBox("+b.getId()+") DONE");
+                    System.out.println("killBox(" + b.getId() + ") DONE");
                     break;
                 }
             }

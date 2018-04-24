@@ -188,7 +188,13 @@ public class Game {
                     break;
                 case 2:
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setOrientation(Orientation.UP);
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.LEFT);
+                    this.actualMovingWorker.move();
+                    setOrientation(Orientation.LEFT);
+                    this.actualMovingWorker.move();
                     break;
                 case 3:
                     table.loadTable("code/res/maps/map1.txt");

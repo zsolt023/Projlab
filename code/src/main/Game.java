@@ -1,5 +1,6 @@
 package main;
 
+import main.field.*;
 import main.movable.Worker;
 
 import java.util.List;
@@ -344,15 +345,32 @@ public class Game {
                     break;
                 case 14:
                     table.loadTable("code/res/maps/map7.txt");
-                    table.game();
+                    table.listWorkers();
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.DOWN);
+                    table.getWorkers().get(0).move();
+                    table.listWorkers();
+
                     break;
                 case 15:
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.UP);
+                    table.getWorkers().get(0).move();
+                    setOrientation(Orientation.LEFT);
+                    table.getWorkers().get(0).move();
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    setOrientation(Orientation.RIGHT);
+                    table.getWorkers().get(1).move();
                     break;
                 case 16:
                     table.loadTable("code/res/maps/map1.txt");
-                    table.game();
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.DOWN);
+                    table.getWorkers().get(0).move();
+                    setActualMovingWorker(table.getWorkers().get(1));
+                    setOrientation(Orientation.UP);
+                    table.getWorkers().get(1).move();
                     break;
                 case 17:
                     table.loadTable("code/res/maps/map17.txt");
@@ -360,19 +378,89 @@ public class Game {
                     break;
                 case 18:
                     table.loadTable("code/res/maps/map17.txt");
-                    table.game();
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field temp2 = table.getFields().get(1);
+                    HoneyPlain hp2 = new HoneyPlain();
+                    hp2.setNeighbour(Orientation.LEFT,temp2.getNeighbour(Orientation.LEFT));
+                    hp2.setNeighbour(Orientation.RIGHT,temp2.getNeighbour(Orientation.RIGHT));
+                    hp2.setActualMovable(temp2.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hp2);
+                    table.getFields().remove(1);
+                    table.getFields().add(1,hp2);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    table.getWorkers().get(0).move();
+
                     break;
                 case 19:
                     table.loadTable("code/res/maps/map17.txt");
-                    table.game();
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field tmp = table.getFields().get(1);
+                    HoneyPlain hp1 = new HoneyPlain();
+                    hp1.setNeighbour(Orientation.LEFT,tmp.getNeighbour(Orientation.LEFT));
+                    hp1.setNeighbour(Orientation.RIGHT,tmp.getNeighbour(Orientation.RIGHT));
+                    hp1.setActualMovable(tmp.getActualMovable());
+                    table.getBoxes().get(0).setActualField(hp1);
+                    table.getFields().remove(1);
+                    table.getFields().add(1,hp1);
+                    System.out.println("setPlainFieldType(p2, hon) DONE");
+
+                    Field temp = table.getFields().get(2);
+                    OilPlain op = new OilPlain();
+                    op.setNeighbour(Orientation.LEFT,temp.getNeighbour(Orientation.LEFT));
+                    op.setNeighbour(Orientation.RIGHT,temp.getNeighbour(Orientation.RIGHT));
+                    op.setActualMovable(temp.getActualMovable());
+                    table.getBoxes().get(1).setActualField(op);
+                    table.getFields().remove(2);
+                    table.getFields().add(2,op);
+                    System.out.println("setPlainFieldType(p3, oil) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    table.getWorkers().get(0).move();
+
                     break;
                 case 20:
                     table.loadTable("code/res/maps/map17.txt");
-                    table.game();
+                    table.getWorkers().get(0).setForce(8);
+
+                    Field temp1 = table.getFields().get(2);
+                    OilPlain hp = new OilPlain();
+                    hp.setNeighbour(Orientation.LEFT,temp1.getNeighbour(Orientation.LEFT));
+                    hp.setNeighbour(Orientation.RIGHT,temp1.getNeighbour(Orientation.RIGHT));
+                    hp.setActualMovable(temp1.getActualMovable());
+                    table.getBoxes().get(1).setActualField(hp);
+                    table.getFields().remove(2);
+                    table.getFields().add(2,hp);
+                    System.out.println("setPlainFieldType(p3, oil) DONE");
+
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    setOrientation(Orientation.RIGHT);
+
+                    table.getWorkers().get(0).move();
+
                     break;
                 case 21:
                     table.loadTable("code/res/maps/map21.txt");
-                    table.game();
+                    table.getWorkers().get(0).setForce(8);
+                    table.getBoxes().get(0).setFriction(4);
+                    table.getBoxes().get(1).setFriction(4);
+                    table.getBoxes().get(2).setFriction(4);
+                    setOrientation(Orientation.RIGHT);
+                    setActualMovingWorker(table.getWorkers().get(0));
+                    table.getWorkers().get(0).move();
                     break;
                 case 22:
                     table.loadTable("code/res/maps/map1.txt");

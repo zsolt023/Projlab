@@ -34,7 +34,7 @@ public class Worker extends Movable {
 
     public void setForce(int force) {
         this.force = force;
-        System.out.println("setForce("+this.getId()+") DONE");
+        System.out.println("setForce("+this.getId()+", " + force +") DONE");
     }
 
     /**
@@ -86,7 +86,7 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
@@ -124,7 +124,7 @@ public class Worker extends Movable {
 
             }
 
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
@@ -160,7 +160,7 @@ public class Worker extends Movable {
                 Game.getInstance().getTable().kill(this);
             }
 
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
@@ -188,7 +188,7 @@ public class Worker extends Movable {
         Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
 
         if (!actualMovingWorker.getId().equals(this.getId())) {
-            if (actualMovingWorker.getForce() > Game.getInstance().getActualChainFriction()) {
+            if (actualMovingWorker.getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 Game.getInstance().getTable().kill(this);
                 return true;
@@ -226,7 +226,7 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 objective.setActualMovable(this);
                 return true;
@@ -269,7 +269,7 @@ public class Worker extends Movable {
             }
         } else {
 
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 s.switchState();
                 Game.getInstance().setActualChainFriction(0);
                 return true;
@@ -304,7 +304,7 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {

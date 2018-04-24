@@ -5,6 +5,9 @@
  */
 package main.field;
 
+import main.Game;
+import main.movable.Movable;
+
 /**
  * @author schnorb
  */
@@ -12,6 +15,23 @@ public class OilPlain extends Plain {
 
     public OilPlain() {
         this.frictionMultiplier = DEFAULT_FRICTION - 1;
+    }
+
+    @Override
+    public boolean accept(Movable movable) {
+
+        if (movable.visit(this)) {
+                       this.setActualMovable(movable);
+            Field previousField = movable.getActualField();
+            previousField.setActualMovable(null);
+            movable.setActualField(this);
+
+
+            return true;
+        } else {
+
+            return false;
+        }
     }
 
 }

@@ -25,7 +25,7 @@ public class Box extends Movable {
     public void setFriction(int friction) {
 
         this.friction = friction;
-        System.out.println("setFriction("+this.getId()+") DONE");
+        System.out.println("setFriction("+this.getId()+ ", " + friction +") DONE");
     }
 
     /**
@@ -37,6 +37,7 @@ public class Box extends Movable {
      */
     @Override
     public boolean move() {
+        System.out.println("asd");
 
         if (this.actualField.getNeigbour().accept(this)) {
 
@@ -75,12 +76,8 @@ public class Box extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().table.alternatives == 3) {
-                Game.getInstance().getTable().kill(this);
 
-            }
-
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
@@ -119,12 +116,8 @@ public class Box extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().table.alternatives == 3) {
-                Game.getInstance().getTable().kill(this);
 
-            }
-
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
@@ -166,7 +159,7 @@ public class Box extends Movable {
                 Game.getInstance().getTable().kill(this);
             }
 
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
@@ -217,7 +210,7 @@ public class Box extends Movable {
             }
         } else {
             Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
-            if (actualMovingWorker.getForce() > Game.getInstance().getActualChainFriction()) {
+            if (actualMovingWorker.getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 Game.getInstance().getTable().kill(this);
                 actualMovingWorker.addPoint();
@@ -261,7 +254,7 @@ public class Box extends Movable {
             }
         } else {
 
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 s.switchState();
                 Game.getInstance().setActualChainFriction(0);
 
@@ -297,7 +290,7 @@ public class Box extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().getActualMovingWorker().getForce() > Game.getInstance().getActualChainFriction()) {
+            if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {

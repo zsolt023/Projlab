@@ -453,7 +453,7 @@ public class Game {
                     table.getBoxes().get(1).setActualField(hp2);
                     table.getFields().remove(2);
                     table.getFields().add(2, hp2);
-                    System.out.println("setPlainFieldType(p2, hon) DONE");
+                    System.out.println("setPlainFieldType(p3, hon) DONE");
 
                     table.getBoxes().get(0).setFriction(4);
                     table.getBoxes().get(1).setFriction(4);

@@ -2,13 +2,14 @@ package main.field;
 
 import java.util.EnumMap;
 import java.util.Map;
+import main.Drawable;
 
 import main.Game;
 
 import main.Orientation;
 import main.movable.Movable;
 
-public abstract class Field {
+public abstract class Field implements Drawable {
 
     private String id;
 
@@ -67,9 +68,6 @@ public abstract class Field {
         return neighbours.get(Game.getInstance().getOrientation());
     }
 
-    public void setHole(Hole hole){}
-
-    public void switchState(){}
     /**
      * Beállítja ennek az objektumank a paraméterben kapott irány és mezőnek megfelelő szomszédokat.
      *

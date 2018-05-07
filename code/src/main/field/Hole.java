@@ -1,6 +1,8 @@
 package main.field;
 
 import main.Game;
+import main.ImagePanel;
+import main.Util;
 import main.movable.Movable;
 
 
@@ -35,19 +37,10 @@ public class Hole extends Field {
      * ha eddig igaz volt, akkor hamis lesz és ha hamis volt igazzá változik.
      */
     public void setActive() {
-
-
-        if (Game.getInstance().table.alternatives == 4) {
-            Game.getInstance().getTable().kill(null);
-        }
-
         Movable movable = this.getActualMovable();
 
-
-        if ((movable != null && !movable.getMoving())) {
-
+        if (movable != null) {
             Game.getInstance().getTable().kill(movable);
-
         }
         if (isActive) {
             isActive = false;
@@ -72,18 +65,12 @@ public class Hole extends Field {
      */
     @Override
     public boolean accept(Movable movable) {
-
         if (movable.visit(this)) {
-            if (Game.getInstance().table.alternatives == 7) {
-                Game.getInstance().getTable().kill(null);
-
-            }
             if (isActive) {
                 Game.getInstance().getTable().kill(movable);
             } else {
                 this.setActualMovable(movable);
             }
-
             Field previousField = movable.getActualField();
             previousField.setActualMovable(null);
             movable.setActualField(this);
@@ -93,4 +80,17 @@ public class Hole extends Field {
         }
     }
 
+    @Override
+    public void draw() {
+        String[] idWithKoord = this.getId().split("_");
+        ImagePanel imagePanel;
+        if (this.isActive) {
+            imagePanel = new ImagePanel("code/res/obj/hole1.jpg", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+        } else {
+            imagePanel = new ImagePanel("code/res/obj/hole2.jpg", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+        }
+        imagePanel.paintComponents(imagePanel.graphics);
+        Util.frame.getContentPane().add(imagePanel);
+    }
+    
 }

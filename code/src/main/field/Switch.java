@@ -1,6 +1,7 @@
 package main.field;
 
-import main.Game;
+import main.ImagePanel;
+import main.Util;
 import main.movable.Movable;
 
 
@@ -31,7 +32,6 @@ public class Switch extends Field {
      */
     public void setHole(Hole hole) {
         this.hole = hole;
-        System.out.println("connectSwitch(" + this.getId() + ", " +hole.getId() + ") DONE");
     }
 
     /**
@@ -39,10 +39,8 @@ public class Switch extends Field {
      * Első körben lekéri a kapcsolóhoz tartozó lyuk objektumot. Majd meghívja a lyuk objektumnak a setActive metódusát.
      */
     public void switchState() {
-
         Hole hole = this.getHole();
         hole.setActive();
-        System.out.println("setSwitch("+this.getId()+","+hole.isIsActive()+") DONE");
     }
 
     /**
@@ -58,7 +56,6 @@ public class Switch extends Field {
      */
     @Override
     public boolean accept(Movable movable) {
-
         if (movable.visit(this)) {
             this.setActualMovable(movable);
             Field previousField = movable.getActualField();
@@ -70,4 +67,12 @@ public class Switch extends Field {
         }
     }
 
+    @Override
+    public void draw() {
+        String[] idWithKoord = this.getId().split("_");
+        ImagePanel imagePanel = new ImagePanel("code/res/obj/switch.jpg", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+        imagePanel.paintComponents(imagePanel.graphics);
+        Util.frame.getContentPane().add(imagePanel);
+    }
+    
 }

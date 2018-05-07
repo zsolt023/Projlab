@@ -1,6 +1,8 @@
 package main.movable;
 
 import main.Game;
+import main.ImagePanel;
+import main.Util;
 import main.field.Hole;
 import main.field.HoneyPlain;
 import main.field.Objective;
@@ -23,9 +25,7 @@ public class Box extends Movable {
     }
 
     public void setFriction(int friction) {
-
         this.friction = friction;
-        System.out.println("setFriction("+this.getId()+ ", " + friction +") DONE");
     }
 
     /**
@@ -37,15 +37,9 @@ public class Box extends Movable {
      */
     @Override
     public boolean move() {
-        this.setMoving(true);
-
         if (this.actualField.getNeigbour().accept(this)) {
-
-            this.setMoving(false);
             return true;
         } else {
-
-            this.setMoving(false);
             return false;
         }
     }
@@ -63,7 +57,6 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(Plain plain) {
-
         Movable movable = plain.getActualMovable();
 
         if (movable != null) {
@@ -71,20 +64,16 @@ public class Box extends Movable {
                     Game.getInstance().getActualChainFriction()
                             + (this.getFriction() * plain.getFrictionMultiplier()));
             if (movable.visit(this)) {
-
                 return true;
             } else {
-
                 return false;
             }
         } else {
-
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
-
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -103,7 +92,6 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(HoneyPlain honeyPlain) {
-
         Movable movable = honeyPlain.getActualMovable();
 
         if (movable != null) {
@@ -111,19 +99,16 @@ public class Box extends Movable {
                     Game.getInstance().getActualChainFriction()
                             + (this.getFriction() * honeyPlain.getFrictionMultiplier()));
             if (movable.visit(this)) {
-
                 return true;
             } else {
-
                 return false;
             }
         } else {
-
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -142,28 +127,23 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(OilPlain oilPlain) {
-
         Movable movable = oilPlain.getActualMovable();
 
         if (movable != null) {
-            Game.getInstance().setActualChainFriction(Game.getInstance().getActualChainFriction() + (this.getFriction() * oilPlain.getFrictionMultiplier()));
+            Game.getInstance().setActualChainFriction(
+                    Game.getInstance().getActualChainFriction() 
+                            + (this.getFriction() * oilPlain.getFrictionMultiplier()));
             if (movable.visit(this)) {
-
                 return true;
             } else {
-
                 return false;
             }
         } else {
-            if (Game.getInstance().table.alternatives == 3) {
-                Game.getInstance().getTable().kill(this);
-            }
-
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -178,6 +158,7 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(Wall wall) {
+        Game.getInstance().setActualChainFriction(0);
         return false;
     }
 
@@ -197,7 +178,6 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(Objective objective) {
-
         Movable movable = objective.getActualMovable();
 
         if (movable != null) {
@@ -211,12 +191,12 @@ public class Box extends Movable {
         } else {
             Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
             if (actualMovingWorker.getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 Game.getInstance().getTable().kill(this);
                 actualMovingWorker.addPoint();
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -240,27 +220,22 @@ public class Box extends Movable {
     public boolean visit(Switch s) {
         Movable movable = s.getActualMovable();
 
-
         if (movable != null) {
             if (movable.visit(this)) {
-                if (!(movable.getId().startsWith("bo"))) {
+                if (!(movable instanceof Box)) {
                     s.switchState();
                 }
-
                 return true;
             } else {
-
                 return false;
             }
         } else {
-
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 s.switchState();
-                //Game.getInstance().setActualChainFriction(0);
-
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -280,7 +255,6 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(Hole hole) {
-
         Movable movable = hole.getActualMovable();
 
         if (movable != null) {
@@ -291,10 +265,10 @@ public class Box extends Movable {
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -311,7 +285,6 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(Worker worker) {
-
         if (move()) {
             return true;
         } else {
@@ -330,8 +303,6 @@ public class Box extends Movable {
      */
     @Override
     public boolean visit(Box box) {
-
-
         if (move()) {
             return true;
         } else {
@@ -339,4 +310,12 @@ public class Box extends Movable {
         }
     }
 
+    @Override
+    public void draw() {
+        String[] idWithKoord = this.getId().split("_");
+        ImagePanel imagePanel = new ImagePanel("code/res/obj/box.png", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+        imagePanel.paintComponents(imagePanel.graphics);
+        Util.frame.getContentPane().add(imagePanel);
+    }
+    
 }

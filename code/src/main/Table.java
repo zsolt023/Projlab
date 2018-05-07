@@ -14,9 +14,7 @@ import main.movable.Movable;
 import main.movable.Worker;
 
 public class Table {
-
-    public static int alternatives = 0;
-
+    
     /**
      * A táblán szereplő összes mezőt tároljuk ebben a listában.
      */
@@ -58,37 +56,6 @@ public class Table {
         return workers;
     }
 
-    public void listWorkers(){
-        System.out.print("listWorkers ");
-        for (Worker w:workers) {
-            System.out.print(w.getId()+ ";");
-        }
-        System.out.println();
-    }
-
-    public void listBoxes(){
-        System.out.print("listBoxes ");
-        for (Box b:boxes) {
-            System.out.print(b.getId()+ ";");
-        }
-        System.out.println();
-    }
-
-    public void listFields(){
-        System.out.print("listFields ");
-        for (Field f:fields) {
-            System.out.print(f.getId()+ ";");
-        }
-        System.out.println();
-    }
-    public void listPoints(){
-        System.out.print("listWorkers ");
-        for (Worker w:workers) {
-            System.out.print(w.getId()+ ":" + w.getScore()+ "; ");
-        }
-        System.out.println();
-    }
-
     /**
      * Visszaadja a dobozok listáját.
      *
@@ -104,6 +71,7 @@ public class Table {
      * Ezeket az objektumokat konzisztens módon eltárolja a table megfelelő változóiban.
      * Beállítja a mezők szomszédait, “ráteszi” a mezőkre a munkásokat, és a dobozokat.
      * Összeköti a kapcsolókat egy lyuk objektummal.
+     * @param filename String
      */
 
     public void loadTable(String filename) {
@@ -332,12 +300,10 @@ public class Table {
      * @param movable
      */
     public void kill(Movable movable) {
-
         if (movable != null) {
             for (Worker w : workers) {
                 if (movable.getId().equals(w.getId())) {
                     workers.remove(w);
-                    System.out.println("killWorker(" + w.getId() + ") DONE");
                     break;
                 }
             }
@@ -345,7 +311,6 @@ public class Table {
             for (Box b : boxes) {
                 if (movable.getId().equals(b.getId())) {
                     boxes.remove(b);
-                    System.out.println("killBox(" + b.getId() + ") DONE");
                     break;
                 }
             }
@@ -361,7 +326,25 @@ public class Table {
      */
     public void game() {
         while (!gameOver()) {
-
+            Game.getInstance().drawAll();
+            
+            if (Util.isWPressed() || Util.isUpPressed()) {
+                Game.getInstance().setOrientation(Orientation.UP);
+            } else if (Util.isAPressed() || Util.isLeftPressed()) {
+                Game.getInstance().setOrientation(Orientation.LEFT);
+            } else if (Util.isSPressed() || Util.isDownPressed()) {
+                Game.getInstance().setOrientation(Orientation.DOWN);
+            } else if (Util.isDPressed() || Util.isRightPressed()) {
+                Game.getInstance().setOrientation(Orientation.RIGHT);
+            }
+            
+            if (Util.isAPressed() || Util.isDPressed() || Util.isSPressed() || Util.isWPressed()) {
+                Game.getInstance().setActualMovingWorker(workers.get(0));
+                Game.getInstance().getActualMovingWorker().move();
+            } else if (Util.isUpPressed() || Util.isLeftPressed() || Util.isDownPressed() || Util.isRightPressed()) {
+                Game.getInstance().setActualMovingWorker(workers.get(1));
+                Game.getInstance().getActualMovingWorker().move();
+            }
         }
     }
 
@@ -369,27 +352,46 @@ public class Table {
      * Ez a függvény csak akkor tér vissza igazzal, ha csak egy munkás maradt életben.
      * Vagy a raktárban az utolsó doboz, cél-helyre került, vagy beszorult, vagy lyukba esett.
      * Egyébként pedig mindig hamissal tér vissza.
-     *
      * @return boolean
      */
     public boolean gameOver() {
-        if (Game.getInstance().penultimateWorker) {
-            System.out.println("Game over, because the penultimate worker was killed.");
-        }
-        if (Game.getInstance().lastBoxKill) {
-            System.out.println("Game over, because the last box was killed.");
-        }
-        if (Game.getInstance().lastBoxToObj) {
-            System.out.println("Game over, because the last box was pushed on objective.");
-        }
-        if (Game.getInstance().lastBoxIsCorner) {
-            System.out.println("Game over, because the last box was pushed in the corner.");
-        }
-        if (Game.getInstance().penultimateWorker || Game.getInstance().lastBoxKill || Game.getInstance().lastBoxIsCorner || Game.getInstance().lastBoxToObj) {
+        if (boxes.isEmpty() || workers.size() == 1) {
             return true;
         } else {
+            return false;
         }
-        return false;
+    }
+    
+    
+    public void listWorkers(){
+        System.out.print("listWorkers ");
+        for (Worker w:workers) {
+            System.out.print(w.getId()+ ";");
+        }
+        System.out.println();
     }
 
+    public void listBoxes(){
+        System.out.print("listBoxes ");
+        for (Box b:boxes) {
+            System.out.print(b.getId()+ ";");
+        }
+        System.out.println();
+    }
+
+    public void listFields(){
+        System.out.print("listFields ");
+        for (Field f:fields) {
+            System.out.print(f.getId()+ ";");
+        }
+        System.out.println();
+    }
+    public void listPoints(){
+        System.out.print("listWorkers ");
+        for (Worker w:workers) {
+            System.out.print(w.getId()+ ":" + w.getScore()+ "; ");
+        }
+        System.out.println();
+    }
+    
 }

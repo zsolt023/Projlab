@@ -1,6 +1,7 @@
 package main.field;
 
-import main.Game;
+import main.ImagePanel;
+import main.Util;
 import main.movable.Movable;
 
 
@@ -51,22 +52,23 @@ public class Plain extends Field {
      */
     @Override
     public boolean accept(Movable movable) {
-
         if (movable.visit(this)) {
-            if (Game.getInstance().table.alternatives == 10) {
-                Game.getInstance().getTable().kill(movable);
-            }
             this.setActualMovable(movable);
             Field previousField = movable.getActualField();
             previousField.setActualMovable(null);
             movable.setActualField(this);
-
-
             return true;
         } else {
-
             return false;
         }
     }
 
+    @Override
+    public void draw() {
+        String[] idWithKoord = this.getId().split("_");
+        ImagePanel imagePanel = new ImagePanel("code/res/obj/plain.jpg", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+        imagePanel.paintComponents(imagePanel.graphics);
+        Util.frame.getContentPane().add(imagePanel);
+    }
+    
 }

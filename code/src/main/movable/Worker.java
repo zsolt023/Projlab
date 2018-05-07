@@ -1,6 +1,8 @@
 package main.movable;
 
 import main.Game;
+import main.ImagePanel;
+import main.Util;
 import main.field.Hole;
 import main.field.HoneyPlain;
 import main.field.Objective;
@@ -34,15 +36,12 @@ public class Worker extends Movable {
 
     public void setForce(int force) {
         this.force = force;
-        System.out.println("setForce("+this.getId()+", " + force +") DONE");
     }
 
     /**
      * Inkrementálja a munkás pontjait egy ponttal.
      */
     public void addPoint() {
-
-        System.out.println("addPoint("+this.getId()+") DONE");
         this.score++;
     }
 
@@ -55,19 +54,11 @@ public class Worker extends Movable {
      */
     @Override
     public boolean move() {
-
-        this.setMoving(true);
-
         if (this.actualField.getNeigbour().accept(this)) {
-            System.out.println("step("+this.getId()+") SUCCESS");
-            Game.getInstance().setActualChainFriction(0);
-            this.setMoving(false);
             return true;
+        } else {
+            return false;
         }
-        System.out.println("step("+this.getId()+") FAIL");
-        Game.getInstance().setActualChainFriction(0);
-        this.setMoving(false);
-        return false;
     }
 
     /**
@@ -82,7 +73,6 @@ public class Worker extends Movable {
      */
     @Override
     public boolean visit(Plain plain) {
-
         Movable movable = plain.getActualMovable();
 
         if (movable != null) {
@@ -93,10 +83,10 @@ public class Worker extends Movable {
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -114,7 +104,6 @@ public class Worker extends Movable {
      */
     @Override
     public boolean visit(HoneyPlain honeyPlain) {
-
         Movable movable = honeyPlain.getActualMovable();
 
         if (movable != null) {
@@ -124,17 +113,11 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().table.alternatives == 3) {
-
-                Game.getInstance().getTable().kill(this);
-
-            }
-
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -161,16 +144,11 @@ public class Worker extends Movable {
                 return false;
             }
         } else {
-            if (Game.getInstance().table.alternatives == 3) {
-
-                Game.getInstance().getTable().kill(this);
-            }
-
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -190,17 +168,16 @@ public class Worker extends Movable {
      */
     @Override
     public boolean visit(Wall wall) {
-
         Worker actualMovingWorker = Game.getInstance().getActualMovingWorker();
 
         if (!actualMovingWorker.getId().equals(this.getId())) {
             if (actualMovingWorker.getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 Game.getInstance().getTable().kill(this);
                 return true;
             }
         }
-        //Game.getInstance().setActualChainFriction(0);
+        Game.getInstance().setActualChainFriction(0);
         return false;
     }
 
@@ -226,18 +203,17 @@ public class Worker extends Movable {
         if (movable != null) {
             if (movable.visit(this)) {
                 objective.setActualMovable(this);
-
                 return true;
             } else {
                 return false;
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 objective.setActualMovable(this);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -259,7 +235,6 @@ public class Worker extends Movable {
      */
     @Override
     public boolean visit(Switch s) {
-
         Movable movable = s.getActualMovable();
 
         if (movable != null) {
@@ -267,20 +242,17 @@ public class Worker extends Movable {
                 if (!(movable instanceof Box)) {
                     s.switchState();
                 }
-
                 return true;
             } else {
-
                 return false;
             }
         } else {
-
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
                 s.switchState();
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -300,7 +272,6 @@ public class Worker extends Movable {
      */
     @Override
     public boolean visit(Hole hole) {
-
         Movable movable = hole.getActualMovable();
 
         if (movable != null) {
@@ -311,10 +282,10 @@ public class Worker extends Movable {
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
-                //Game.getInstance().setActualChainFriction(0);
+                Game.getInstance().setActualChainFriction(0);
                 return false;
             }
         }
@@ -329,6 +300,7 @@ public class Worker extends Movable {
      */
     @Override
     public boolean visit(Worker worker) {
+        Game.getInstance().setActualChainFriction(0);
         return false;
     }
 
@@ -342,7 +314,6 @@ public class Worker extends Movable {
      */
     @Override
     public boolean visit(Box box) {
-
         if (move()) {
             return true;
         } else {
@@ -350,4 +321,12 @@ public class Worker extends Movable {
         }
     }
 
+    @Override
+    public void draw() {
+        String[] idWithKoord = this.getId().split("_");
+        ImagePanel imagePanel = new ImagePanel("code/res/obj/worker.png", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+        imagePanel.paintComponents(imagePanel.graphics);
+        Util.frame.getContentPane().add(imagePanel);
+    }
+    
 }

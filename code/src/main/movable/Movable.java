@@ -1,6 +1,6 @@
 package main.movable;
 
-import main.Game;
+import main.Drawable;
 import main.field.Field;
 import main.field.Hole;
 import main.field.HoneyPlain;
@@ -11,17 +11,9 @@ import main.field.Switch;
 import main.field.Wall;
 
 
-public abstract class Movable {
+public abstract class Movable implements Drawable {
 
     private String id;
-
-    private boolean moving=false;
-
-    public void setMoving(boolean value){
-        moving=value;
-    }
-
-    public boolean getMoving(){return moving;}
 
     public String getId() {
         return id;

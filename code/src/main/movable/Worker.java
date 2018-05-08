@@ -324,7 +324,7 @@ public class Worker extends Movable {
     @Override
     public void draw() {
         String[] idWithKoord = this.getId().split("_");
-        ImagePanel imagePanel = new ImagePanel("code/res/obj/worker.png", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+        ImagePanel imagePanel = new ImagePanel("code/res/obj/worker" + Integer.parseInt(idWithKoord[3]) + ".png", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
         imagePanel.paintComponents(imagePanel.graphics);
         Util.frame.getContentPane().add(imagePanel);
     }

@@ -5,10 +5,10 @@
 5;wall;null;f_4_0;null;f_5_0;p_4_1;f_3_0;
 6;wall;null;f_5_0;null;null;f_5_1;f_4_0;
 7;wall;null;f_0_1;f_0_0;p_1_1;f_0_2;null;
-8;plain;w_1_1;p_1_1;f_1_0;h_2_1;p_1_2;f_0_1;
+8;plain;wo_1_1_1;p_1_1;f_1_0;h_2_1;p_1_2;f_0_1;
 9;hole;null;h_2_1;f_2_0;p_3_1;p_2_2;p_1_1;
 10;plain;null;p_3_1;f_3_0;p_4_1;p_3_2;h_2_1;
-11;plain;w_4_1;p_4_1;f_4_0;f_5_1;p_4_2;p_3_1;
+11;plain;wo_4_1_2;p_4_1;f_4_0;f_5_1;p_4_2;p_3_1;
 12;wall;null;f_5_1;f_5_0;null;f_5_2;p_4_1;
 13;wall;null;f_0_2;f_0_1;p_1_2;f_0_3;null;
 14;plain;null;p_1_2;p_1_1;p_2_2;f_1_3;f_0_2;

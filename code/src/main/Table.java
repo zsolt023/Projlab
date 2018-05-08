@@ -79,30 +79,30 @@ public class Table {
         int lineNumber;
 
         Box b1 = new Box();
-        b1.setId("b1");
+        b1.setId("b_2_2");
         Box b2 = new Box();
-        b2.setId("b2");
-        Box b3 = new Box();
-        b3.setId("b3");
+        b2.setId("b_3_2");
+//        Box b3 = new Box();
+//        b3.setId("b3");
 
         boxes.clear();
 
 
         boxes.add(b1);
         boxes.add(b2);
-        boxes.add(b3);
+//        boxes.add(b3);
 
         Worker w1 = new Worker();
-        w1.setId("w1");
+        w1.setId("wo_1_1_1");
         Worker w2 = new Worker();
-        w2.setId("w2");
-        Worker w3 = new Worker();
-        w3.setId("w3");
+        w2.setId("wo_4_1_2");
+//        Worker w3 = new Worker();
+//        w3.setId("w3");
         workers.clear();
 
         workers.add(w1);
         workers.add(w2);
-        workers.add(w3);
+//        workers.add(w3);
 
         fields.clear();
 

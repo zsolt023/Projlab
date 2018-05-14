@@ -7,6 +7,8 @@ import java.io.InputStream;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
+
+import main.Game;
 import main.movable.Movable;
 
 
@@ -40,21 +42,9 @@ public class Objective extends Field {
 
     @Override
     public ImageView draw() {
-        InputStream objectiveInputStream;
-        BufferedImage objectiveBufferedImage;
-        try {
-            objectiveInputStream = new FileInputStream("code/res/obj/objective.jpg");
-           
-            objectiveBufferedImage = ImageIO.read(objectiveInputStream);
-            javafx.scene.image.Image newObjectiveImage = SwingFXUtils.toFXImage(objectiveBufferedImage, null);
-            ImageView objectiveImageView = new ImageView(newObjectiveImage);
-            objectiveImageView.setFitHeight(30);
-            objectiveImageView.setFitWidth(30);
-            return objectiveImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        ImageView ret = new ImageView();
+        ret.setImage(Game.getInstance().objectiveImageView.getImage());
+        return ret;
     }
     
 }

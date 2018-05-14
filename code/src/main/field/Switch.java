@@ -7,6 +7,8 @@ import java.io.InputStream;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
+
+import main.Game;
 import main.movable.Movable;
 
 
@@ -74,21 +76,9 @@ public class Switch extends Field {
 
     @Override
     public ImageView draw() {
-        InputStream switchInputStream;
-        BufferedImage switchBufferedImage;
-        try {
-            switchInputStream = new FileInputStream("code/res/obj/switch.jpg");
-           
-            switchBufferedImage = ImageIO.read(switchInputStream);
-            javafx.scene.image.Image newSwitchImage = SwingFXUtils.toFXImage(switchBufferedImage, null);
-            ImageView switchImageView = new ImageView(newSwitchImage);
-            switchImageView.setFitHeight(30);
-            switchImageView.setFitWidth(30);
-            return switchImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        ImageView ret = new ImageView();
+        ret.setImage(Game.getInstance().switchImageView.getImage());
+        return ret;
     }
     
 }

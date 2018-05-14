@@ -57,7 +57,7 @@ public class Util extends Application implements EventHandler<WindowEvent> {
                             break;
                     }
                     Game.getInstance().getTable().game();
-                    System.out.println("Key Pressed: " + ke.getCode());
+                   // System.out.println("Key Pressed: " + ke.getCode());
                     ke.consume();
                 }
             });
@@ -99,7 +99,7 @@ public class Util extends Application implements EventHandler<WindowEvent> {
                             break;
                     }
                     Game.getInstance().getTable().game();
-                    System.out.println("Key Released: " + ke.getCode());
+                    //System.out.println("Key Released: " + ke.getCode());
                     ke.consume();
                 }
             });

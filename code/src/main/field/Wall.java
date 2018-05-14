@@ -7,6 +7,8 @@ import java.io.InputStream;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
+
+import main.Game;
 import main.movable.Movable;
 
 
@@ -40,21 +42,9 @@ public class Wall extends Field {
 
     @Override
     public ImageView draw() {
-        InputStream wallInputStream;
-        BufferedImage wallBufferedImage;
-        try {
-            wallInputStream = new FileInputStream("code/res/obj/wall.jpg");
-           
-            wallBufferedImage = ImageIO.read(wallInputStream);
-            javafx.scene.image.Image newWallImage = SwingFXUtils.toFXImage(wallBufferedImage, null);
-            ImageView wallImageView = new ImageView(newWallImage);
-            wallImageView.setFitHeight(30);
-            wallImageView.setFitWidth(30);
-            return wallImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        ImageView ret = new ImageView();
+        ret.setImage(Game.getInstance().wallImageView.getImage());
+        return ret;
     }
     
 }

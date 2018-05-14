@@ -7,6 +7,8 @@ import java.io.InputStream;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
+
+import main.Game;
 import main.movable.Movable;
 
 
@@ -70,21 +72,9 @@ public class Plain extends Field {
 
     @Override
     public ImageView draw() {
-        InputStream plainInputStream;
-        BufferedImage plainBufferedImage;
-        try {
-            plainInputStream = new FileInputStream("code/res/obj/plain.jpg");
-           
-            plainBufferedImage = ImageIO.read(plainInputStream);
-            javafx.scene.image.Image newPlainImage = SwingFXUtils.toFXImage(plainBufferedImage, null);
-            ImageView plainImageView = new ImageView(newPlainImage);
-            plainImageView.setFitHeight(30);
-            plainImageView.setFitWidth(30);
-            return plainImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        ImageView ret = new ImageView();
+        ret.setImage(Game.getInstance().plainImageView.getImage());
+        return ret;
     }
     
 }

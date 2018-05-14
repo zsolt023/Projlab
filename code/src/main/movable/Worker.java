@@ -4,9 +4,12 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
+
 import javax.imageio.ImageIO;
+
 import main.Game;
 import main.field.Hole;
 import main.field.HoneyPlain;
@@ -328,21 +331,15 @@ public class Worker extends Movable {
     @Override
     public ImageView draw() {
         String[] idWithKoord = this.getId().split("_");
-        InputStream workerInputStream;
-        BufferedImage workerBufferedImage;
-        try {
-            workerInputStream = new FileInputStream("code/res/obj/worker" + Integer.parseInt(idWithKoord[3]) + ".png");
-           
-            workerBufferedImage = ImageIO.read(workerInputStream);
-            javafx.scene.image.Image newWorkerImage = SwingFXUtils.toFXImage(workerBufferedImage, null);
-            ImageView workerImageView = new ImageView(newWorkerImage);
-            workerImageView.setFitHeight(20);
-            workerImageView.setFitWidth(20);
-            return workerImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+        ImageView ret = new ImageView();
+        System.out.println(idWithKoord[3]);
+        if (Integer.parseInt(idWithKoord[3])==1) {
+
+            ret.setImage(Game.getInstance().worker1ImageView.getImage());
+        }else if (Integer.parseInt(idWithKoord[3])==2){
+                ret.setImage(Game.getInstance().worker2ImageView.getImage());
         }
+        return ret;
     }
-    
+
 }

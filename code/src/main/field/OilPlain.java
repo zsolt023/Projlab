@@ -12,6 +12,8 @@ import java.io.InputStream;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
+
+import main.Game;
 import main.movable.Movable;
 
 /**
@@ -38,21 +40,9 @@ public class OilPlain extends Plain {
 
     @Override
     public ImageView draw() {
-        InputStream oilInputStream;
-        BufferedImage oilBufferedImage;
-        try {
-            oilInputStream = new FileInputStream("code/res/obj/oil.jpg");
-           
-            oilBufferedImage = ImageIO.read(oilInputStream);
-            javafx.scene.image.Image newOilImage = SwingFXUtils.toFXImage(oilBufferedImage, null);
-            ImageView oilImageView = new ImageView(newOilImage);
-            oilImageView.setFitHeight(30);
-            oilImageView.setFitWidth(30);
-            return oilImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        ImageView ret = new ImageView();
+        ret.setImage(Game.getInstance().oilImageView.getImage());
+        return ret;
     }
     
 }

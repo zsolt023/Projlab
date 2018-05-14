@@ -1,5 +1,6 @@
 package main;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
@@ -11,6 +12,13 @@ import main.movable.Box;
 import main.movable.Worker;
 import main.fx.FXMLDocumentController;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 
 public class Game {
 
@@ -19,8 +27,96 @@ public class Game {
      * vagy bármely metódusát.
      */
     private static Game instance;
+    public ImageView hole1ImageView;
+    public ImageView hole2ImageView;
+    public ImageView honeyImageView;
+    public ImageView objectiveImageView;
+    public ImageView oilImageView;
+    public ImageView plainImageView;
+    public ImageView switchImageView;
+    public ImageView wallImageView;
+    public ImageView boxImageView;
+    public ImageView worker1ImageView;
+    public ImageView worker2ImageView;
 
     private Game() {
+        InputStream inputStream;
+        BufferedImage bufferedImage;
+        javafx.scene.image.Image newImage;
+        try {
+            inputStream = new FileInputStream("code/res/obj/hole1.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            hole1ImageView = new ImageView(newImage);
+            hole1ImageView.setFitHeight(30);
+            hole1ImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/hole2.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            hole2ImageView = new ImageView(newImage);
+            hole2ImageView.setFitHeight(30);
+            hole2ImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/honey.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            honeyImageView = new ImageView(newImage);
+            honeyImageView.setFitHeight(30);
+            honeyImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/objective.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            objectiveImageView = new ImageView(newImage);
+            objectiveImageView.setFitHeight(30);
+            objectiveImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/oil.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            oilImageView = new ImageView(newImage);
+            oilImageView.setFitHeight(30);
+            oilImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/plain.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            plainImageView = new ImageView(newImage);
+            plainImageView.setFitHeight(30);
+            plainImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/switch.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            switchImageView = new ImageView(newImage);
+            switchImageView.setFitHeight(30);
+            switchImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/wall.jpg");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            wallImageView = new ImageView(newImage);
+            wallImageView.setFitHeight(30);
+            wallImageView.setFitWidth(30);
+             inputStream = new FileInputStream("code/res/obj/box.png");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            boxImageView = new ImageView(newImage);
+            boxImageView.setFitHeight(30);
+            boxImageView.setFitWidth(30);
+            inputStream = new FileInputStream("code/res/obj/worker1.png");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            worker1ImageView = new ImageView(newImage);
+            worker1ImageView.setFitHeight(30);
+            worker1ImageView.setFitWidth(30);
+            inputStream = new FileInputStream("code/res/obj/worker2.png");
+            bufferedImage = ImageIO.read(inputStream);
+            newImage = SwingFXUtils.toFXImage(bufferedImage, null);
+            worker2ImageView = new ImageView(newImage);
+            worker2ImageView.setFitHeight(30);
+            worker2ImageView.setFitWidth(30);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
 
     }
 
@@ -130,8 +226,8 @@ public class Game {
         table.loadTable("code/res/maps/map3.txt");
         table.game();
     }
-    
-    public void drawAll() {  
+
+    public void drawAll() {
         StackPane gameStackPane = new StackPane();
         gameStackPane.setAlignment(Pos.CENTER);
         VBox gameVBox = new VBox();
@@ -144,7 +240,7 @@ public class Game {
                 newHBox.getChildren().add(newStackPane);
             }
         }
-        
+
         for (Field field : table.getFields()) {
             String[] idWithKoord = field.getId().split("_");
             ImageView fieldImageView = field.draw();
@@ -152,23 +248,23 @@ public class Game {
             StackPane actualStackPane = (StackPane) actualHBox.getChildren().get(Integer.parseInt(idWithKoord[1]));
             actualStackPane.getChildren().add(fieldImageView);
         }
-        
+
         for (Box box : table.getBoxes()) {
             String[] idWithKoord = box.getActualField().getId().split("_");
-            ImageView boxImageView =  box.draw();
+            ImageView boxImageView = box.draw();
             HBox actualHBox = (HBox) gameVBox.getChildren().get(Integer.parseInt(idWithKoord[2]));
             StackPane actualStackPane = (StackPane) actualHBox.getChildren().get(Integer.parseInt(idWithKoord[1]));
             actualStackPane.getChildren().add(boxImageView);
         }
-        
+
         for (Worker worker : table.getWorkers()) {
             String[] idWithKoord = worker.getActualField().getId().split("_");
-            ImageView workerImageView =  worker.draw();
+            ImageView workerImageView = worker.draw();
             HBox actualHBox = (HBox) gameVBox.getChildren().get(Integer.parseInt(idWithKoord[2]));
             StackPane actualStackPane = (StackPane) actualHBox.getChildren().get(Integer.parseInt(idWithKoord[1]));
             actualStackPane.getChildren().add(workerImageView);
         }
-        
+
         Tab gametab = FXMLDocumentController.tabPaneStatic.getSelectionModel().getSelectedItem();
         gametab.setContent(gameStackPane);
     }

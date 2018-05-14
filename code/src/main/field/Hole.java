@@ -4,9 +4,12 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
+
 import javax.imageio.ImageIO;
+
 import main.Game;
 import main.movable.Movable;
 
@@ -87,24 +90,13 @@ public class Hole extends Field {
 
     @Override
     public ImageView draw() {
-        InputStream holeInputStream;
-        BufferedImage holeBufferedImage;
-        try {
-            if (this.isActive) {
-                holeInputStream = new FileInputStream("code/res/obj/hole1.jpg");
-            } else {
-                holeInputStream = new FileInputStream("code/res/obj/hole2.jpg");
-            }
-            holeBufferedImage = ImageIO.read(holeInputStream);
-            javafx.scene.image.Image newHoleImage = SwingFXUtils.toFXImage(holeBufferedImage, null);
-            ImageView holeImageView = new ImageView(newHoleImage);
-            holeImageView.setFitHeight(30);
-            holeImageView.setFitWidth(30);
-            return holeImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+        ImageView ret = new ImageView();
+        if (isActive) {
+            ret.setImage(Game.getInstance().hole1ImageView.getImage());
+        } else {
+            ret.setImage(Game.getInstance().hole2ImageView.getImage());
         }
+        return ret;
     }
-    
+
 }

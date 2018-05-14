@@ -12,6 +12,8 @@ import java.io.InputStream;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.ImageView;
 import javax.imageio.ImageIO;
+
+import main.Game;
 import main.movable.Movable;
 
 /**
@@ -38,20 +40,8 @@ public class HoneyPlain extends Plain {
     
     @Override
     public ImageView draw() {
-        InputStream honeyInputStream;
-        BufferedImage honeyBufferedImage;
-        try {
-            honeyInputStream = new FileInputStream("code/res/obj/honey.jpg");
-           
-            honeyBufferedImage = ImageIO.read(honeyInputStream);
-            javafx.scene.image.Image newHoneyImage = SwingFXUtils.toFXImage(honeyBufferedImage, null);
-            ImageView honeyImageView = new ImageView(newHoneyImage);
-            honeyImageView.setFitHeight(30);
-            honeyImageView.setFitWidth(30);
-            return honeyImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        ImageView ret = new ImageView();
+        ret.setImage(Game.getInstance().honeyImageView.getImage());
+        return ret;
     }
 }

@@ -317,21 +317,9 @@ public class Box extends Movable {
 
     @Override
     public ImageView draw() {
-        InputStream boxInputStream;
-        BufferedImage boxBufferedImage;
-        try {
-            boxInputStream = new FileInputStream("code/res/obj/box.png");
-           
-            boxBufferedImage = ImageIO.read(boxInputStream);
-            javafx.scene.image.Image newBoxImage = SwingFXUtils.toFXImage(boxBufferedImage, null);
-            ImageView boxImageView = new ImageView(newBoxImage);
-            boxImageView.setFitHeight(20);
-            boxImageView.setFitWidth(20);
-            return boxImageView;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        ImageView ret = new ImageView();
+        ret.setImage(Game.getInstance().boxImageView.getImage());
+        return ret;
     }
     
 }

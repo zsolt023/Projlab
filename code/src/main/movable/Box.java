@@ -1,8 +1,13 @@
 package main.movable;
 
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
+import javax.imageio.ImageIO;
 import main.Game;
-import main.ImagePanel;
-import main.Util;
 import main.field.Hole;
 import main.field.HoneyPlain;
 import main.field.Objective;
@@ -311,11 +316,22 @@ public class Box extends Movable {
     }
 
     @Override
-    public void draw() {
-        String[] idWithKoord = this.getId().split("_");
-        ImagePanel imagePanel = new ImagePanel("code/res/obj/box.png", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
-        imagePanel.paintComponents(imagePanel.graphics);
-        Util.frame.getContentPane().add(imagePanel);
+    public ImageView draw() {
+        InputStream boxInputStream;
+        BufferedImage boxBufferedImage;
+        try {
+            boxInputStream = new FileInputStream("code/res/obj/box.png");
+           
+            boxBufferedImage = ImageIO.read(boxInputStream);
+            javafx.scene.image.Image newBoxImage = SwingFXUtils.toFXImage(boxBufferedImage, null);
+            ImageView boxImageView = new ImageView(newBoxImage);
+            boxImageView.setFitHeight(20);
+            boxImageView.setFitWidth(20);
+            return boxImageView;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
     
 }

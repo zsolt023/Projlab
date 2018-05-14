@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox fx:controller="main.fx.FXMLDocumentController" xmlns:fx="http://javafx.com/fxml/1"
+	fx:id="rootLayout" alignment="CENTER" spacing="10" minWidth="1200" minHeight="1200">
+    
+    <!-- Set padding values -->
+    <padding>
+        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+    </padding>
+
+    <!-- Tabbed panel -->
+    <TabPane fx:id="tabPane" >
+	<tabs>
+            <!-- Persons tab -->
+            <Tab fx:id="startTab" text=" Start Menu " closable="False">
+                
+                <VBox spacing="10" >
+                    <padding>
+                            <Insets bottom="10" left="0" right="0" top="10.0" />
+                    </padding>
+
+                    <Label fx:id="newGameLabel"
+                                     minWidth="700" minHeight="17" />
+                    <Label fx:id="gameInfoLabel"
+                                     minWidth="700" minHeight="17" />
+                                     
+                    <!-- Search input panel -->
+                    <HBox alignment="CENTER" spacing="10">
+
+                        <!-- New game button -->
+                        <Button fx:id="newGameButton" text="Új játék" onAction="#handleGameAction" />
+
+                        <Button fx:id="gameInfoButton" text="Sűgó" onAction="#handleInfoAction" />
+                        
+                        <Button fx:id="exitButton" text="Kilépés" onAction="#handleExitAction" />
+                    </HBox>
+                </VBox>
+            </Tab>
+            <Tab fx:id="infoTab" text=" Súgó " closable="False">
+                 <VBox spacing="10" >
+                    <padding>
+                            <Insets bottom="10" left="0" right="0" top="10.0" />
+                    </padding>
+                    <Label fx:id="infosLabel"
+                                     minWidth="700" minHeight="700" />
+                    <Button fx:id="backButton" text="Vissza" onAction="#handleBackAction" />
+                 </VBox>
+            </Tab>
+            <Tab fx:id="statTab" text=" Eredmény " closable="False">
+                 <VBox spacing="10" >
+                    <padding>
+                            <Insets bottom="10" left="0" right="0" top="10.0" />
+                    </padding>
+                    <Label fx:id="statLabel"
+                                     minWidth="700" minHeight="700" />
+                    <Button fx:id="back2Button" text="Vissza" onAction="#handleBackAction" />
+                 </VBox>
+            </Tab>
+            <Tab fx:id="gameTab" text=" Játék " closable="False" >
+                 <Button fx:id="newGameStartButton" text="Start" onAction="#handleGameStartAction" />
+            </Tab>
+        </tabs>
+    </TabPane>
+</VBox>

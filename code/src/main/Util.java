@@ -1,182 +1,136 @@
 package main;
 
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
-public class Util {
+public class Util extends Application implements EventHandler<WindowEvent> {
     
-    private static volatile boolean wPressed = false;
-    private static volatile boolean aPressed = false;
-    private static volatile boolean sPressed = false;
-    private static volatile boolean dPressed = false;
+    public static Stage stg;
     
-    private static volatile boolean upPressed = false;
-    private static volatile boolean downPressed = false;
-    private static volatile boolean rightPressed = false;
-    private static volatile boolean leftPressed = false;
-    
-    public static JFrame frame = new JFrame("HelloGame");
-    
-    public static boolean isWPressed() {
-        synchronized (Table.class) {
-            return wPressed;
-        }
-    }
-    
-    public static boolean isAPressed() {
-        synchronized (Table.class) {
-            return aPressed;
-        }
-    }
-    
-    public static boolean isSPressed() {
-        synchronized (Table.class) {
-            return sPressed;
-        }
-    }
-    
-    public static boolean isDPressed() {
-        synchronized (Table.class) {
-            return dPressed;
-        }
-    }
-    
-    public static boolean isUpPressed() {
-        synchronized (Table.class) {
-            return upPressed;
-        }
-    }
-    
-    public static boolean isDownPressed() {
-        synchronized (Table.class) {
-            return downPressed;
-        }
-    }
-    
-    public static boolean isRightPressed() {
-        synchronized (Table.class) {
-            return rightPressed;
-        }
-    }
-    
-    public static boolean isLeftPressed() {
-        synchronized (Table.class) {
-            return leftPressed;
+    @Override
+    public void start(Stage stage) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("main/fx/View.fxml"));
+            Scene scene = new Scene(root);
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    switch (ke.getCode()) {
+                        case W:
+                            Game.getInstance().setOrientation(Orientation.UP);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(0));
+                            break;
+                        case A:
+                            Game.getInstance().setOrientation(Orientation.LEFT);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(0));
+                            break;
+                        case S:
+                            Game.getInstance().setOrientation(Orientation.DOWN);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(0));
+                            break;
+                        case D:
+                            Game.getInstance().setOrientation(Orientation.RIGHT);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(0));
+                            break;
+                        case UP:
+                            Game.getInstance().setOrientation(Orientation.UP);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(1));
+                            break;
+                        case DOWN:
+                            Game.getInstance().setOrientation(Orientation.DOWN);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(1));
+                            break;
+                        case RIGHT:
+                            Game.getInstance().setOrientation(Orientation.RIGHT);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(1));
+                            break;
+                        case LEFT:
+                            Game.getInstance().setOrientation(Orientation.LEFT);
+                            Game.getInstance().setActualMovingWorker(Game.getInstance().getTable().getWorkers().get(1));
+                            break;
+                    }
+                    Game.getInstance().getTable().game();
+                    System.out.println("Key Pressed: " + ke.getCode());
+                    ke.consume();
+                }
+            });
+            scene.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent ke) {
+                    switch (ke.getCode()) {
+                        case W:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                        case A:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                        case S:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                        case D:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                        case UP:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                        case DOWN:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                        case RIGHT:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                        case LEFT:
+                            Game.getInstance().setOrientation(null);
+                            Game.getInstance().setActualMovingWorker(null);
+                            break;
+                    }
+                    Game.getInstance().getTable().game();
+                    System.out.println("Key Released: " + ke.getCode());
+                    ke.consume();
+                }
+            });
+            stage.setOnCloseRequest(this);
+            stage.setTitle("Game");
+            stage.setWidth(1000);
+            stage.setHeight(1000);
+            stage.setScene(scene);
+            
+            stage.show();
+            stg = stage;
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
-    
     /**
      * A játékot ténylegesen elindító main függvény.
-     * @param args 
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-
-            @Override
-            public boolean dispatchKeyEvent(KeyEvent ke) {
-                synchronized (Util.class) {
-                    switch (ke.getID()) {
-                        case KeyEvent.KEY_PRESSED:
-                            switch (ke.getKeyCode()) {
-                                case KeyEvent.VK_W:
-                                    wPressed = true;
-                                    break;
-                                case KeyEvent.VK_A:
-                                    aPressed = true;
-                                    break;
-                                case KeyEvent.VK_S:
-                                    sPressed = true;
-                                    break;
-                                case KeyEvent.VK_D:
-                                    dPressed = true;
-                                    break;
-                                case KeyEvent.VK_UP:
-                                    upPressed = true;
-                                    break;
-                                case KeyEvent.VK_DOWN:
-                                    downPressed = true;
-                                    break;
-                                case KeyEvent.VK_RIGHT:
-                                    rightPressed = true;
-                                    break;
-                                case KeyEvent.VK_LEFT:
-                                    leftPressed = true;
-                                    break;
-                            }
-                            break;
-                            
-                        case KeyEvent.KEY_RELEASED:
-                            switch (ke.getKeyCode()) {
-                                case KeyEvent.VK_W:
-                                    wPressed = false;
-                                    break;
-                                case KeyEvent.VK_A:
-                                    aPressed = false;
-                                    break;
-                                case KeyEvent.VK_S:
-                                    sPressed = false;
-                                    break;
-                                case KeyEvent.VK_D:
-                                    dPressed = false;
-                                    break;
-                                case KeyEvent.VK_UP:
-                                    upPressed = false;
-                                    break;
-                                case KeyEvent.VK_DOWN:
-                                    downPressed = false;
-                                    break;
-                                case KeyEvent.VK_RIGHT:
-                                    rightPressed = false;
-                                    break;
-                                case KeyEvent.VK_LEFT:
-                                    leftPressed = false;
-                                    break;
-                                }
-                                break;
-                    }
-                    return false;
-                }
-            }
-        });
-        
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
-    }
-
-    private static void createAndShowGUI() {
-        frame = new JFrame("HelloGame");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 1000);
-        
-        JLabel label = new JLabel("Hello game");
-        label.setBounds(10, 280, 100, 20);
-        frame.getContentPane().add(label);
-
-        JButton newGameButton = new JButton("Új játék");
-        newGameButton.setBounds(10, 480, 100, 20);
-        newGameButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Game.getInstance().init();
-            }
-        });
-        
-        frame.getContentPane().add(newGameButton);
-        
-        frame.pack();
-        frame.setVisible(true);
+        launch(args);
     }
     
+    @Override
+    public void handle(WindowEvent event) {
+        if (WindowEvent.WINDOW_CLOSE_REQUEST.equals(event.getEventType())) {
+            stg.close();
+        }
+    }
+
 }
 
 

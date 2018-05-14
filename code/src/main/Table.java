@@ -12,6 +12,7 @@ import main.field.Wall;
 import main.movable.Box;
 import main.movable.Movable;
 import main.movable.Worker;
+import main.fx.FXMLDocumentController;
 
 public class Table {
     
@@ -76,7 +77,6 @@ public class Table {
 
     public void loadTable(String filename) {
         BufferedReader br = null;
-        int lineNumber;
 
         Box b1 = new Box();
         b1.setId("b_2_2");
@@ -84,10 +84,7 @@ public class Table {
         b2.setId("b_3_2");
 //        Box b3 = new Box();
 //        b3.setId("b3");
-
         boxes.clear();
-
-
         boxes.add(b1);
         boxes.add(b2);
 //        boxes.add(b3);
@@ -96,13 +93,9 @@ public class Table {
         w1.setId("wo_1_1_1");
         Worker w2 = new Worker();
         w2.setId("wo_4_1_2");
-//        Worker w3 = new Worker();
-//        w3.setId("w3");
         workers.clear();
-
         workers.add(w1);
         workers.add(w2);
-//        workers.add(w3);
 
         fields.clear();
 
@@ -114,7 +107,7 @@ public class Table {
             ArrayList<String> neighbours[] = new ArrayList[4];
 
             for (int i = 0; i < 4; i++) {
-                neighbours[i] = new ArrayList<String>();
+                neighbours[i] = new ArrayList<>();
             }
 
             while ((s = br.readLine()) != null) {
@@ -130,24 +123,8 @@ public class Table {
                         Wall wall = new Wall();
                         wall.setId(line[3]);
 
-                        if (line[2] != null) {
-                            for (Worker w : workers) {
-                                if (w.getId().equals(line[2]))
-                                    wall.setActualMovable(w);
-                            }
-
-                            for (Box b : boxes) {
-                                if (b.getId().equals(line[2]))
-                                    wall.setActualMovable(b);
-                            }
-                        }
-
-                        if (wall.getActualMovable() != null)
-                            wall.getActualMovable().setActualField(wall);
                         fields.add(wall);
                         break;
-
-
                     case "plain":
                         Plain plain = new Plain();
                         plain.setId(line[3]);
@@ -183,8 +160,7 @@ public class Table {
                                     hole.setActualMovable(b);
                             }
                         }
-
-
+                        
                         if (hole.getActualMovable() != null)
                             hole.getActualMovable().setActualField(hole);
                         fields.add(hole);
@@ -203,10 +179,7 @@ public class Table {
                                 if (b.getId().equals(line[2]))
                                     sw.setActualMovable(b);
                             }
-
-                            //sw.setHole((Hole) fields.get(7));
                         }
-
 
                         if (sw.getActualMovable() != null)
                             sw.getActualMovable().setActualField(sw);
@@ -227,19 +200,15 @@ public class Table {
                                     obj.setActualMovable(b);
                             }
                         }
-
-
+                        
                         if (obj.getActualMovable() != null)
                             obj.getActualMovable().setActualField(obj);
                         fields.add(obj);
                         break;
                 }
-
-
             }
 
             for (int i = 0; i < neighbours[0].size(); i++) {
-
                 if (!neighbours[0].get(i).equals("null"))
                     for (Field f : fields)
                         if (f.getId().equals(neighbours[0].get(i)))
@@ -247,7 +216,6 @@ public class Table {
             }
 
             for (int i = 0; i < neighbours[1].size(); i++) {
-
                 if (!neighbours[1].get(i).equals("null"))
                     for (Field f : fields)
                         if (f.getId().equals(neighbours[1].get(i)))
@@ -255,7 +223,6 @@ public class Table {
             }
 
             for (int i = 0; i < neighbours[2].size(); i++) {
-
                 if (!neighbours[2].get(i).equals("null"))
                     for (Field f : fields)
                         if (f.getId().equals(neighbours[2].get(i)))
@@ -263,32 +230,36 @@ public class Table {
             }
 
             for (int i = 0; i < neighbours[3].size(); i++) {
-
                 if (!neighbours[3].get(i).equals("null"))
                     for (Field f : fields)
                         if (f.getId().equals(neighbours[3].get(i)))
                             f.setNeighbour(Orientation.RIGHT, fields.get(i));
             }
-
         } catch (IOException e) {
-
             e.printStackTrace();
-
         } finally {
-
             try {
-
-                if (br != null)
+                if (br != null) {
                     br.close();
-
-
+                }
             } catch (IOException ex) {
-
                 ex.printStackTrace();
-
             }
-
         }
+        
+        Switch sw = new Switch();
+        Hole hole = new Hole();
+        for (Field field : fields) {
+            if (field.getId().equals("h_4_3")) {
+                hole = (Hole) field;
+            }
+            if (field.getId().equals("s_2_3")) {
+                sw = (Switch) field;
+            }
+        }
+        sw.setHole(hole);
+        hole.setIsActive(false);
+        
         System.out.println("load(" + filename + ") DONE");
     }
 
@@ -325,27 +296,13 @@ public class Table {
      * Majd legvégül ezen munkás move() függvénye kerül meghívásra, ami a rekurziót hivatott elindítani.
      */
     public void game() {
-        while (!gameOver()) {
+        if (!gameOver()) {            
+            if (null != Game.getInstance().getActualMovingWorker()) {
+                Game.getInstance().getActualMovingWorker().move();
+            }
             Game.getInstance().drawAll();
-            
-            if (Util.isWPressed() || Util.isUpPressed()) {
-                Game.getInstance().setOrientation(Orientation.UP);
-            } else if (Util.isAPressed() || Util.isLeftPressed()) {
-                Game.getInstance().setOrientation(Orientation.LEFT);
-            } else if (Util.isSPressed() || Util.isDownPressed()) {
-                Game.getInstance().setOrientation(Orientation.DOWN);
-            } else if (Util.isDPressed() || Util.isRightPressed()) {
-                Game.getInstance().setOrientation(Orientation.RIGHT);
-            }
-            
-            if (Util.isAPressed() || Util.isDPressed() || Util.isSPressed() || Util.isWPressed()) {
-                Game.getInstance().setActualMovingWorker(workers.get(0));
-                Game.getInstance().getActualMovingWorker().move();
-            } else if (Util.isUpPressed() || Util.isLeftPressed() || Util.isDownPressed() || Util.isRightPressed()) {
-                Game.getInstance().setActualMovingWorker(workers.get(1));
-                Game.getInstance().getActualMovingWorker().move();
-            }
         }
+        
     }
 
     /**
@@ -355,7 +312,8 @@ public class Table {
      * @return boolean
      */
     public boolean gameOver() {
-        if (boxes.isEmpty() || workers.size() == 1) {
+        if (boxes.isEmpty() || workers.size() <= 1) {
+            FXMLDocumentController.tabPaneStatic.getSelectionModel().select(2);
             return true;
         } else {
             return false;

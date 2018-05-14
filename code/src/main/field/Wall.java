@@ -1,7 +1,12 @@
 package main.field;
 
-import main.ImagePanel;
-import main.Util;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
+import javax.imageio.ImageIO;
 import main.movable.Movable;
 
 
@@ -34,11 +39,22 @@ public class Wall extends Field {
     }
 
     @Override
-    public void draw() {
-        String[] idWithKoord = this.getId().split("_");
-        ImagePanel imagePanel = new ImagePanel("code/res/obj/wall.jpg", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
-        imagePanel.paintComponents(imagePanel.graphics);
-        Util.frame.getContentPane().add(imagePanel);
+    public ImageView draw() {
+        InputStream wallInputStream;
+        BufferedImage wallBufferedImage;
+        try {
+            wallInputStream = new FileInputStream("code/res/obj/wall.jpg");
+           
+            wallBufferedImage = ImageIO.read(wallInputStream);
+            javafx.scene.image.Image newWallImage = SwingFXUtils.toFXImage(wallBufferedImage, null);
+            ImageView wallImageView = new ImageView(newWallImage);
+            wallImageView.setFitHeight(30);
+            wallImageView.setFitWidth(30);
+            return wallImageView;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
     
 }

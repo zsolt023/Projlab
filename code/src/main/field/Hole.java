@@ -1,8 +1,13 @@
 package main.field;
 
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
+import javax.imageio.ImageIO;
 import main.Game;
-import main.ImagePanel;
-import main.Util;
 import main.movable.Movable;
 
 
@@ -81,16 +86,25 @@ public class Hole extends Field {
     }
 
     @Override
-    public void draw() {
-        String[] idWithKoord = this.getId().split("_");
-        ImagePanel imagePanel;
-        if (this.isActive) {
-            imagePanel = new ImagePanel("code/res/obj/hole1.jpg", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
-        } else {
-            imagePanel = new ImagePanel("code/res/obj/hole2.jpg", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
+    public ImageView draw() {
+        InputStream holeInputStream;
+        BufferedImage holeBufferedImage;
+        try {
+            if (this.isActive) {
+                holeInputStream = new FileInputStream("code/res/obj/hole1.jpg");
+            } else {
+                holeInputStream = new FileInputStream("code/res/obj/hole2.jpg");
+            }
+            holeBufferedImage = ImageIO.read(holeInputStream);
+            javafx.scene.image.Image newHoleImage = SwingFXUtils.toFXImage(holeBufferedImage, null);
+            ImageView holeImageView = new ImageView(newHoleImage);
+            holeImageView.setFitHeight(30);
+            holeImageView.setFitWidth(30);
+            return holeImageView;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
         }
-        imagePanel.paintComponents(imagePanel.graphics);
-        Util.frame.getContentPane().add(imagePanel);
     }
     
 }

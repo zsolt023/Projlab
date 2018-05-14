@@ -1,8 +1,15 @@
 package main;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.Tab;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import main.field.Field;
 import main.movable.Box;
 import main.movable.Worker;
+import main.fx.FXMLDocumentController;
 
 
 public class Game {
@@ -74,7 +81,6 @@ public class Game {
      * @return Worker
      */
     public Worker getActualMovingWorker() {
-
         return this.actualMovingWorker;
     }
 
@@ -125,19 +131,45 @@ public class Game {
         table.game();
     }
     
-    public void drawAll() {
+    public void drawAll() {  
+        StackPane gameStackPane = new StackPane();
+        gameStackPane.setAlignment(Pos.CENTER);
+        VBox gameVBox = new VBox();
+        gameStackPane.getChildren().add(gameVBox);
+        for (int i = 0; i < Math.sqrt(table.getFields().size()); i++) {
+            HBox newHBox = new HBox();
+            gameVBox.getChildren().add(newHBox);
+            for (int j = 0; j < Math.sqrt(table.getFields().size()); j++) {
+                StackPane newStackPane = new StackPane();
+                newHBox.getChildren().add(newStackPane);
+            }
+        }
+        
         for (Field field : table.getFields()) {
-            field.draw();
+            String[] idWithKoord = field.getId().split("_");
+            ImageView fieldImageView = field.draw();
+            HBox actualHBox = (HBox) gameVBox.getChildren().get(Integer.parseInt(idWithKoord[2]));
+            StackPane actualStackPane = (StackPane) actualHBox.getChildren().get(Integer.parseInt(idWithKoord[1]));
+            actualStackPane.getChildren().add(fieldImageView);
         }
         
         for (Box box : table.getBoxes()) {
-            box.draw();
+            String[] idWithKoord = box.getActualField().getId().split("_");
+            ImageView boxImageView =  box.draw();
+            HBox actualHBox = (HBox) gameVBox.getChildren().get(Integer.parseInt(idWithKoord[2]));
+            StackPane actualStackPane = (StackPane) actualHBox.getChildren().get(Integer.parseInt(idWithKoord[1]));
+            actualStackPane.getChildren().add(boxImageView);
         }
         
         for (Worker worker : table.getWorkers()) {
-            worker.draw();
+            String[] idWithKoord = worker.getActualField().getId().split("_");
+            ImageView workerImageView =  worker.draw();
+            HBox actualHBox = (HBox) gameVBox.getChildren().get(Integer.parseInt(idWithKoord[2]));
+            StackPane actualStackPane = (StackPane) actualHBox.getChildren().get(Integer.parseInt(idWithKoord[1]));
+            actualStackPane.getChildren().add(workerImageView);
         }
         
-        
+        Tab gametab = FXMLDocumentController.tabPaneStatic.getSelectionModel().getSelectedItem();
+        gametab.setContent(gameStackPane);
     }
 }

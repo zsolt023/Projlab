@@ -5,12 +5,14 @@
  */
 package main;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author schnorb
  */
 public interface Drawable {
     
-    public void draw();
+    public ImageView draw();
     
 }

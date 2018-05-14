@@ -1,8 +1,13 @@
 package main.movable;
 
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.ImageView;
+import javax.imageio.ImageIO;
 import main.Game;
-import main.ImagePanel;
-import main.Util;
 import main.field.Hole;
 import main.field.HoneyPlain;
 import main.field.Objective;
@@ -248,7 +253,6 @@ public class Worker extends Movable {
             }
         } else {
             if (Game.getInstance().getActualMovingWorker().getForce() >= Game.getInstance().getActualChainFriction()) {
-                s.switchState();
                 Game.getInstance().setActualChainFriction(0);
                 return true;
             } else {
@@ -322,11 +326,23 @@ public class Worker extends Movable {
     }
 
     @Override
-    public void draw() {
+    public ImageView draw() {
         String[] idWithKoord = this.getId().split("_");
-        ImagePanel imagePanel = new ImagePanel("code/res/obj/worker" + Integer.parseInt(idWithKoord[3]) + ".png", Integer.parseInt(idWithKoord[1])* 30, Integer.parseInt(idWithKoord[2]) * 30);
-        imagePanel.paintComponents(imagePanel.graphics);
-        Util.frame.getContentPane().add(imagePanel);
+        InputStream workerInputStream;
+        BufferedImage workerBufferedImage;
+        try {
+            workerInputStream = new FileInputStream("code/res/obj/worker" + Integer.parseInt(idWithKoord[3]) + ".png");
+           
+            workerBufferedImage = ImageIO.read(workerInputStream);
+            javafx.scene.image.Image newWorkerImage = SwingFXUtils.toFXImage(workerBufferedImage, null);
+            ImageView workerImageView = new ImageView(newWorkerImage);
+            workerImageView.setFitHeight(20);
+            workerImageView.setFitWidth(20);
+            return workerImageView;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
     
 }

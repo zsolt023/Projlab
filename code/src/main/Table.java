@@ -74,29 +74,10 @@ public class Table {
      * Összeköti a kapcsolókat egy lyuk objektummal.
      * @param filename String
      */
-
     public void loadTable(String filename) {
         BufferedReader br = null;
 
-        Box b1 = new Box();
-        b1.setId("b_2_2");
-        Box b2 = new Box();
-        b2.setId("b_3_2");
-//        Box b3 = new Box();
-//        b3.setId("b3");
         boxes.clear();
-        boxes.add(b1);
-        boxes.add(b2);
-//        boxes.add(b3);
-
-        Worker w1 = new Worker();
-        w1.setId("wo_1_1_1");
-        Worker w2 = new Worker();
-        w2.setId("wo_4_1_2");
-        workers.clear();
-        workers.add(w1);
-        workers.add(w2);
-
         fields.clear();
 
         try {
@@ -118,6 +99,19 @@ public class Table {
                     neighbours[i].add(line[i + 4]);
                 }
 
+                if (!"null".equals(line[2])) {
+                    if (line[2].startsWith("b")) {
+                        Box box = new Box();
+                        box.setId(line[2]);
+                        boxes.add(box);
+                    }
+                    if (line[2].startsWith("wo")) {
+                        Worker worker = new Worker();
+                        worker.setId(line[2]);
+                        workers.add(worker);
+                    }
+                }
+                
                 switch (line[1]) {
                     case "wall":
                         Wall wall = new Wall();
@@ -184,6 +178,15 @@ public class Table {
                         if (sw.getActualMovable() != null)
                             sw.getActualMovable().setActualField(sw);
                         fields.add(sw);
+                        
+                        String[] ids = sw.getId().split("-");
+                        for (Field field : fields) {
+                            if (ids[1].equals(field.getId())) {
+                                Hole holeToSwitch = (Hole) field;
+                                sw.setHole(holeToSwitch);
+                                sw.getHole().setIsActive(false);
+                            }
+                        }
                         break;
                     case "objective":
                         Objective obj = new Objective();
@@ -246,19 +249,6 @@ public class Table {
                 ex.printStackTrace();
             }
         }
-        
-        Switch sw = new Switch();
-        Hole hole = new Hole();
-        for (Field field : fields) {
-            if (field.getId().equals("h_4_3")) {
-                hole = (Hole) field;
-            }
-            if (field.getId().equals("s_2_3")) {
-                sw = (Switch) field;
-            }
-        }
-        sw.setHole(hole);
-        hole.setIsActive(false);
         
         System.out.println("load(" + filename + ") DONE");
     }

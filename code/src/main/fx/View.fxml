@@ -60,11 +60,13 @@
                     </padding>
                     <Label fx:id="statLabel"
                                      minWidth="700" minHeight="700" />
+                    
+                    <Button fx:id="statButton" text="Mutat" onAction="#handleStatAction" />
                     <Button fx:id="back2Button" text="Vissza" onAction="#handleBackAction" />
                  </VBox>
             </Tab>
             <Tab fx:id="gameTab" text=" Játék " closable="False" >
-                 <Button fx:id="newGameStartButton" text="Start" onAction="#handleGameStartAction" />
+                 
             </Tab>
         </tabs>
     </TabPane>

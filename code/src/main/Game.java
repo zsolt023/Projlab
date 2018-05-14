@@ -50,12 +50,12 @@ public class Game {
     /**
      * Tábla osztály példányát tárolja ezen keresztül érjük el a tábla szükséges metódusait.
      */
-    public static Table table;
+    public Table table;
 
     /**
      * Az aktuálisan tolni kívánt lánc súrlódási összege. Ezen változó értékével vizsgáljuk, hogy az adott lánc eltolható-e.
      */
-    private static int actualChainFriction = 0;
+    private int actualChainFriction = 0;
 
     /**
      * Visszaadja az aktuális lépés irányát.
@@ -117,7 +117,7 @@ public class Game {
      * @param actualChainFriction
      */
     public void setActualChainFriction(int actualChainFriction) {
-        Game.actualChainFriction = actualChainFriction;
+        this.actualChainFriction = actualChainFriction;
     }
 
     /**

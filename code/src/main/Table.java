@@ -26,7 +26,8 @@ public class Table {
      * ami megsemmisült a játék végének ellenőrzése céljábol.
      */
     private List<Worker> workers = new ArrayList<>();
-
+    public List<Worker> workers2 = new ArrayList<>();
+    
     /**
      * A táblán lévő összes dobozt tároljok ebben a listában, és kivesszük belőle azon elemet,
      * ami megsemmisült, vagy cél-helyre került, vagy beragadt a játék végének ellenőrzése céljából.
@@ -85,19 +86,11 @@ public class Table {
 
             String s;
 
-            ArrayList<String> neighbours[] = new ArrayList[4];
-
-            for (int i = 0; i < 4; i++) {
-                neighbours[i] = new ArrayList<>();
-            }
+            Map<Field, String[]> neighboursMap = new HashMap<>();
 
             while ((s = br.readLine()) != null) {
                 //0:mező sorszám 1:mező típusa 2:mezőn lévő moveable azonosítója 3:mező azonosítója 4:felső szomszéd 5:jobb szomszéd6: alsó szomszéd 7:bal szomszéd
                 String line[] = s.split(";");
-
-                for (int i = 0; i < 4; i++) {
-                    neighbours[i].add(line[i + 4]);
-                }
 
                 if (!"null".equals(line[2])) {
                     if (line[2].startsWith("b")) {
@@ -116,7 +109,11 @@ public class Table {
                     case "wall":
                         Wall wall = new Wall();
                         wall.setId(line[3]);
-
+                        String[] wallNeighbours = new String[4];
+                        for (int i = 0; i < 4; i++) {
+                            wallNeighbours[i] = line[i+4];
+                        }
+                        neighboursMap.put(wall, wallNeighbours);
                         fields.add(wall);
                         break;
                     case "plain":
@@ -135,8 +132,15 @@ public class Table {
                             }
                         }
 
-                        if (plain.getActualMovable() != null)
+                        if (plain.getActualMovable() != null) {
                             plain.getActualMovable().setActualField(plain);
+                        }
+                        
+                        String[] plainNeighbours = new String[4];
+                        for (int i = 0; i < 4; i++) {
+                            plainNeighbours[i] = line[i+4];
+                        }
+                        neighboursMap.put(plain, plainNeighbours);
                         fields.add(plain);
                         break;
                     case "hole":
@@ -155,8 +159,15 @@ public class Table {
                             }
                         }
                         
-                        if (hole.getActualMovable() != null)
+                        if (hole.getActualMovable() != null) {
                             hole.getActualMovable().setActualField(hole);
+                        }
+                        
+                        String[] holeNeighbours = new String[4];
+                        for (int i = 0; i < 4; i++) {
+                            holeNeighbours[i] = line[i+4];
+                        }
+                        neighboursMap.put(hole, holeNeighbours);
                         fields.add(hole);
                         break;
                     case "switch":
@@ -175,8 +186,15 @@ public class Table {
                             }
                         }
 
-                        if (sw.getActualMovable() != null)
+                        if (sw.getActualMovable() != null) {
                             sw.getActualMovable().setActualField(sw);
+                        }
+                        
+                        String[] switchNeighbours = new String[4];
+                        for (int i = 0; i < 4; i++) {
+                            switchNeighbours[i] = line[i+4];
+                        }
+                        neighboursMap.put(sw, switchNeighbours);
                         fields.add(sw);
                         
                         String[] ids = sw.getId().split("-");
@@ -204,40 +222,47 @@ public class Table {
                             }
                         }
                         
-                        if (obj.getActualMovable() != null)
+                        if (obj.getActualMovable() != null) {
                             obj.getActualMovable().setActualField(obj);
+                        }
+                        
+                        String[] objectiveNeighbours = new String[4];
+                        for (int i = 0; i < 4; i++) {
+                            objectiveNeighbours[i] = line[i+4];
+                        }
+                        neighboursMap.put(obj, objectiveNeighbours);
                         fields.add(obj);
                         break;
                 }
             }
 
-            for (int i = 0; i < neighbours[0].size(); i++) {
-                if (!neighbours[0].get(i).equals("null"))
-                    for (Field f : fields)
-                        if (f.getId().equals(neighbours[0].get(i)))
-                            f.setNeighbour(Orientation.DOWN, fields.get(i));
+            for (Map.Entry<Field, String[]> neighs : neighboursMap.entrySet()) {
+                for (int i = 0; i < neighs.getValue().length; i++) {
+                    if (!"null".equals(neighs.getValue()[i])) {
+                        for (Field field : fields) {
+                            if (neighs.getValue()[i].equals(field.getId())) {
+                                switch (i) {
+                                    case 0:
+                                        neighs.getKey().setNeighbour(Orientation.UP, field);
+                                        break;
+                                    case 1:
+                                        neighs.getKey().setNeighbour(Orientation.RIGHT, field);
+                                        break;
+                                    case 2:
+                                        neighs.getKey().setNeighbour(Orientation.DOWN, field);
+                                        break;
+                                    case 3:
+                                        neighs.getKey().setNeighbour(Orientation.LEFT, field);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                }
             }
-
-            for (int i = 0; i < neighbours[1].size(); i++) {
-                if (!neighbours[1].get(i).equals("null"))
-                    for (Field f : fields)
-                        if (f.getId().equals(neighbours[1].get(i)))
-                            f.setNeighbour(Orientation.LEFT, fields.get(i));
-            }
-
-            for (int i = 0; i < neighbours[2].size(); i++) {
-                if (!neighbours[2].get(i).equals("null"))
-                    for (Field f : fields)
-                        if (f.getId().equals(neighbours[2].get(i)))
-                            f.setNeighbour(Orientation.UP, fields.get(i));
-            }
-
-            for (int i = 0; i < neighbours[3].size(); i++) {
-                if (!neighbours[3].get(i).equals("null"))
-                    for (Field f : fields)
-                        if (f.getId().equals(neighbours[3].get(i)))
-                            f.setNeighbour(Orientation.RIGHT, fields.get(i));
-            }
+            
+            workers2.add(workers.get(0));
+            workers2.add(workers.get(1));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

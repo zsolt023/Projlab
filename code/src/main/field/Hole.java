@@ -44,7 +44,7 @@ public class Hole extends Field {
     public void setActive() {
         Movable movable = this.getActualMovable();
 
-        if (movable != null) {
+        if (movable != null && !Game.getInstance().getActualMovingWorker().getId().equals(movable.getId())) {
             Game.getInstance().getTable().kill(movable);
         }
         if (isActive) {

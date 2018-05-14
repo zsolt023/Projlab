@@ -7,15 +7,11 @@ package main.fx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import main.Game;
 import main.Util;
 
@@ -46,9 +42,6 @@ public class FXMLDocumentController implements Initializable {
     private Button newGameButton;
     
     @FXML
-    private Button newGameStartButton;
-    
-    @FXML
     private Button gameInfoButton;
     
     @FXML
@@ -61,16 +54,13 @@ public class FXMLDocumentController implements Initializable {
     private Button back2Button;
     
     @FXML
+    private Button statButton;
+    
+    @FXML
     private void handleGameAction() {
         if (newGameButton.isArmed()) {
             tabPaneStatic = tabPane;
             tabPane.getSelectionModel().select(3);
-        }
-    }
-    
-    @FXML
-    private void handleGameStartAction() {
-        if (newGameStartButton.isArmed()) {
             Game.getInstance().init();
         }
     }
@@ -96,6 +86,14 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    @FXML
+    private void handleStatAction() {
+        if (statButton.isArmed()) {
+            statLabel.setText("Az eredmény: \n\n1. Munkás: " + Game.getInstance().getTable().workers2.get(0).getScore()
+                    + " pontot szerzett\n\n2. Munkás: " + Game.getInstance().getTable().workers2.get(1).getScore() + " pontot szerzett");
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         newGameLabel.setText("1. A játék indításához hazsnáld az Új játék gombot.");
@@ -105,7 +103,7 @@ public class FXMLDocumentController implements Initializable {
         handleInfoAction();
         handleExitAction();
         handleBackAction();
-        handleGameStartAction();
+        handleStatAction();
     }    
     
 }

@@ -169,7 +169,7 @@ public class Box extends Movable {
 
     /**
      * Azon eset, amikor is a doboz kerülne a cél-helyre. Ekkor meg kell néznünk,
-     * hogy az adott cél-helyen van-e valamilyen movable objektum (ami egyébként csak munkás lehet,
+     * hogy az adott cél-helyen van-e valamilyen movable objektuGame.getInstance().getOrientation()m (ami egyébként csak munkás lehet,
      * mert a doboz eltüntetésre kerülne, amikor is rátolják). Ebben az esetben egy újabb visit hívást kezdeményezünk,
      * ami a láncolás eltolásának ellenőrzésére szolgál. A lánc sikeres eltolásának visszatérési értéke alapján,
      * ha igazzal tért vissza, akkor az adott dobozt kill-eljük. majd az aktuálisan toló munkásnak pontot adunk.

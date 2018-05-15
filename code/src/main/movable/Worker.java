@@ -247,7 +247,7 @@ public class Worker extends Movable {
 
         if (movable != null) {
             if (movable.visit(this)) {
-                if (!(movable instanceof Box)) {
+                if (!(movable instanceof Worker)) {
                     s.switchState();
                 }
                 return true;

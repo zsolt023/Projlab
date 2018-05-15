@@ -223,7 +223,7 @@ public class Game {
      */
     public void init() {
         table = new Table();
-        table.loadTable("code/res/maps/map3.txt");
+        table.loadTable("code/res/maps/map3_2.txt");
         table.game();
     }
 

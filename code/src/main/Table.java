@@ -80,7 +80,8 @@ public class Table {
 
         boxes.clear();
         fields.clear();
-
+        workers.clear();
+        
         try {
             br = new BufferedReader(new FileReader(filename));
 
